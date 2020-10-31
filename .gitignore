@@ -1,0 +1,16 @@
+*.ids
+*.iml
+*.ipr
+*.iws
+.csrepo
+.gradle
+.idea*
+build
+custom.properties
+out
+logs
+node_modules
+.env.development
+
+*.log
+development.env.js
