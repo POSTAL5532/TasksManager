@@ -1,4 +1,4 @@
-//Общая конфигурация для всех проектов
+//All project config
 allprojects {
     group 'com.tasks-manager'
     version '1.0-SNAPSHOT'
@@ -7,3 +7,19 @@ allprojects {
         mavenCentral()
     }
 }
+
+//Java-projects config
+[':tasks-manager-data', ':tasks-manager-service'].each { name ->
+    project(":$name") {
+        apply plugin: 'java'
+
+        sourceCompatibility = 1.8
+        compileJava.options.encoding = "UTF-8"
+        compileTestJava.options.encoding = "UTF-8"
+
+        dependencies {
+            testCompile group: 'junit', name: 'junit', version: '4.12'
+        }
+    }
+}
+
