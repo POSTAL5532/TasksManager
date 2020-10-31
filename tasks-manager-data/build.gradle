@@ -19,7 +19,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
-task startDB(type: JavaExec) {
+task startDatabase(type: JavaExec) {
     classpath configurations.driver
     main = 'org.hsqldb.server.Server'
     args = ['--database.0', 'file:build/database/data', '--dbname.0', 'data']
@@ -33,11 +33,11 @@ task stopDatabase {
 
 task createTables {
     doLast {
-        executeSqlFile('create.sql')
+        executeSqlFile('createTables.sql')
     }
 }
 
-task addData {
+task addTestData {
     doLast {
         executeSqlFile('addTestData.sql')
     }
@@ -45,8 +45,16 @@ task addData {
 
 task dropTables {
     doLast {
-        executeSqlFile('drop.sql')
+        executeSqlFile('dropTables.sql')
     }
+}
+
+task refreshData {
+    dependsOn 'dropTables'
+    dependsOn 'createTables'
+    dependsOn 'addTestData'
+    tasks.findByName('createTables').mustRunAfter 'dropTables'
+    tasks.findByName('addTestData').mustRunAfter 'createTables'
 }
 
 configurations.driver.each { file ->
@@ -54,7 +62,7 @@ configurations.driver.each { file ->
 }
 
 def executeSqlFile(String fileName) {
-    String sqlScript = new File("${projectDir}/src/data/" + fileName).text
+    String sqlScript = new File("${projectDir}/src/scripts/" + fileName).text
     executeSqlQuery(sqlScript)
 }
 
