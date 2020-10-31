@@ -1,3 +1,9 @@
-group 'org.example'
-version '1.0-SNAPSHOT'
+//Общая конфигурация для всех проектов
+allprojects {
+    group 'com.tasks-manager'
+    version '1.0-SNAPSHOT'
 
+    repositories {
+        mavenCentral()
+    }
+}
