@@ -5,7 +5,7 @@ import javax.validation.Payload;
 import java.lang.annotation.*;
 
 /**
- * Проверка на уникальность email
+ * Email uniqueness validation
  *
  * @author SIE
  */

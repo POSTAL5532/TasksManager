@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 import com.tasksmanager.service.service.UserService;
 
 /**
- * Проверка на уникальность email
+ * Email uniqueness validator
  *
  * @author SIE
  */

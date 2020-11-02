@@ -9,7 +9,7 @@ import com.tasksmanager.data.model.user.User;
 import com.tasksmanager.service.security.UserPrincipal;
 
 /**
- * Сервис для получения {@link UserPrincipal}
+ * UserPrincipal service
  *
  * @author SIE
  */

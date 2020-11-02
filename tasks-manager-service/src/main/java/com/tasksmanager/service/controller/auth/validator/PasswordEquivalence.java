@@ -4,7 +4,7 @@ import javax.validation.Constraint;
 import java.lang.annotation.*;
 
 /**
- * Проверка на совпадение паролей логина
+ * Passwords equivalence validation
  *
  * @author SIE
  */

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.tasksmanager.service.service.UserService;
 
 /**
+ * Has user by email validator
+ *
  * @author SIE
  */
 public class UserExistValidator implements ConstraintValidator<UserExist, String> {

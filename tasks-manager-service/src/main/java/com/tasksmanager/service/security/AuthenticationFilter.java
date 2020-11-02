@@ -20,7 +20,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.tasksmanager.service.service.UserDetailsServiceImpl;
 
 /**
- * Фильтр для проверки аутентификации и загрузки пользователя в SecurityContextHolder
+ * Security authentication filter
  *
  * @author SIE
  */

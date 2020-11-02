@@ -5,6 +5,8 @@ import javax.validation.Payload;
 import java.lang.annotation.*;
 
 /**
+ * Has user by email validation
+ *
  * @author SIE
  */
 @Documented

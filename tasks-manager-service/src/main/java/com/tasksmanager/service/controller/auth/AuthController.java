@@ -19,6 +19,8 @@ import com.tasksmanager.service.security.SecurityConfig;
 import com.tasksmanager.service.service.UserService;
 
 /**
+ * SignIn/SignUp/Logout controller
+ *
  * @author SIE
  */
 @RestController
