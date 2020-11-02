@@ -1,11 +1,18 @@
 package com.tasksmanager.service.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tasksmanager.data.model.user.User;
+import com.tasksmanager.data.model.user.UserConfirmStatus;
+import com.tasksmanager.data.model.user.UserRole;
 import com.tasksmanager.data.repository.UserRepository;
+import com.tasksmanager.service.controller.auth.payload.SignUpRequest;
 
 /**
  * User service {@link User}
@@ -18,11 +25,14 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    private final PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public User get(String id) {
+    public User getById(String id) {
         return this.userRepository
             .findById(id)
             .orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + id));
@@ -32,6 +42,20 @@ public class UserService {
         return this.userRepository
             .findByEmail(email)
             .orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + email));
+    }
+
+    @Transactional(readOnly = false)
+    public String addNewUser(SignUpRequest request) {
+        User newUser = new User();
+        newUser.setFirstName(request.getFirstName());
+        newUser.setLastName(request.getLastName());
+        newUser.setEmail(request.getEmail());
+        newUser.setPassword(this.passwordEncoder.encode(request.getPassword()));
+        newUser.setRole(UserRole.ROLE_USER);
+        newUser.setConfirmStatus(UserConfirmStatus.UNCONFIRMED);
+        newUser.setRegDate(Date.valueOf(LocalDate.now()));
+
+        return userRepository.save(newUser).getId();
     }
 
     public Boolean existByEmail(String email) {
