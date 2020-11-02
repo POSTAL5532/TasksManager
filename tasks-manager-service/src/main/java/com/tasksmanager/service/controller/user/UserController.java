@@ -9,6 +9,7 @@ import com.tasksmanager.service.service.UserService;
  * @author SIE
  */
 @RestController
+@RequestMapping("/api")
 public class UserController {
 
     private final UserService userService;

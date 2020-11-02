@@ -1,12 +1,16 @@
-package com.tasksmanager.service.service;
+package com.tasksmanager.service.security;
 
+import java.util.Collections;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.tasksmanager.data.model.user.User;
-import com.tasksmanager.service.security.UserPrincipal;
+import com.tasksmanager.service.service.UserService;
 
 /**
  * UserPrincipal service
@@ -25,11 +29,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = this.userService.getByEmail(email);
+        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().name());
 
-        return UserPrincipal.create(user);
-    }
-
-    public UserDetails loadUserById(String id) throws UsernameNotFoundException {
-        return UserPrincipal.create(this.userService.getById(id));
+        return new org.springframework.security.core.userdetails.User(
+            user.getEmail(),
+            user.getPassword(),
+            Collections.singletonList(authority)
+        );
     }
 }

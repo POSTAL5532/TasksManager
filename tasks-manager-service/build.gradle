@@ -6,24 +6,24 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.3.1.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.3.5.RELEASE")
     }
 }
 
 plugins {
     id 'war'
-    id 'org.springframework.boot' version '2.3.2.RELEASE'
+    id 'org.springframework.boot' version '2.3.4.RELEASE'
 }
 
 dependencies {
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.3.2.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.3.2.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.3.2.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.3.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.3.5.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.3.5.RELEASE'
+    compile group: 'org.springframework.security.oauth.boot', name: 'spring-security-oauth2-autoconfigure', version: '2.3.4.RELEASE'
 
-    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
-    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.1'
-    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hibernate5', version: '2.10.1'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.3'
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hibernate5', version: '2.11.3'
 
     compile project(':tasks-manager-data')
 }

@@ -1,7 +1,6 @@
 package com.tasksmanager.service;
 
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
-import com.tasksmanager.service.service.UserDetailsServiceImpl;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

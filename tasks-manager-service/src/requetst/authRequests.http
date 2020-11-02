@@ -1,0 +1,5 @@
+POST http://localhost:8080/oauth/token?username=postal@qwe.qwe&password=1qweQWE2&grant_type=password
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic Z2xlZS1vLW1ldGVyOnNlY3JldA==
+
+###
