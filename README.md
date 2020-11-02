@@ -1,24 +1,24 @@
-#Tasks manger application
+# Tasks manger application
 
-##Description
+## Description
 Tasks manger application
 
-##Work environment
+## Work environment
 + Java (JDK) 8
 + NodeJS 12.13.0 or later
 + Google Chrome browser
 
-##Run project
+## Run project
 1. Build the project - ``gradlew clean build``
 2. Start the database - ``gradlew startDatabase``
 3. Clean and add new data to database - ``gradlew dropTables createTables addTestData`` or ``gradlew refreshData``
 4. Start the API-application - ``gradlew bootRun``
 
-##Stop project
+## Stop project
 1. Stop the project - ``Ctrl + C``
 2. Start the database - ``gradlew stopDatabase`` or ``Ctrl + C``
 
-##Database commands
+## Database commands
 ``gradlew startDatabase`` - start database
 
 ``gradlew createTables`` - create database tables
