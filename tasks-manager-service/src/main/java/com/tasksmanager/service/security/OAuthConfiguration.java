@@ -1,5 +1,7 @@
 package com.tasksmanager.service.security;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,17 +27,17 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 
     private final UserDetailsService userService;
 
-    @Value("${jwt.clientId:glee-o-meter}")
+    @Value("${app.oAuth2.clientId}")
     private String clientId;
 
-    @Value("${jwt.client-secret:secret}")
+    @Value("${app.oAuth2.clientSecret}")
     private String clientSecret;
 
-    @Value("${jwt.accessTokenValidititySeconds:604800}") // 12 hours
+    @Value("${app.oAuth2.jwtExpirationSeconds}")
     private int accessTokenValiditySeconds;
 
-    @Value("${jwt.authorizedGrantTypes:password,authorization_code,refresh_token}")
-    private String[] authorizedGrantTypes;
+    @Value("${app.oAuth2.jwtAuthorizedGrantTypes}")
+    public String[] authorizedGrantTypes;
 
     @Value("${jwt.refreshTokenValiditySeconds:2592000}") // 30 days
     private int refreshTokenValiditySeconds;
