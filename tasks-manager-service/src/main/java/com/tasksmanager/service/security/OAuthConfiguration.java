@@ -60,11 +60,6 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) {
-        System.out.println("\n\n");
-        System.out.println(clientId);
-        System.out.println(clientSecret);
-        System.out.println("\n\n");
-
         endpoints
             .accessTokenConverter(accessTokenConverter())
             .userDetailsService(userService)
