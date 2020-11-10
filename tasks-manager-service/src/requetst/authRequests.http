@@ -1,5 +1,13 @@
-POST {{host}}/oauth/token?username=postal@qwe.qwe&password=1qweQWE2&grant_type=password
+### Auth POST token request by login and password (access and refresh token response)
+POST {{host}}/oauth/token
 Content-Type: application/x-www-form-urlencoded
-Authorization: {{authorization}}
+Authorization: {{basic_authorization_token}}
 
-###
+username=postal@qwe.qwe&password=1qweQWE2&grant_type=password
+
+### Auth POST token request by bad login and password (400 response)
+POST {{host}}/oauth/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: {{basic_authorization_token}}
+
+username=QWEpostal@qwe.qwe&password=QWE1qweQWE2&grant_type=password

@@ -10,6 +10,8 @@ import com.tasksmanager.service.controller.auth.validator.EmailUniqueness;
 import com.tasksmanager.service.controller.auth.validator.PasswordEquivalence;
 
 /**
+ * SignUp DTO
+ *
  * @author SIE
  */
 @PasswordEquivalence(password = "password", passwordMatch = "rPassword", message = "Пароли не совпадают")

@@ -6,6 +6,8 @@ import com.tasksmanager.data.model.user.User;
 import com.tasksmanager.service.service.UserService;
 
 /**
+ * User data controller
+ *
  * @author SIE
  */
 @RestController

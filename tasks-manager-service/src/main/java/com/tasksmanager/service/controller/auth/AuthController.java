@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tasksmanager.service.controller.auth.payload.SignInRequest;
 import com.tasksmanager.service.controller.auth.payload.SignUpRequest;
 import com.tasksmanager.service.service.UserService;
 
@@ -17,8 +16,6 @@ import com.tasksmanager.service.service.UserService;
  */
 @RestController
 public class AuthController {
-
-    public static final String SIGN_IN_URL = "/signin";
 
     public static final String SIGN_UP_URL = "/signup";
 
@@ -31,10 +28,6 @@ public class AuthController {
     @PostMapping(SIGN_UP_URL)
     public void signUp(@RequestBody @Valid SignUpRequest request) {
         userService.addNewUser(request);
-    }
-
-    @PostMapping(SIGN_IN_URL)
-    public void signIn(@RequestBody @Valid SignInRequest request) {
     }
 
 }

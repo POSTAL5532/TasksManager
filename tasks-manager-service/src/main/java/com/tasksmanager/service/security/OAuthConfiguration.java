@@ -1,7 +1,5 @@
 package com.tasksmanager.service.security;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +13,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 /**
+ * OAuth authorization server configuration
+ *
  * @author SIE
  */
 @Configuration
@@ -39,7 +39,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     @Value("${app.oAuth2.jwtAuthorizedGrantTypes}")
     public String[] authorizedGrantTypes;
 
-    @Value("${jwt.refreshTokenValiditySeconds:2592000}") // 30 days
+    @Value("${app.oAuth2.jwtrefreshTokenValiditySeconds}") // 30 days
     private int refreshTokenValiditySeconds;
 
     public OAuthConfiguration(AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, UserDetailsService userDetailsServiceImpl) {
@@ -56,8 +56,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
             .accessTokenValiditySeconds(accessTokenValiditySeconds)
             .refreshTokenValiditySeconds(refreshTokenValiditySeconds)
             .authorizedGrantTypes(authorizedGrantTypes)
-            .scopes("read", "write")
-            .resourceIds("api");
+            .scopes("read", "write");
     }
 
     @Override
