@@ -21,4 +21,8 @@ VALUES ('4028e48f713215020171321690280001', 'Igor', 'Shcherbachenya', 'postal@qw
 
        ('4028e48f713215020171321690280006', 'Tatiana', 'Mamovna', 'Tatiana@qwe.qwe',
         '$2a$10$daTJ4qjtST0oYw48qP0EweI9sR9x8Wjrgzty5nbEfCbmytrfcoaiO',
-        'ROLE_USER', '2020-09-18', 'DELETED', 'UNCONFIRMED');
+        'ROLE_USER', '2020-09-18', 'DELETED', 'UNCONFIRMED'),
+
+       ('4028e48f713215020171321690280007', 'Admen', 'Admenenya', 'admen@qwe.qwe',
+        '$2a$10$daTJ4qjtST0oYw48qP0EweI9sR9x8Wjrgzty5nbEfCbmytrfcoaiO',
+        'ROLE_ADMIN', '2012-12-12', 'ACTIVE', 'CONFIRMED');
