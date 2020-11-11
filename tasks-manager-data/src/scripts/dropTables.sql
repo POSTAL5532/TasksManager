@@ -1,1 +1,3 @@
+DROP TABLE IF EXISTS projects;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS colour_themes;
