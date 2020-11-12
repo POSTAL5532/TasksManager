@@ -1,4 +1,4 @@
-package com.tasksmanager.data.model.colourthemes;
+package com.tasksmanager.data.model.colourtheme;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +11,6 @@ import com.tasksmanager.data.model.AbstractEntity;
  *
  * @author SIE
  */
-// TODO repository/service/convert/controller
 @Entity
 @Table(name = "colour_themes")
 public class ColourTheme extends AbstractEntity {

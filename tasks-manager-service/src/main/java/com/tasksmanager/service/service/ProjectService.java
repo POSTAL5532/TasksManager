@@ -31,7 +31,7 @@ public class ProjectService {
     public Project getById(String id) {
         return this.projectRepository
             .findById(id)
-            .orElseThrow(() -> new NoSuchElementException("Project not found"));
+            .orElseThrow(NoSuchElementException::new);
     }
 
     @Transactional(readOnly = false)

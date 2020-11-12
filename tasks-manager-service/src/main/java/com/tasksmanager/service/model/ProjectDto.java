@@ -12,6 +12,7 @@ import com.tasksmanager.data.model.project.ProjectStatus;
  *
  * @author SIE
  */
+// TODO improve validation (Regex)
 public class ProjectDto {
 
     private String id;
