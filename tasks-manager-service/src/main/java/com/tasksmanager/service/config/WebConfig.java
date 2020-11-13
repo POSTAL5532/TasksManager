@@ -1,7 +1,9 @@
 package com.tasksmanager.service.config;
 
+import java.util.Arrays;
 import java.util.Collections;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +22,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
+    @Value("${app.cors.hosts}")
+    private String[] corsAcceptedHosts;
+
     @Bean
     public FilterRegistrationBean<CorsFilter> customCorsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -27,8 +32,11 @@ public class WebConfig implements WebMvcConfigurer {
         config.setAllowCredentials(true);
         config.setAllowedMethods(Collections.singletonList("*"));
         config.setAllowedHeaders(Collections.singletonList("*"));
-        config.addAllowedOrigin("http://localhost:8080");
-        config.addAllowedOrigin("https://web.postman.co");
+
+        for (String host : this.corsAcceptedHosts) {
+            config.addAllowedOrigin(host);
+        }
+
         config.setAllowCredentials(true);
         source.registerCorsConfiguration("/**", config);
         FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(new CorsFilter(source));
