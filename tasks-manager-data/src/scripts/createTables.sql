@@ -34,3 +34,25 @@ CREATE TABLE projects
     FOREIGN KEY (colour_theme_id) REFERENCES colour_themes (id),
     PRIMARY KEY (id)
 )
+
+CREATE TABLE tasks
+(
+    id               varchar(36)  NOT NULL,
+    project_id       varchar(36)  NOT NULL,
+    parent_id        varchar(36),
+    author_id        varchar(36),
+    executor_id      varchar(36),
+    name             varchar(255) NOT NULL,
+    description      longvarchar,
+    level            varchar(255) NOT NULL,
+    status           varchar(255) NOT NULL,
+    type             varchar(255) NOT NULL,
+    blocking         varchar(255),
+    blocked_by       varchar(255),
+    creation_date    timestamp    NOT NULL,
+    change_date      timestamp,
+    FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE,
+    FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (executor_id) REFERENCES users (id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+)
