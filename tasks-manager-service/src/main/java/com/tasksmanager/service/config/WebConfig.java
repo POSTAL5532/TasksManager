@@ -1,6 +1,5 @@
 package com.tasksmanager.service.config;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Value;

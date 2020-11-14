@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.NoSuchElementException;
 
-import javax.persistence.EntityNotFoundException;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
