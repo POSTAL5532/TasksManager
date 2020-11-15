@@ -24,11 +24,10 @@ public class ColourThemeService {
         this.colourThemeRepository = colourThemeRepository;
     }
 
-    // TODO handle NoSuchElementException to http-response
     public ColourTheme getById(String id) {
         return this.colourThemeRepository
             .findById(id)
-            .orElseThrow(NoSuchElementException::new);
+            .orElseThrow(() -> new NoSuchElementException("Colour theme not found"));
     }
 
     public List<ColourTheme> getAll() {

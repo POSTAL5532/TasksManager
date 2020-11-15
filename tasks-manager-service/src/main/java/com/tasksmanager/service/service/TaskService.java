@@ -25,11 +25,10 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
-    // TODO handle NoSuchElementException to http-response
     public Task getById(String id) {
         return this.taskRepository
             .findById(id)
-            .orElseThrow(NoSuchElementException::new);
+            .orElseThrow(() -> new NoSuchElementException("Task not found"));
     }
 
     @Transactional(readOnly = false)

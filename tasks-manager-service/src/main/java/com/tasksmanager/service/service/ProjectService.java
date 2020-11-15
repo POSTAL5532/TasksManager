@@ -25,11 +25,10 @@ public class ProjectService {
         this.projectRepository = projectRepository;
     }
 
-    // TODO handle NoSuchElementException to http-response
     public Project getById(String id) {
         return this.projectRepository
             .findById(id)
-            .orElseThrow(NoSuchElementException::new);
+            .orElseThrow(() -> new NoSuchElementException("Project not found"));
     }
 
     @Transactional(readOnly = false)
