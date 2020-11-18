@@ -15,7 +15,6 @@ import com.tasksmanager.data.model.AbstractEntity;
  *
  * @author SIE
  */
-// TODO add test data
 @Entity
 @Table(name = "tasks")
 public class Task extends AbstractEntity {
@@ -33,6 +32,9 @@ public class Task extends AbstractEntity {
     private String executorId;
 
     private String name;
+
+    @Column(name = "short_name")
+    private String shortName;
 
     private String description;
 
@@ -93,6 +95,14 @@ public class Task extends AbstractEntity {
         this.name = name;
     }
 
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -149,6 +159,7 @@ public class Task extends AbstractEntity {
             ", authorId='" + authorId + '\'' +
             ", executorId='" + executorId + '\'' +
             ", name='" + name + '\'' +
+            ", shortName='" + shortName + '\'' +
             ", description='" + description + '\'' +
             ", level=" + level +
             ", status=" + status +

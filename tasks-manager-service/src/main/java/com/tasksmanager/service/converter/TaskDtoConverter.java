@@ -24,6 +24,7 @@ public class TaskDtoConverter implements DtoConverter<Task, TaskDto> {
         task.setAuthorId(dto.getAuthorId());
         task.setExecutorId(dto.getExecutorId());
         task.setName(dto.getName());
+        task.setShortName(dto.getShortName());
         task.setDescription(dto.getDescription());
         task.setLevel(dto.getLevel());
         task.setStatus(dto.getStatus());
@@ -43,6 +44,7 @@ public class TaskDtoConverter implements DtoConverter<Task, TaskDto> {
         taskDto.setAuthorId(entity.getAuthorId());
         taskDto.setExecutorId(entity.getExecutorId());
         taskDto.setName(entity.getName());
+        taskDto.setShortName(entity.getShortName());
         taskDto.setDescription(entity.getDescription());
         taskDto.setLevel(entity.getLevel());
         taskDto.setStatus(entity.getStatus());

@@ -24,6 +24,9 @@ public class ProjectDto {
     private String name;
 
     @NotBlank
+    private String shortName;
+
+    @NotBlank
     private String description;
 
     @NotBlank
@@ -56,6 +59,14 @@ public class ProjectDto {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
     }
 
     public String getDescription() {
@@ -96,6 +107,7 @@ public class ProjectDto {
             "id='" + id + '\'' +
             ", ownerId='" + ownerId + '\'' +
             ", name='" + name + '\'' +
+            ", shortName='" + shortName + '\'' +
             ", description='" + description + '\'' +
             ", colourThemeId='" + colourThemeId + '\'' +
             ", status=" + status +

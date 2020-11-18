@@ -31,6 +31,9 @@ public class TaskDto {
     @NotBlank
     private String name;
 
+    @NotBlank
+    private String shortName;
+
     private String description;
 
     @NotBlank
@@ -95,6 +98,14 @@ public class TaskDto {
         this.name = name;
     }
 
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -152,6 +163,7 @@ public class TaskDto {
             ", authorId='" + authorId + '\'' +
             ", executorId='" + executorId + '\'' +
             ", name='" + name + '\'' +
+            ", shortName='" + shortName + '\'' +
             ", description='" + description + '\'' +
             ", level=" + level +
             ", status=" + status +

@@ -24,6 +24,9 @@ public class Project extends AbstractEntity {
 
     private String name;
 
+    @Column(name = "short_name")
+    private String shortName;
+
     private String description;
 
     @Column(name = "colour_theme_id")
@@ -53,6 +56,14 @@ public class Project extends AbstractEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
     }
 
     public String getDescription() {
@@ -92,6 +103,7 @@ public class Project extends AbstractEntity {
         return "Project{" +
             "ownerId='" + ownerId + '\'' +
             ", name='" + name + '\'' +
+            ", shortName='" + shortName + '\'' +
             ", description='" + description + '\'' +
             ", colourThemeId='" + colourThemeId + '\'' +
             ", status=" + status +

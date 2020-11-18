@@ -22,6 +22,7 @@ public class ProjectConverter implements DtoConverter<Project, ProjectDto> {
         project.setId(dto.getId());
         project.setOwnerId(dto.getOwnerId());
         project.setName(dto.getName());
+        project.setShortName(dto.getShortName());
         project.setDescription(dto.getDescription());
         project.setColourThemeId(dto.getColourThemeId());
         project.setStatus(dto.getStatus());
@@ -39,6 +40,7 @@ public class ProjectConverter implements DtoConverter<Project, ProjectDto> {
         projectDto.setId(entity.getId());
         projectDto.setOwnerId(entity.getOwnerId());
         projectDto.setName(entity.getName());
+        projectDto.setShortName(entity.getShortName());
         projectDto.setDescription(entity.getDescription());
         projectDto.setColourThemeId(entity.getColourThemeId());
         projectDto.setStatus(entity.getStatus());
