@@ -28,8 +28,6 @@ public class TaskDtoConverter implements DtoConverter<Task, TaskDto> {
         task.setLevel(dto.getLevel());
         task.setStatus(dto.getStatus());
         task.setType(dto.getType());
-        task.setBlocking(dto.getBlocking());
-        task.setBlockedBy(dto.getBlockedBy());
         task.setCreationDate(Timestamp.valueOf(dto.getCreationDate()));
         task.setChangeDate(Timestamp.valueOf(dto.getChangeDate()));
 
@@ -49,8 +47,6 @@ public class TaskDtoConverter implements DtoConverter<Task, TaskDto> {
         taskDto.setLevel(entity.getLevel());
         taskDto.setStatus(entity.getStatus());
         taskDto.setType(entity.getType());
-        taskDto.setBlocking(entity.getBlocking());
-        taskDto.setBlockedBy(entity.getBlockedBy());
         taskDto.setCreationDate(entity.getCreationDate().toLocalDateTime());
         taskDto.setChangeDate(entity.getChangeDate().toLocalDateTime());
 

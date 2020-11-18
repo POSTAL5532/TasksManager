@@ -42,10 +42,6 @@ public class TaskDto {
     @NotBlank
     private TaskType type;
 
-    private String blocking;
-
-    private String blockedBy;
-
     @NotBlank
     private LocalDateTime creationDate;
 
@@ -131,22 +127,6 @@ public class TaskDto {
         this.type = type;
     }
 
-    public String getBlocking() {
-        return blocking;
-    }
-
-    public void setBlocking(String blocking) {
-        this.blocking = blocking;
-    }
-
-    public String getBlockedBy() {
-        return blockedBy;
-    }
-
-    public void setBlockedBy(String blockedBy) {
-        this.blockedBy = blockedBy;
-    }
-
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
@@ -176,8 +156,6 @@ public class TaskDto {
             ", level=" + level +
             ", status=" + status +
             ", type=" + type +
-            ", blocking='" + blocking + '\'' +
-            ", blockedBy='" + blockedBy + '\'' +
             ", creationDate=" + creationDate +
             ", changeDate=" + changeDate +
             '}';

@@ -6,6 +6,7 @@ CREATE TABLE users
     email          varchar(255) NOT NULL UNIQUE,
     password       varchar(255) NOT NULL,
     role           varchar(255) NOT NULL,
+
     reg_date       date         NOT NULL,
     status         varchar(255) NOT NULL,
     confirm_status varchar(255) NOT NULL,
@@ -39,7 +40,6 @@ CREATE TABLE tasks
 (
     id               varchar(36)  NOT NULL,
     project_id       varchar(36)  NOT NULL,
-    parent_id        varchar(36),
     author_id        varchar(36),
     executor_id      varchar(36),
     name             varchar(255) NOT NULL,
@@ -47,12 +47,21 @@ CREATE TABLE tasks
     level            varchar(255) NOT NULL,
     status           varchar(255) NOT NULL,
     type             varchar(255) NOT NULL,
-    blocking         varchar(255),
-    blocked_by       varchar(255),
     creation_date    timestamp    NOT NULL,
     change_date      timestamp,
     FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE,
     FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE CASCADE,
     FOREIGN KEY (executor_id) REFERENCES users (id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+)
+
+CREATE TABLE tasks_relations
+(
+    id               varchar(36)  NOT NULL,
+    task_id          varchar(36)  NOT NULL,
+    relation_type    varchar(255) NOT NULL,
+    related_task_id  varchar(36)  NOT NULL,
+    FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE,
+    FOREIGN KEY (related_task_id) REFERENCES tasks (id) ON DELETE CASCADE,
     PRIMARY KEY (id)
 )

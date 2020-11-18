@@ -43,11 +43,6 @@ public class Task extends AbstractEntity {
 
     private TaskType type;
 
-    private String blocking;
-
-    @Column(name = "blocked_by")
-    private String blockedBy;
-
     @Column(name = "creation_date")
     private Timestamp creationDate;
 
@@ -130,22 +125,6 @@ public class Task extends AbstractEntity {
         this.type = type;
     }
 
-    public String getBlocking() {
-        return blocking;
-    }
-
-    public void setBlocking(String blocking) {
-        this.blocking = blocking;
-    }
-
-    public String getBlockedBy() {
-        return blockedBy;
-    }
-
-    public void setBlockedBy(String blockedBy) {
-        this.blockedBy = blockedBy;
-    }
-
     public Timestamp getCreationDate() {
         return creationDate;
     }
@@ -174,8 +153,6 @@ public class Task extends AbstractEntity {
             ", level=" + level +
             ", status=" + status +
             ", type=" + type +
-            ", blocking='" + blocking + '\'' +
-            ", blockedBy='" + blockedBy + '\'' +
             ", creationDate=" + creationDate +
             ", changeDate=" + changeDate +
             ", id='" + id + '\'' +

@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS tasks_relations;
 DROP TABLE IF EXISTS tasks;
 DROP TABLE IF EXISTS projects;
 DROP TABLE IF EXISTS users;
