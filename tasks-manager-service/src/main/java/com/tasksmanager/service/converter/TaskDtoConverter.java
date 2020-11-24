@@ -1,5 +1,6 @@
 package com.tasksmanager.service.converter;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import org.springframework.stereotype.Service;
@@ -30,6 +31,7 @@ public class TaskDtoConverter implements DtoConverter<Task, TaskDto> {
         task.setStatus(dto.getStatus());
         task.setType(dto.getType());
         task.setCreationDate(Timestamp.valueOf(dto.getCreationDate()));
+        task.setEndingDate(Date.valueOf(dto.getEndingDate()));
         task.setChangeDate(Timestamp.valueOf(dto.getChangeDate()));
 
         return task;
@@ -50,6 +52,7 @@ public class TaskDtoConverter implements DtoConverter<Task, TaskDto> {
         taskDto.setStatus(entity.getStatus());
         taskDto.setType(entity.getType());
         taskDto.setCreationDate(entity.getCreationDate().toLocalDateTime());
+        taskDto.setEndingDate(entity.getEndingDate().toLocalDate());
         taskDto.setChangeDate(entity.getChangeDate().toLocalDateTime());
 
         return taskDto;

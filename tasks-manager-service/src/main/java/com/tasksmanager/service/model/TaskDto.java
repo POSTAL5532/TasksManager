@@ -1,5 +1,7 @@
 package com.tasksmanager.service.model;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotBlank;
@@ -47,6 +49,8 @@ public class TaskDto {
 
     @NotBlank
     private LocalDateTime creationDate;
+
+    private LocalDate endingDate;
 
     private LocalDateTime changeDate;
 
@@ -146,6 +150,14 @@ public class TaskDto {
         this.creationDate = creationDate;
     }
 
+    public LocalDate getEndingDate() {
+        return endingDate;
+    }
+
+    public void setEndingDate(LocalDate endingDate) {
+        this.endingDate = endingDate;
+    }
+
     public LocalDateTime getChangeDate() {
         return changeDate;
     }
@@ -169,6 +181,7 @@ public class TaskDto {
             ", status=" + status +
             ", type=" + type +
             ", creationDate=" + creationDate +
+            ", endingDate=" + endingDate +
             ", changeDate=" + changeDate +
             '}';
     }

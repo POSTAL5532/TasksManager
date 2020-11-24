@@ -1,5 +1,6 @@
 package com.tasksmanager.data.model.task;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -47,6 +48,9 @@ public class Task extends AbstractEntity {
 
     @Column(name = "creation_date")
     private Timestamp creationDate;
+
+    @Column(name = "ending_date")
+    private Date endingDate;
 
     @Column(name = "change_date")
     private Timestamp changeDate;
@@ -143,6 +147,14 @@ public class Task extends AbstractEntity {
         this.creationDate = creationDate;
     }
 
+    public Date getEndingDate() {
+        return endingDate;
+    }
+
+    public void setEndingDate(Date endingDate) {
+        this.endingDate = endingDate;
+    }
+
     public Timestamp getChangeDate() {
         return changeDate;
     }
@@ -165,6 +177,7 @@ public class Task extends AbstractEntity {
             ", status=" + status +
             ", type=" + type +
             ", creationDate=" + creationDate +
+            ", endingDate=" + endingDate +
             ", changeDate=" + changeDate +
             ", id='" + id + '\'' +
             '}';
