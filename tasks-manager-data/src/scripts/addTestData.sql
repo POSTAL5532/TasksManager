@@ -1,3 +1,7 @@
+/**
+* Test data adding scripts
+*/
+
 INSERT INTO users (id, first_name, last_name, email, password, role, reg_date, status, confirm_status)
 VALUES ('4028e48f713215020171321690280001', 'Igor', 'Shcherbachenya', 'postal@qwe.qwe',
         '$2a$10$daTJ4qjtST0oYw48qP0EweI9sR9x8Wjrgzty5nbEfCbmytrfcoaiO',

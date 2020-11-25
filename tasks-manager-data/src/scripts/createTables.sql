@@ -124,6 +124,14 @@ CREATE TABLE tasks_relations
     PRIMARY KEY (id)
 )
 
+/**
+ * Tags table
+ *
+ * id - tag ID
+ * project_id - project id
+ * colour - tag mark colour
+ * value - tag text
+ */
 CREATE TABLE tags
 (
     id               varchar(36)  NOT NULL,
@@ -133,6 +141,13 @@ CREATE TABLE tags
     PRIMARY KEY (id)
 )
 
+/**
+ * Tasks tags relations table
+ *
+ * id - relation ID
+ * task_id - task ID
+ * tag_id - tag ID
+ */
 CREATE TABLE tasks_tags
 (
     id               varchar(36)  NOT NULL,
