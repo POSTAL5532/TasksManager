@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tasksmanager.data.model.user.User;
 import com.tasksmanager.data.model.user.UserConfirmStatus;
 import com.tasksmanager.data.model.user.UserRole;
+import com.tasksmanager.data.model.user.UserStatus;
 import com.tasksmanager.data.repository.UserRepository;
 import com.tasksmanager.service.controller.auth.payload.SignUpRequest;
 
@@ -52,6 +53,7 @@ public class UserService {
         newUser.setEmail(request.getEmail());
         newUser.setPassword(this.passwordEncoder.encode(request.getPassword()));
         newUser.setRole(UserRole.ROLE_USER);
+        newUser.setStatus(UserStatus.ACTIVE);
         newUser.setConfirmStatus(UserConfirmStatus.UNCONFIRMED);
         newUser.setRegDate(Date.valueOf(LocalDate.now()));
 
