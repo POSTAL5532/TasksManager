@@ -123,3 +123,19 @@ CREATE TABLE tasks_relations
     FOREIGN KEY (related_task_id) REFERENCES tasks (id) ON DELETE CASCADE,
     PRIMARY KEY (id)
 )
+
+CREATE TABLE tags
+(
+    id               varchar(36)  NOT NULL,
+    project_id       varchar(36)  NOT NULL,
+    colour           varchar(7)   NOT NULL,
+    value            varchar(255) NOT NULL,
+    PRIMARY KEY (id)
+)
+
+CREATE TABLE tasks_tags
+(
+    id               varchar(36)  NOT NULL,
+    task_id          varchar(36)  NOT NULL,
+    tag_id           varchar(36)  NOT NULL,
+)

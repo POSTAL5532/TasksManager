@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS tasks_tags;
+DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS tasks_relations;
 DROP TABLE IF EXISTS tasks;
 DROP TABLE IF EXISTS projects;

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tasksmanager.data.model.task.Task;
-import com.tasksmanager.service.converter.TaskDtoConverter;
+import com.tasksmanager.service.converter.TaskConverter;
 import com.tasksmanager.service.model.TaskDto;
 import com.tasksmanager.service.service.TaskService;
 
@@ -27,29 +27,29 @@ public class TasksController {
 
     private final TaskService taskService;
 
-    private final TaskDtoConverter taskDtoConverter;
+    private final TaskConverter taskConverter;
 
-    public TasksController(TaskService taskService, TaskDtoConverter taskDtoConverter) {
+    public TasksController(TaskService taskService, TaskConverter taskDtoConverter) {
         this.taskService = taskService;
-        this.taskDtoConverter = taskDtoConverter;
+        this.taskConverter = taskDtoConverter;
     }
 
     @GetMapping("/tasks/{id}")
     public ResponseEntity<TaskDto> getTask(@PathVariable String id) {
         Task task = this.taskService.getById(id);
-        return ResponseEntity.ok(this.taskDtoConverter.convertToDto(task));
+        return ResponseEntity.ok(this.taskConverter.convertToDto(task));
     }
 
     @PostMapping("/tasks")
     public ResponseEntity<String> createTask(@Valid @RequestBody TaskDto task) {
-        Task newTask = this.taskDtoConverter.convertToEntity(task);
+        Task newTask = this.taskConverter.convertToEntity(task);
         String newTaskId = this.taskService.addNewTask(newTask);
         return ResponseEntity.ok(newTaskId);
     }
 
     @PutMapping("/tasks")
     public ResponseEntity<Void> updateTask(@Valid @RequestBody TaskDto task) {
-        Task changedTask = this.taskDtoConverter.convertToEntity(task);
+        Task changedTask = this.taskConverter.convertToEntity(task);
         this.taskService.updateTask(changedTask);
         return ResponseEntity.ok().build();
     }
