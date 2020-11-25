@@ -2,6 +2,7 @@
 * Drop data tables scripts
 */
 
+DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS tasks_tags;
 DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS tasks_relations;

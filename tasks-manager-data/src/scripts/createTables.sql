@@ -150,7 +150,31 @@ CREATE TABLE tags
  */
 CREATE TABLE tasks_tags
 (
+    id       varchar(36)  NOT NULL,
+    task_id  varchar(36)  NOT NULL,
+    tag_id   varchar(36)  NOT NULL,
+)
+
+/**
+ * Entity comments table
+ *
+ * id - comment ID
+ * author_id - author ID
+ * entity_id - entity ID
+ * entity_type - entity type
+ * content - comment content
+ * creation_date - comment creation date
+ * change_date - comment change date
+ */
+CREATE TABLE comments
+(
     id               varchar(36)  NOT NULL,
-    task_id          varchar(36)  NOT NULL,
-    tag_id           varchar(36)  NOT NULL,
+    author_id        varchar(36)  NOT NULL,
+    entity_id        varchar(36)  NOT NULL,
+    entity_type      varchar(255) NOT NULL,
+    content          varchar(255) NOT NULL,
+    creation_date    timestamp    NOT NULL,
+    change_date      timestamp,
+    FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
 )
