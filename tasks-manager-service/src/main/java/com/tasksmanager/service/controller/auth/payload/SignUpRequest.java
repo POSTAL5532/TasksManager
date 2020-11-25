@@ -14,7 +14,7 @@ import com.tasksmanager.service.controller.auth.validator.PasswordEquivalence;
  *
  * @author SIE
  */
-@PasswordEquivalence(password = "password", passwordMatch = "rPassword", message = "Пароли не совпадают")
+@PasswordEquivalence(password = "password", passwordMatch = "rPassword", message = "Passwords is not equivalence")
 public class SignUpRequest {
 
     @JsonIgnore
@@ -23,26 +23,26 @@ public class SignUpRequest {
     @JsonIgnore
     public static final String NAME_PATTERN = "^\\w{2,255}$";
 
-    @NotBlank(message = "Имя не должно быть пустым")
-    @Pattern(regexp = NAME_PATTERN, message = "Значение имени не корректно")
+    @NotBlank(message = "Name must be specified")
+    @Pattern(regexp = NAME_PATTERN, message = "Name is incorrect")
     private String firstName;
 
-    @NotBlank(message = "Имя не должно быть пустым")
-    @Pattern(regexp = NAME_PATTERN, message = "Значение имени не корректно")
+    @NotBlank(message = "Last name must be specified")
+    @Pattern(regexp = NAME_PATTERN, message = "Last name is incorrect")
     private String lastName;
 
-    @NotBlank(message = "Email не должен быть пустым")
-    @Email(message = "Значение Email не корректно")
-    @EmailUniqueness(message = "Пользователь с таким email уже зарегестрирован")
+    @NotBlank(message = "Email must be specified")
+    @Email(message = "Email is incorrect")
+    @EmailUniqueness(message = "User with this email is already registered")
     private String email;
 
-    @NotBlank(message = "Пароль не должен быть пустым")
-    @Pattern(regexp = PASSWORD_PATTERN, message = "Значение пароля не корректно")
+    @NotBlank(message = "Email must be specified")
+    @Pattern(regexp = PASSWORD_PATTERN, message = "Email is incorrect")
     private String password;
 
     @JsonProperty("rPassword")
-    @NotBlank(message = "Повторный пароль не должен быть пустым")
-    @Pattern(regexp = PASSWORD_PATTERN, message = "Значение повторного пароля не корректно")
+    @NotBlank(message = "Repeat must be specified")
+    @Pattern(regexp = PASSWORD_PATTERN, message = "Repeat password is incorrect")
     private String rPassword;
 
     public String getFirstName() {
