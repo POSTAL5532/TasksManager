@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotBlank;
 
-import com.tasksmanager.data.model.comment.CommentEntityType;
-
 /**
  * Comment DTO
  *
@@ -22,7 +20,7 @@ public class CommentDto {
     private String entityId;
 
     @NotBlank
-    private CommentEntityType commentEntityType;
+    private String commentEntityType;
 
     @NotBlank
     private String content;
@@ -55,11 +53,11 @@ public class CommentDto {
         this.entityId = entityId;
     }
 
-    public CommentEntityType getCommentEntityType() {
+    public String getCommentEntityType() {
         return commentEntityType;
     }
 
-    public void setCommentEntityType(CommentEntityType commentEntityType) {
+    public void setCommentEntityType(String commentEntityType) {
         this.commentEntityType = commentEntityType;
     }
 

@@ -6,6 +6,9 @@ import java.sql.Timestamp;
 import org.springframework.stereotype.Service;
 
 import com.tasksmanager.data.model.task.Task;
+import com.tasksmanager.data.model.task.TaskLevel;
+import com.tasksmanager.data.model.task.TaskStatus;
+import com.tasksmanager.data.model.task.TaskType;
 import com.tasksmanager.service.model.TaskDto;
 
 /**
@@ -27,9 +30,9 @@ public class TaskConverter implements DtoConverter<Task, TaskDto> {
         task.setName(dto.getName());
         task.setShortName(dto.getShortName());
         task.setDescription(dto.getDescription());
-        task.setLevel(dto.getLevel());
-        task.setStatus(dto.getStatus());
-        task.setType(dto.getType());
+        task.setLevel(TaskLevel.valueOf(dto.getLevel()));
+        task.setStatus(TaskStatus.valueOf(dto.getStatus()));
+        task.setType(TaskType.valueOf(dto.getType()));
         task.setCreationDate(Timestamp.valueOf(dto.getCreationDate()));
         task.setEndingDate(Date.valueOf(dto.getEndingDate()));
         task.setChangeDate(Timestamp.valueOf(dto.getChangeDate()));
@@ -48,9 +51,9 @@ public class TaskConverter implements DtoConverter<Task, TaskDto> {
         taskDto.setName(entity.getName());
         taskDto.setShortName(entity.getShortName());
         taskDto.setDescription(entity.getDescription());
-        taskDto.setLevel(entity.getLevel());
-        taskDto.setStatus(entity.getStatus());
-        taskDto.setType(entity.getType());
+        taskDto.setLevel(entity.getLevel().name());
+        taskDto.setStatus(entity.getStatus().name());
+        taskDto.setType(entity.getType().name());
         taskDto.setCreationDate(entity.getCreationDate().toLocalDateTime());
         taskDto.setEndingDate(entity.getEndingDate().toLocalDate());
         taskDto.setChangeDate(entity.getChangeDate().toLocalDateTime());

@@ -5,10 +5,6 @@ import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotBlank;
 
-import com.tasksmanager.data.model.task.TaskLevel;
-import com.tasksmanager.data.model.task.TaskStatus;
-import com.tasksmanager.data.model.task.TaskType;
-
 /**
  * Task DTO model
  *
@@ -38,13 +34,13 @@ public class TaskDto {
     private String description;
 
     @NotBlank
-    private TaskLevel level;
+    private String level;
 
     @NotBlank
-    private TaskStatus status;
+    private String status;
 
     @NotBlank
-    private TaskType type;
+    private String type;
 
     @NotBlank
     private LocalDateTime creationDate;
@@ -117,27 +113,27 @@ public class TaskDto {
         this.description = description;
     }
 
-    public TaskLevel getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(TaskLevel level) {
+    public void setLevel(String level) {
         this.level = level;
     }
 
-    public TaskStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(TaskStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public TaskType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(TaskType type) {
+    public void setType(String type) {
         this.type = type;
     }
 

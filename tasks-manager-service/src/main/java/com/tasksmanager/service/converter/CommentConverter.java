@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import org.springframework.stereotype.Service;
 
 import com.tasksmanager.data.model.comment.Comment;
+import com.tasksmanager.data.model.comment.CommentEntityType;
 import com.tasksmanager.service.model.CommentDto;
 
 /**
@@ -21,7 +22,7 @@ public class CommentConverter implements DtoConverter<Comment, CommentDto> {
         comment.setId(dto.getId());
         comment.setAuthorId(dto.getAuthorId());
         comment.setEntityId(dto.getEntityId());
-        comment.setCommentEntityType(dto.getCommentEntityType());
+        comment.setCommentEntityType(CommentEntityType.valueOf(dto.getCommentEntityType()));
         comment.setCreationDate(Timestamp.valueOf(dto.getCreationDate()));
         comment.setChangeDate(Timestamp.valueOf(dto.getChangeDate()));
 
@@ -34,7 +35,7 @@ public class CommentConverter implements DtoConverter<Comment, CommentDto> {
         dto.setId(entity.getId());
         dto.setAuthorId(entity.getAuthorId());
         dto.setEntityId(entity.getEntityId());
-        dto.setCommentEntityType(entity.getCommentEntityType());
+        dto.setCommentEntityType(entity.getCommentEntityType().name());
         dto.setCreationDate(entity.getCreationDate().toLocalDateTime());
         dto.setChangeDate(entity.getChangeDate().toLocalDateTime());
 

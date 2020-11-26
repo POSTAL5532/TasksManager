@@ -5,8 +5,6 @@ import java.time.LocalDate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.tasksmanager.data.model.project.ProjectStatus;
-
 /**
  * Project DTO model
  *
@@ -33,7 +31,7 @@ public class ProjectDto {
     private String colourThemeId;
 
     @NotNull
-    private ProjectStatus status;
+    private String status;
 
     private LocalDate creationDate;
 
@@ -85,11 +83,11 @@ public class ProjectDto {
         this.colourThemeId = colourThemeId;
     }
 
-    public ProjectStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(ProjectStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
