@@ -100,8 +100,8 @@ CREATE TABLE tasks
     ending_date      date,
     change_date      timestamp,
     FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE,
-    FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE CASCADE,
-    FOREIGN KEY (executor_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE SET NULL,
+    FOREIGN KEY (executor_id) REFERENCES users (id) ON DELETE SET NULL,
     PRIMARY KEY (id)
 )
 
@@ -138,6 +138,7 @@ CREATE TABLE tags
     project_id       varchar(36)  NOT NULL,
     colour           varchar(7)   NOT NULL,
     value            varchar(255) NOT NULL,
+    FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE,
     PRIMARY KEY (id)
 )
 
@@ -153,6 +154,9 @@ CREATE TABLE tasks_tags
     id       varchar(36)  NOT NULL,
     task_id  varchar(36)  NOT NULL,
     tag_id   varchar(36)  NOT NULL,
+    FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE,
+    FOREIGN KEY (tag_id) REFERENCES tags (id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
 )
 
 /**
@@ -169,12 +173,12 @@ CREATE TABLE tasks_tags
 CREATE TABLE comments
 (
     id               varchar(36)  NOT NULL,
-    author_id        varchar(36)  NOT NULL,
+    author_id        varchar(36),
     entity_id        varchar(36)  NOT NULL,
     entity_type      varchar(255) NOT NULL,
     content          varchar(255) NOT NULL,
     creation_date    timestamp    NOT NULL,
     change_date      timestamp,
-    FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE CASCADE,
+    FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE SET NULL,
     PRIMARY KEY (id)
 )
