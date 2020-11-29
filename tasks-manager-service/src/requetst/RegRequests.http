@@ -1,0 +1,59 @@
+### Register new user
+POST {{host}}/api/signup
+Content-Type: application/json
+
+{
+    "firstName": "New",
+    "lastName": "User",
+    "email": "new_user@qwe.qwe",
+    "password": "123QWEqwe",
+    "rPassword": "123QWEqwe"
+}
+
+### Register validation error - email uniquess
+POST {{host}}/api/signup
+Content-Type: application/json
+
+{
+    "firstName": "Test",
+    "lastName": "Test",
+    "email": "user1@qwe.qwe",
+    "password": "123Test",
+    "rPassword": "123Test"
+}
+
+### Register validation error - passwords not equivalence
+POST {{host}}/api/signup
+Content-Type: application/json
+
+{
+    "firstName": "Test",
+    "lastName": "Test",
+    "email": "test@test.test",
+    "password": "123Test",
+    "rPassword": "Test123"
+}
+
+### Register validation error - bad firstName, lastName, email, password, rPassword
+POST {{host}}/api/signup
+Content-Type: application/json
+
+{
+    "firstName": "T",
+    "lastName": "T",
+    "email": "testtest.test",
+    "password": "test",
+    "rPassword": "test"
+}
+
+### Register validation error - must be specified firstName, lastName, email, password, rPassword
+POST {{host}}/api/signup
+Content-Type: application/json
+
+{
+    "firstName": "",
+    "lastName": "",
+    "email": "",
+    "password": "",
+    "rPassword": ""
+}
