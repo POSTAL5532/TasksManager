@@ -6,7 +6,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 /**
- * Passwords equivalence validator
+ * Passwords equivalence validator.
  *
  * @author SIE
  */
@@ -27,10 +27,16 @@ public class PasswordEquivalenceValidator implements ConstraintValidator<Passwor
         Object password = new BeanWrapperImpl(value).getPropertyValue(this.password);
         Object passwordMatch = new BeanWrapperImpl(value).getPropertyValue(this.passwordMatch);
 
-        if (password != null) {
-            return password.equals(passwordMatch);
-        } else {
-            return passwordMatch == null;
+        boolean isValid = password != null && password.equals(passwordMatch);
+
+        if (!isValid) {
+            context.disableDefaultConstraintViolation();
+            context
+                .buildConstraintViolationWithTemplate(context.getDefaultConstraintMessageTemplate())
+                .addPropertyNode(this.passwordMatch)
+                .addConstraintViolation();
         }
+
+        return isValid;
     }
 }
