@@ -15,7 +15,7 @@ import com.tasksmanager.service.model.ProjectDto;
  * @author SIE
  */
 @Service
-public class ProjectConverter implements DtoConverter<Project, ProjectDto> {
+public class ProjectConverter implements DtoEntityConverter<Project, ProjectDto> {
 
     @Override
     public Project convertToEntity(ProjectDto dto) {

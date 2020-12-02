@@ -11,7 +11,7 @@ import com.tasksmanager.service.model.TagDto;
  * @author SIE
  */
 @Service
-public class TagConverter implements DtoConverter<Tag, TagDto> {
+public class TagConverter implements DtoEntityConverter<Tag, TagDto> {
 
     @Override
     public Tag convertToEntity(TagDto dto) {

@@ -11,7 +11,7 @@ import com.tasksmanager.service.controller.auth.payload.SignUpRequest;
 import com.tasksmanager.service.service.UserService;
 
 /**
- * SignIn/SignUp/Logout controller
+ * SignUp/Logout controller
  *
  * @author SIE
  */

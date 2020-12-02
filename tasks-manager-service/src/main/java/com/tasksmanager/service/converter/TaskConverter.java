@@ -17,7 +17,7 @@ import com.tasksmanager.service.model.TaskDto;
  * @author SIE
  */
 @Service
-public class TaskConverter implements DtoConverter<Task, TaskDto> {
+public class TaskConverter implements DtoEntityConverter<Task, TaskDto> {
 
     @Override
     public Task convertToEntity(TaskDto dto) {

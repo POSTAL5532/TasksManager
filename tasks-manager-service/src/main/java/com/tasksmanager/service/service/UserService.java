@@ -3,6 +3,7 @@ package com.tasksmanager.service.service;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,11 @@ public class UserService {
             .orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + email));
     }
 
+    public User getCurrentAuthenticatedUser() {
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return this.userRepository.findByEmail(email).orElse(null);
+    }
+
     @Transactional(readOnly = false)
     public String addNewUser(SignUpRequest request) {
         User newUser = new User();
@@ -62,6 +68,13 @@ public class UserService {
 
     public Boolean existByEmail(String email) {
         return this.userRepository.existsByEmail(email);
+    }
+
+    public void changeCurrentUserEmail(String email) {
+        User current = this.getCurrentAuthenticatedUser();
+        current.setEmail(email);
+        current.setConfirmStatus(UserConfirmStatus.UNCONFIRMED);
+        this.userRepository.save(current);
     }
 }
 

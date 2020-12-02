@@ -14,7 +14,7 @@ import com.tasksmanager.service.model.CommentDto;
  * @author SIE
  */
 @Service
-public class CommentConverter implements DtoConverter<Comment, CommentDto> {
+public class CommentConverter implements DtoEntityConverter<Comment, CommentDto> {
 
     @Override
     public Comment convertToEntity(CommentDto dto) {

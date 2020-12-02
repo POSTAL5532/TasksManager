@@ -11,7 +11,7 @@ import com.tasksmanager.service.model.ColourThemeDto;
  * @author SIE
  */
 @Service
-public class ColourThemeConverter implements DtoConverter<ColourTheme, ColourThemeDto> {
+public class ColourThemeConverter implements DtoEntityConverter<ColourTheme, ColourThemeDto> {
 
     @Override
     public ColourTheme convertToEntity(ColourThemeDto dto) {
