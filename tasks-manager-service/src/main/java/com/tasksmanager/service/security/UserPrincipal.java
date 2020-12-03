@@ -19,6 +19,8 @@ import com.tasksmanager.data.model.user.UserStatus;
  */
 public class UserPrincipal implements UserDetails {
 
+    private String id;
+
     @JsonIgnore
     private String email;
 
@@ -45,6 +47,14 @@ public class UserPrincipal implements UserDetails {
             user,
             Collections.singletonList(new SimpleGrantedAuthority(user.getRole().name()))
         );
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
@@ -85,7 +95,8 @@ public class UserPrincipal implements UserDetails {
     @Override
     public String toString() {
         return "UserPrincipal{" +
-            "email='" + email + '\'' +
+            "id='" + id + '\'' +
+            ", email='" + email + '\'' +
             ", password='" + password + '\'' +
             ", authorities=" + authorities +
             ", status=" + status +

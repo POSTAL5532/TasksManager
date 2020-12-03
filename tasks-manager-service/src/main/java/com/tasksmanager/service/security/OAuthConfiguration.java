@@ -10,6 +10,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 /**
@@ -20,6 +21,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 @Configuration
 @EnableAuthorizationServer
 public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
+
+    private final TokenStore tokenStore;
 
     private final AuthenticationManager authenticationManager;
 
@@ -42,10 +45,11 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     @Value("${app.oAuth2.jwtrefreshTokenValiditySeconds}") // 30 days
     private int refreshTokenValiditySeconds;
 
-    public OAuthConfiguration(AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, UserDetailsService userDetailsServiceImpl) {
+    public OAuthConfiguration(TokenStore tokenStore, AuthenticationManager authenticationManager, PasswordEncoder passwordEncoder, UserDetailsService userDetailsServiceImpl) {
         this.authenticationManager = authenticationManager;
         this.passwordEncoder = passwordEncoder;
         this.userService = userDetailsServiceImpl;
+        this.tokenStore = tokenStore;
     }
 
     @Override
@@ -62,6 +66,7 @@ public class OAuthConfiguration extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
+            .tokenStore(this.tokenStore)
             .accessTokenConverter(accessTokenConverter())
             .userDetailsService(userService)
             .authenticationManager(authenticationManager);

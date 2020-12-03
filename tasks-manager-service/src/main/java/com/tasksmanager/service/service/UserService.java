@@ -15,6 +15,7 @@ import com.tasksmanager.data.model.user.UserRole;
 import com.tasksmanager.data.model.user.UserStatus;
 import com.tasksmanager.data.repository.UserRepository;
 import com.tasksmanager.service.controller.auth.payload.SignUpRequest;
+import com.tasksmanager.service.security.UserPrincipal;
 
 /**
  * User service {@link User}
@@ -47,8 +48,8 @@ public class UserService {
     }
 
     public User getCurrentAuthenticatedUser() {
-        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return this.userRepository.findByEmail(email).orElse(null);
+        UserPrincipal principal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return this.userRepository.findByEmail(principal.getUsername()).orElse(null);
     }
 
     @Transactional(readOnly = false)

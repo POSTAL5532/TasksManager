@@ -26,6 +26,28 @@ CREATE TABLE users
 );
 
 /**
+ * OAuth tokens table
+ */
+CREATE TABLE oauth_access_token (
+    authentication_id varchar(255) NOT NULL PRIMARY KEY,
+    token_id varchar(255) NOT NULL,
+    token blob NOT NULL,
+    user_name varchar(255) NOT NULL,
+    client_id varchar(255) NOT NULL,
+    authentication blob NOT NULL,
+    refresh_token varchar(255) NOT NULL
+);
+
+/**
+ * OAuth refresh-tokens table
+ */
+CREATE TABLE oauth_refresh_token (
+    token_id varchar(255) NOT NULL,
+    token blob NOT NULL,
+    authentication blob NOT NULL
+);
+
+/**
  * Project colour themes table
  *
  * id - theme ID
