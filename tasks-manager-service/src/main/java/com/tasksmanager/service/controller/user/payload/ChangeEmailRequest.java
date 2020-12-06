@@ -12,7 +12,7 @@ import com.tasksmanager.service.controller.user.validator.ChangingEmailUniquenes
  */
 public class ChangeEmailRequest {
 
-    @NotBlank
+    @NotBlank(message = "Email must be specified")
     @Email(message = "Email is incorrect")
     @ChangingEmailUniqueness(message = "User with this email is already registered")
     private String email;

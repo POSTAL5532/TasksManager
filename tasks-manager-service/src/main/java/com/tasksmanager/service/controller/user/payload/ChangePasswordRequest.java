@@ -1,5 +1,7 @@
 package com.tasksmanager.service.controller.user.payload;
 
+import javax.validation.constraints.NotBlank;
+
 import com.tasksmanager.service.controller.user.validator.CorrectUserPassword;
 
 /**
@@ -9,9 +11,11 @@ import com.tasksmanager.service.controller.user.validator.CorrectUserPassword;
  */
 public class ChangePasswordRequest {
 
+    @NotBlank(message = "Prev password must be specified")
     @CorrectUserPassword(message = "Not correct user password")
     private String prevPassword;
 
+    @NotBlank(message = "New password must be specified")
     private String newPassword;
 
     public String getPrevPassword() {
