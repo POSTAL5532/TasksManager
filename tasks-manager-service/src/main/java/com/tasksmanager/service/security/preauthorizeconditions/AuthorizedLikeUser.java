@@ -15,6 +15,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @PreAuthorize("hasAnyAuthority(T(com.tasksmanager.data.model.user.UserRole).ROLE_USER.name())")
-public @interface AuthorizeLikeUser {
+public @interface AuthorizedLikeUser {
 
 }

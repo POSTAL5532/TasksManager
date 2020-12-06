@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tasksmanager.service.controller.auth.payload.SignUpRequest;
-import com.tasksmanager.service.security.preauthorizeconditions.AuthorizeLikeUser;
+import com.tasksmanager.service.security.preauthorizeconditions.AuthorizedLikeUser;
 import com.tasksmanager.service.service.UserService;
 
 /**
@@ -40,7 +40,7 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    @AuthorizeLikeUser
+    @AuthorizedLikeUser
     public void logout(OAuth2Authentication authentication) {
         final String userToken = ((OAuth2AuthenticationDetails) authentication.getDetails()).getTokenValue();
         tokenServices.revokeToken(userToken);

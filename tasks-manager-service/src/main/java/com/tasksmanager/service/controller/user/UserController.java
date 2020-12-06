@@ -10,7 +10,7 @@ import com.tasksmanager.service.controller.user.payload.ChangeEmailRequest;
 import com.tasksmanager.service.controller.user.payload.ChangePasswordRequest;
 import com.tasksmanager.service.converter.UserConverter;
 import com.tasksmanager.service.model.UserDto;
-import com.tasksmanager.service.security.preauthorizeconditions.AuthorizeLikeUser;
+import com.tasksmanager.service.security.preauthorizeconditions.AuthorizedLikeUser;
 import com.tasksmanager.service.service.UserService;
 import com.tasksmanager.service.utils.AuthUtils;
 
@@ -41,7 +41,7 @@ public class UserController {
      * @return HTTP OK with User info
      */
     @GetMapping("/users/current")
-    @AuthorizeLikeUser
+    @AuthorizedLikeUser
     public ResponseEntity<UserDto> getCurrentUserInfo() {
         UserDto dto = this.userConverter.convertToDto(this.authUtils.getCurrentAuthenticatedUser());
         return ResponseEntity.ok(dto);
@@ -54,7 +54,7 @@ public class UserController {
      * @return HTTP OK
      */
     @PutMapping("/users/changeemail")
-    @AuthorizeLikeUser
+    @AuthorizedLikeUser
     public ResponseEntity<Void> changeEmail(@Valid @RequestBody ChangeEmailRequest changeEmailRequest, OAuth2Authentication authentication) {
         this.userService.changeCurrentUserEmail(changeEmailRequest.getEmail());
         authUtils.revokeCurrentUserToken(authentication);
@@ -68,7 +68,7 @@ public class UserController {
      * @return HTTP OK
      */
     @PutMapping("/users/changepassword")
-    @AuthorizeLikeUser
+    @AuthorizedLikeUser
     public ResponseEntity<Void> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest, OAuth2Authentication authentication) {
         this.userService.changeCurrentUserPassword(changePasswordRequest.getNewPassword());
         authUtils.revokeCurrentUserToken(authentication);
