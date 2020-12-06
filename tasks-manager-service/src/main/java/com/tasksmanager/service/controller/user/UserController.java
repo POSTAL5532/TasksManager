@@ -4,18 +4,18 @@ import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
-import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.web.bind.annotation.*;
 
 import com.tasksmanager.service.controller.user.payload.ChangeEmailRequest;
+import com.tasksmanager.service.controller.user.payload.ChangePasswordRequest;
 import com.tasksmanager.service.converter.UserConverter;
 import com.tasksmanager.service.model.UserDto;
 import com.tasksmanager.service.security.preauthorizeconditions.AuthorizeLikeUser;
 import com.tasksmanager.service.service.UserService;
+import com.tasksmanager.service.utils.AuthUtils;
 
 /**
- * User data controller
+ * User data controller.
  *
  * @author SIE
  */
@@ -27,23 +27,23 @@ public class UserController {
 
     private final UserConverter userConverter;
 
-    private final DefaultTokenServices tokenServices;
+    private final AuthUtils authUtils;
 
-    public UserController(UserService userService, UserConverter userConverter, DefaultTokenServices tokenServices) {
+    public UserController(UserService userService, UserConverter userConverter, AuthUtils authUtils) {
         this.userService = userService;
         this.userConverter = userConverter;
-        this.tokenServices = tokenServices;
+        this.authUtils = authUtils;
     }
 
     /**
      * Return current user info.
      *
-     * @return HTTP OK
+     * @return HTTP OK with User info
      */
     @GetMapping("/users/current")
     @AuthorizeLikeUser
     public ResponseEntity<UserDto> getCurrentUserInfo() {
-        UserDto dto = this.userConverter.convertToDto(this.userService.getCurrentAuthenticatedUser());
+        UserDto dto = this.userConverter.convertToDto(this.authUtils.getCurrentAuthenticatedUser());
         return ResponseEntity.ok(dto);
     }
 
@@ -57,10 +57,21 @@ public class UserController {
     @AuthorizeLikeUser
     public ResponseEntity<Void> changeEmail(@Valid @RequestBody ChangeEmailRequest changeEmailRequest, OAuth2Authentication authentication) {
         this.userService.changeCurrentUserEmail(changeEmailRequest.getEmail());
+        authUtils.revokeCurrentUserToken(authentication);
+        return ResponseEntity.ok().build();
+    }
 
-        String userToken = ((OAuth2AuthenticationDetails) authentication.getDetails()).getTokenValue();
-        tokenServices.revokeToken(userToken);
-
+    /**
+     * Change current user password and logout.
+     *
+     * @param changePasswordRequest request body with old and new passwords values
+     * @return HTTP OK
+     */
+    @PutMapping("/users/changepassword")
+    @AuthorizeLikeUser
+    public ResponseEntity<Void> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest, OAuth2Authentication authentication) {
+        this.userService.changeCurrentUserPassword(changePasswordRequest.getNewPassword());
+        authUtils.revokeCurrentUserToken(authentication);
         return ResponseEntity.ok().build();
     }
 }

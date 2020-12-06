@@ -3,7 +3,6 @@ package com.tasksmanager.service.service;
 import java.sql.Date;
 import java.time.LocalDate;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,7 @@ import com.tasksmanager.data.model.user.UserRole;
 import com.tasksmanager.data.model.user.UserStatus;
 import com.tasksmanager.data.repository.UserRepository;
 import com.tasksmanager.service.controller.auth.payload.SignUpRequest;
-import com.tasksmanager.service.security.UserPrincipal;
+import com.tasksmanager.service.utils.AuthUtils;
 
 /**
  * User service {@link User}
@@ -30,9 +29,12 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    private final AuthUtils authUtils;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthUtils authUtils) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.authUtils = authUtils;
     }
 
     public User getById(String id) {
@@ -45,11 +47,6 @@ public class UserService {
         return this.userRepository
             .findByEmail(email)
             .orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + email));
-    }
-
-    public User getCurrentAuthenticatedUser() {
-        UserPrincipal principal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return this.userRepository.findByEmail(principal.getUsername()).orElse(null);
     }
 
     @Transactional(readOnly = false)
@@ -72,9 +69,15 @@ public class UserService {
     }
 
     public void changeCurrentUserEmail(String email) {
-        User current = this.getCurrentAuthenticatedUser();
+        User current = this.authUtils.getCurrentAuthenticatedUser();
         current.setEmail(email);
         current.setConfirmStatus(UserConfirmStatus.UNCONFIRMED);
+        this.userRepository.save(current);
+    }
+
+    public void changeCurrentUserPassword(String password) {
+        User current = this.authUtils.getCurrentAuthenticatedUser();
+        current.setPassword(password);
         this.userRepository.save(current);
     }
 }

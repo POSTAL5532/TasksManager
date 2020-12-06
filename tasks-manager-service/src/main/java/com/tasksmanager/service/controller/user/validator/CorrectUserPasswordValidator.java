@@ -6,26 +6,22 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tasksmanager.data.model.user.User;
-import com.tasksmanager.service.service.UserService;
 import com.tasksmanager.service.utils.AuthUtils;
 
 /**
- * Changing current user email uniqueness validator.
+ * Correct user password validator.
  *
  * @author SIE
  */
-public class ChangingEmailUniquenessValidator implements ConstraintValidator<ChangingEmailUniqueness, String> {
-
-    @Autowired
-    private UserService userService;
+public class CorrectUserPasswordValidator implements ConstraintValidator<CorrectUserPassword, String> {
 
     @Autowired
     private AuthUtils authUtils;
 
     @Override
-    public boolean isValid(String email, ConstraintValidatorContext cxt) {
+    public boolean isValid(String password, ConstraintValidatorContext cxt) {
         User current = this.authUtils.getCurrentAuthenticatedUser();
 
-        return current.getEmail().equals(email) || !userService.existByEmail(email);
+        return current.getPassword().equals(password);
     }
 }
