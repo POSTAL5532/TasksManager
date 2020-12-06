@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.tasksmanager.service.controller.user.payload.ChangeEmailRequest;
 import com.tasksmanager.service.controller.user.payload.ChangePasswordRequest;
+import com.tasksmanager.service.controller.user.payload.ChangeUserNamesRequest;
 import com.tasksmanager.service.converter.UserConverter;
 import com.tasksmanager.service.model.UserDto;
 import com.tasksmanager.service.security.preauthorizeconditions.AuthorizedLikeUser;
@@ -72,6 +73,19 @@ public class UserController {
     public ResponseEntity<Void> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest, OAuth2Authentication authentication) {
         this.userService.changeCurrentUserPassword(changePasswordRequest.getNewPassword());
         authUtils.revokeCurrentUserToken(authentication);
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Change current user firstName/lastName.
+     *
+     * @param changeRequest request body with firstName and LastName.
+     * @return HTTP OK
+     */
+    @PutMapping("/users/changenames")
+    @AuthorizedLikeUser
+    public ResponseEntity<Void> changeName(@Valid @RequestBody ChangeUserNamesRequest changeRequest) {
+        this.userService.changeCurrentUserNames(changeRequest.getFirstName(), changeRequest.getLastName());
         return ResponseEntity.ok().build();
     }
 }

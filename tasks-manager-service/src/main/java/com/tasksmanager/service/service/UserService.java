@@ -80,5 +80,12 @@ public class UserService {
         current.setPassword(password);
         this.userRepository.save(current);
     }
+
+    public void changeCurrentUserNames(String firstName, String lastName) {
+        User current = this.authUtils.getCurrentAuthenticatedUser();
+        current.setFirstName(firstName);
+        current.setLastName(lastName);
+        this.userRepository.save(current);
+    }
 }
 
