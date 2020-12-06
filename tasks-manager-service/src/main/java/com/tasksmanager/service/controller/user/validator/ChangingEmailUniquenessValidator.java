@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.tasksmanager.data.model.user.User;
 import com.tasksmanager.service.service.UserService;
-import com.tasksmanager.service.utils.AuthUtils;
 
 /**
  * Changing current user email uniqueness validator.
@@ -19,12 +18,9 @@ public class ChangingEmailUniquenessValidator implements ConstraintValidator<Cha
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private AuthUtils authUtils;
-
     @Override
     public boolean isValid(String email, ConstraintValidatorContext cxt) {
-        User current = this.authUtils.getCurrentAuthenticatedUser();
+        User current = this.userService.getCurrentAuthenticatedUser();
 
         return current.getEmail().equals(email) || !userService.existByEmail(email);
     }

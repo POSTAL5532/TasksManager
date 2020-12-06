@@ -13,7 +13,7 @@ import com.tasksmanager.service.converter.UserConverter;
 import com.tasksmanager.service.model.UserDto;
 import com.tasksmanager.service.security.preauthorizeconditions.AuthorizedLikeUser;
 import com.tasksmanager.service.service.UserService;
-import com.tasksmanager.service.utils.AuthUtils;
+import com.tasksmanager.service.utils.TokenUtils;
 
 /**
  * User data controller.
@@ -28,12 +28,12 @@ public class UserController {
 
     private final UserConverter userConverter;
 
-    private final AuthUtils authUtils;
+    private final TokenUtils tokenUtils;
 
-    public UserController(UserService userService, UserConverter userConverter, AuthUtils authUtils) {
+    public UserController(UserService userService, UserConverter userConverter, TokenUtils tokenUtils) {
         this.userService = userService;
         this.userConverter = userConverter;
-        this.authUtils = authUtils;
+        this.tokenUtils = tokenUtils;
     }
 
     /**
@@ -44,7 +44,7 @@ public class UserController {
     @GetMapping("/users/current")
     @AuthorizedLikeUser
     public ResponseEntity<UserDto> getCurrentUserInfo() {
-        UserDto dto = this.userConverter.convertToDto(this.authUtils.getCurrentAuthenticatedUser());
+        UserDto dto = this.userConverter.convertToDto(this.userService.getCurrentAuthenticatedUser());
         return ResponseEntity.ok(dto);
     }
 
@@ -58,7 +58,7 @@ public class UserController {
     @AuthorizedLikeUser
     public ResponseEntity<Void> changeEmail(@Valid @RequestBody ChangeEmailRequest changeEmailRequest, OAuth2Authentication authentication) {
         this.userService.changeCurrentUserEmail(changeEmailRequest.getEmail());
-        authUtils.revokeCurrentUserToken(authentication);
+        tokenUtils.revokeCurrentUserToken(authentication);
         return ResponseEntity.ok().build();
     }
 
@@ -72,7 +72,7 @@ public class UserController {
     @AuthorizedLikeUser
     public ResponseEntity<Void> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest, OAuth2Authentication authentication) {
         this.userService.changeCurrentUserPassword(changePasswordRequest.getNewPassword());
-        authUtils.revokeCurrentUserToken(authentication);
+        tokenUtils.revokeCurrentUserToken(authentication);
         return ResponseEntity.ok().build();
     }
 

@@ -3,6 +3,7 @@ package com.tasksmanager.service.service;
 import java.sql.Date;
 import java.time.LocalDate;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import com.tasksmanager.data.model.user.UserRole;
 import com.tasksmanager.data.model.user.UserStatus;
 import com.tasksmanager.data.repository.UserRepository;
 import com.tasksmanager.service.controller.auth.payload.SignUpRequest;
-import com.tasksmanager.service.utils.AuthUtils;
+import com.tasksmanager.service.security.UserPrincipal;
 
 /**
  * User service {@link User}
@@ -29,12 +30,14 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final AuthUtils authUtils;
-
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthUtils authUtils) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.authUtils = authUtils;
+    }
+
+    public User getCurrentAuthenticatedUser() {
+        UserPrincipal principal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return this.getByEmail(principal.getUsername());
     }
 
     public User getById(String id) {
@@ -69,20 +72,20 @@ public class UserService {
     }
 
     public void changeCurrentUserEmail(String email) {
-        User current = this.authUtils.getCurrentAuthenticatedUser();
+        User current = this.getCurrentAuthenticatedUser();
         current.setEmail(email);
         current.setConfirmStatus(UserConfirmStatus.UNCONFIRMED);
         this.userRepository.save(current);
     }
 
     public void changeCurrentUserPassword(String password) {
-        User current = this.authUtils.getCurrentAuthenticatedUser();
+        User current = this.getCurrentAuthenticatedUser();
         current.setPassword(password);
         this.userRepository.save(current);
     }
 
     public void changeCurrentUserNames(String firstName, String lastName) {
-        User current = this.authUtils.getCurrentAuthenticatedUser();
+        User current = this.getCurrentAuthenticatedUser();
         current.setFirstName(firstName);
         current.setLastName(lastName);
         this.userRepository.save(current);
