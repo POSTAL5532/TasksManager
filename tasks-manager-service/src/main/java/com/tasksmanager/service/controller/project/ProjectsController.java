@@ -21,7 +21,7 @@ import com.tasksmanager.service.service.ProjectService;
  * @author SIE
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/projects/api")
 public class ProjectsController {
 
     private final ProjectService projectService;
@@ -33,13 +33,13 @@ public class ProjectsController {
         this.projectConverter = projectConverter;
     }
 
-    @GetMapping("/projects/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProjectDto> getProject(@PathVariable String id) {
         Project project = this.projectService.getById(id);
         return ResponseEntity.ok(this.projectConverter.convertToDto(project));
     }
 
-    @PostMapping("/projects")
+    @PostMapping
     public ResponseEntity<String> createProject(@Valid @RequestBody ProjectDto project) {
         Project newProject = this.projectConverter.convertToEntity(project);
         String newProjectId = this.projectService.addNewProject(newProject);

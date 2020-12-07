@@ -21,7 +21,7 @@ import com.tasksmanager.service.utils.TokenUtils;
  * @author SIE
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/users/api")
 public class UserController {
 
     private final UserService userService;
@@ -41,7 +41,7 @@ public class UserController {
      *
      * @return HTTP OK with User info
      */
-    @GetMapping("/users/current")
+    @GetMapping("/current")
     @AuthorizedLikeUser
     public ResponseEntity<UserDto> getCurrentUserInfo() {
         UserDto dto = this.userConverter.convertToDto(this.userService.getCurrentAuthenticatedUser());
@@ -54,7 +54,7 @@ public class UserController {
      * @param changeEmailRequest request body with new email value
      * @return HTTP OK
      */
-    @PutMapping("/users/changeemail")
+    @PutMapping("/changeemail")
     @AuthorizedLikeUser
     public ResponseEntity<Void> changeEmail(@Valid @RequestBody ChangeEmailRequest changeEmailRequest, OAuth2Authentication authentication) {
         this.userService.changeCurrentUserEmail(changeEmailRequest.getEmail());
@@ -68,7 +68,7 @@ public class UserController {
      * @param changePasswordRequest request body with old and new passwords values
      * @return HTTP OK
      */
-    @PutMapping("/users/changepassword")
+    @PutMapping("/changepassword")
     @AuthorizedLikeUser
     public ResponseEntity<Void> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest, OAuth2Authentication authentication) {
         this.userService.changeCurrentUserPassword(changePasswordRequest.getNewPassword());
@@ -82,7 +82,7 @@ public class UserController {
      * @param changeRequest request body with firstName and LastName.
      * @return HTTP OK
      */
-    @PutMapping("/users/changenames")
+    @PutMapping("/changenames")
     @AuthorizedLikeUser
     public ResponseEntity<Void> changeName(@Valid @RequestBody ChangeUserNamesRequest changeRequest) {
         this.userService.changeCurrentUserNames(changeRequest.getFirstName(), changeRequest.getLastName());

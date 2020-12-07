@@ -24,7 +24,7 @@ import com.tasksmanager.service.service.ColourThemeService;
  * @author SIE
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/colourthemes/api")
 public class ColourThemeController {
 
     private final ColourThemeService colourThemeService;
@@ -36,7 +36,7 @@ public class ColourThemeController {
         this.colourThemeConverter = colourThemeConverter;
     }
 
-    @GetMapping("/colourthemes")
+    @GetMapping
     public ResponseEntity<List<ColourThemeDto>> getAllColourTheme() {
         List<ColourTheme> colourThemes = this.colourThemeService.getAll();
         List<ColourThemeDto> dtoColourTheme = colourThemes.stream()
@@ -46,13 +46,13 @@ public class ColourThemeController {
         return ResponseEntity.ok(dtoColourTheme);
     }
 
-    @GetMapping("/colourthemes/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ColourThemeDto> getColourTheme(@PathVariable String id) {
         ColourTheme colourTheme = this.colourThemeService.getById(id);
         return ResponseEntity.ok(this.colourThemeConverter.convertToDto(colourTheme));
     }
 
-    @PostMapping("/colourthemes")
+    @PostMapping
     public ResponseEntity<String> createColourTheme(@Valid @RequestBody ColourThemeDto colourTheme) {
         ColourTheme newColourTheme = this.colourThemeConverter.convertToEntity(colourTheme);
         String newColourThemeId = this.colourThemeService.addNewColourTheme(newColourTheme);

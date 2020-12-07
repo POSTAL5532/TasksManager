@@ -22,7 +22,7 @@ import com.tasksmanager.service.service.TaskService;
  * @author SIE
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/tasks/api")
 public class TasksController {
 
     private final TaskService taskService;
@@ -34,20 +34,20 @@ public class TasksController {
         this.taskConverter = taskDtoConverter;
     }
 
-    @GetMapping("/tasks/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TaskDto> getTask(@PathVariable String id) {
         Task task = this.taskService.getById(id);
         return ResponseEntity.ok(this.taskConverter.convertToDto(task));
     }
 
-    @PostMapping("/tasks")
+    @PostMapping
     public ResponseEntity<String> createTask(@Valid @RequestBody TaskDto task) {
         Task newTask = this.taskConverter.convertToEntity(task);
         String newTaskId = this.taskService.addNewTask(newTask);
         return ResponseEntity.ok(newTaskId);
     }
 
-    @PutMapping("/tasks")
+    @PutMapping
     public ResponseEntity<Void> updateTask(@Valid @RequestBody TaskDto task) {
         Task changedTask = this.taskConverter.convertToEntity(task);
         this.taskService.updateTask(changedTask);

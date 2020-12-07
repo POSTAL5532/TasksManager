@@ -22,7 +22,7 @@ import com.tasksmanager.service.service.CommentService;
  * @author SIE
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/comments/api")
 public class CommentController {
 
     private final CommentService commentService;
@@ -34,20 +34,20 @@ public class CommentController {
         this.commentConverter = commentConverter;
     }
 
-    @GetMapping("/comments/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<CommentDto> getComment(@PathVariable String id) {
         Comment comment = this.commentService.getById(id);
         return ResponseEntity.ok(this.commentConverter.convertToDto(comment));
     }
 
-    @PostMapping("/comments")
+    @PostMapping
     public ResponseEntity<String> createComment(@Valid @RequestBody CommentDto comment) {
         Comment newComment = this.commentConverter.convertToEntity(comment);
         String newCommentId = this.commentService.addNewComment(newComment);
         return ResponseEntity.ok(newCommentId);
     }
 
-    @PutMapping("/comments")
+    @PutMapping
     public ResponseEntity<Void> updateComment(@Valid @RequestBody CommentDto comment) {
         Comment changedComment = this.commentConverter.convertToEntity(comment);
         this.commentService.updateComment(changedComment);

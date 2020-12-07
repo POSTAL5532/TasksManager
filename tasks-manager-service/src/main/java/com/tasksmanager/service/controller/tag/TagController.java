@@ -22,7 +22,7 @@ import com.tasksmanager.service.service.TagService;
  * @author SIE
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/tags/api")
 public class TagController {
 
     private final TagService tagService;
@@ -34,20 +34,20 @@ public class TagController {
         this.tagConverter = tagConverter;
     }
 
-    @GetMapping("/tags/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TagDto> getTag(@PathVariable String id) {
         Tag tag = this.tagService.getById(id);
         return ResponseEntity.ok(this.tagConverter.convertToDto(tag));
     }
 
-    @PostMapping("/tags")
+    @PostMapping
     public ResponseEntity<String> createTag(@Valid @RequestBody TagDto tag) {
         Tag newTag = this.tagConverter.convertToEntity(tag);
         String newTagId = this.tagService.addNewTask(newTag);
         return ResponseEntity.ok(newTagId);
     }
 
-    @PutMapping("/tags")
+    @PutMapping
     public ResponseEntity<Void> updateTag(@Valid @RequestBody TagDto tag) {
         Tag changedTag = this.tagConverter.convertToEntity(tag);
         this.tagService.updateTag(changedTag);
