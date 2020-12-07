@@ -21,7 +21,7 @@ import com.tasksmanager.service.utils.TokenUtils;
  * @author SIE
  */
 @RestController
-@RequestMapping("/users/api")
+@RequestMapping("/api/users")
 public class UserController {
 
     private final UserService userService;

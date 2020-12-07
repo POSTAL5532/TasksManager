@@ -24,7 +24,7 @@ import com.tasksmanager.service.service.ColourThemeService;
  * @author SIE
  */
 @RestController
-@RequestMapping("/colourthemes/api")
+@RequestMapping("/api/colourthemes")
 public class ColourThemeController {
 
     private final ColourThemeService colourThemeService;

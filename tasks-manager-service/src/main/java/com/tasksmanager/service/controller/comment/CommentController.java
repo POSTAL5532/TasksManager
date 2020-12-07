@@ -22,7 +22,7 @@ import com.tasksmanager.service.service.CommentService;
  * @author SIE
  */
 @RestController
-@RequestMapping("/comments/api")
+@RequestMapping("/api/comments")
 public class CommentController {
 
     private final CommentService commentService;

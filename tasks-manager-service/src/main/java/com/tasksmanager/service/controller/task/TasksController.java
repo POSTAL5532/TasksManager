@@ -22,7 +22,7 @@ import com.tasksmanager.service.service.TaskService;
  * @author SIE
  */
 @RestController
-@RequestMapping("/tasks/api")
+@RequestMapping("/api/tasks")
 public class TasksController {
 
     private final TaskService taskService;

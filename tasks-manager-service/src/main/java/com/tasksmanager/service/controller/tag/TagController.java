@@ -22,7 +22,7 @@ import com.tasksmanager.service.service.TagService;
  * @author SIE
  */
 @RestController
-@RequestMapping("/tags/api")
+@RequestMapping("/api/tags")
 public class TagController {
 
     private final TagService tagService;

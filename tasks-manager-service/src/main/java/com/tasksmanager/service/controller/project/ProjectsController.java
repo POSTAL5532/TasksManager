@@ -21,7 +21,7 @@ import com.tasksmanager.service.service.ProjectService;
  * @author SIE
  */
 @RestController
-@RequestMapping("/projects/api")
+@RequestMapping("/api/projects")
 public class ProjectsController {
 
     private final ProjectService projectService;
