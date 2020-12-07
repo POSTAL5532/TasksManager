@@ -77,27 +77,32 @@ VALUES ('4028e48f713215020171321690280101', '4028e48f713215020171321690280001', 
         'Nam rutrum dictum justo et aliquam. Vivamus luctus nec odio ultrices ultrices. Duis quis vehicula libero, ut accumsan ante. Nulla in pharetra elit. Suspendisse potenti.',
         '4028e48f713215020171321690280013', 'DRAFT', '2020-09-18');
 
-INSERT INTO tasks (id, project_id, author_id, executor_id, name, description, level, status, type, creation_date, ending_date, change_date)
+INSERT INTO tasks (id, project_id, author_id, executor_id, name, description, level, status, type, creation_date, ending_date,
+                   change_date)
 VALUES ('4028e48f713215020171321690201001', '4028e48f713215020171321690280101', '4028e48f713215020171321690280001', NULL,
         'Start TasksManager story 1', 'story 1 some task description', 'MAJOR', 'NEED_TO_SOLVE', 'STORY',
         '2020-11-18', NULL, NULL),
        ('4028e48f713215020171321690202001', '4028e48f713215020171321690280101', '4028e48f713215020171321690280001', NULL,
         'Start TasksManager task 0', 'task 0 some task description', 'MAJOR', 'NEED_TO_SOLVE', 'TASK',
         '2020-11-18', NULL, '2020-11-19'),
-       ('4028e48f713215020171321690203001', '4028e48f713215020171321690280101', '4028e48f713215020171321690280001', '4028e48f713215020171321690280002',
+       ('4028e48f713215020171321690203001', '4028e48f713215020171321690280101', '4028e48f713215020171321690280001',
+        '4028e48f713215020171321690280002',
         'Start TasksManager task 2', 'story_1_subtask_1 some task description', 'MAJOR', 'IN_PROCESS', 'TASK',
         '2020-11-18', NULL, '2020-11-19'),
-       ('4028e48f713215020171321690204001', '4028e48f713215020171321690280101', '4028e48f713215020171321690280002', '4028e48f713215020171321690280001',
+       ('4028e48f713215020171321690204001', '4028e48f713215020171321690280101', '4028e48f713215020171321690280002',
+        '4028e48f713215020171321690280001',
         'Start TasksManager task 3', 'story_1_subtask_1_subtask_1 some task description', 'MINOR', 'READY_TO_CHECK', 'TASK',
         '2020-11-18', NULL, NULL),
-       ('4028e48f713215020171321690205001', '4028e48f713215020171321690280101', '4028e48f713215020171321690280001', '4028e48f713215020171321690280001',
+       ('4028e48f713215020171321690205001', '4028e48f713215020171321690280101', '4028e48f713215020171321690280001',
+        '4028e48f713215020171321690280001',
         'Start TasksManager task 4', 'story_1_subtask_1_subtask_2 some task description', 'MINOR', 'NEED_TO_SOLVE', 'TASK',
         '2020-11-17', NULL, '2020-11-18'),
        ('4028e48f713215020171321690206001', '4028e48f713215020171321690280101', '4028e48f713215020171321690280002', NULL,
         'Start TasksManager task 4', 'task_2_relate_story_1_subtask_1 some task description', 'MAJOR', 'IN_PROCESS', 'TASK',
         '2020-11-17', NULL, '2020-11-18'),
        ('4028e48f713215020171321690207001', '4028e48f713215020171321690280101', '4028e48f713215020171321690280002', NULL,
-        'Start TasksManager task 4', 'task_3_relate_story_1_subtask_1_subtask_2 some task description', 'MAJOR', 'IN_PROCESS', 'TASK',
+        'Start TasksManager task 4', 'task_3_relate_story_1_subtask_1_subtask_2 some task description', 'MAJOR', 'IN_PROCESS',
+        'TASK',
         '2020-11-17', NULL, '2020-11-18');
 
 INSERT INTO tasks_relations (id, task_id, relation_type, related_task_id)
@@ -106,3 +111,8 @@ VALUES ('4028e48f713215020171321690217001', '4028e48f713215020171321690203001', 
        ('4028e48f713215020171321690237001', '4028e48f713215020171321690205001', 'SUB_TASK', '4028e48f713215020171321690203001'),
        ('4028e48f713215020171321690247001', '4028e48f713215020171321690206001', 'SIMPLE', '4028e48f713215020171321690204001'),
        ('4028e48f713215020171321690257001', '4028e48f713215020171321690207001', 'BLOCKER', '4028e48f713215020171321690205001');
+
+INSERT INTO user_project_access (id, project_id, user_id, owner, can_see_team, can_see_project,
+                            can_edit_project, can_see_other_tasks, can_add_tasks, can_delete_tasks)
+VALUES ('4028e48f713215020171321121280101', '4028e48f713215020171321690280101', '4028e48f713215020171321690280001',
+        1, 1, 1, 1, 1, 1, 1);

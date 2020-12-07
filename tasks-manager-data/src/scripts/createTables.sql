@@ -149,6 +149,37 @@ CREATE TABLE tasks_relations
 /**
  * Tags table
  *
+ * id - user project access ID
+ * project_id - project id
+ * user_id - user id
+ * is_owner - user is owner of project
+ * can_see_team - user is owner of project
+ * can_see_project - user can see project info
+ * can_edit_project - user can edit project
+ * can_see_other_tasks - user can see other project tasks
+ * can_add_tasks - user can add tasks to project
+ * can_delete_tasks - user can delete tasks from project
+ */
+CREATE TABLE user_project_access
+(
+    id                  varchar(36) NOT NULL,
+    project_id          varchar(36) NOT NULL,
+    user_id             varchar(36) NOT NULL,
+    is_owner            bit(1)      NOT NULL,
+    can_see_team        bit(1)      NOT NULL,
+    can_see_project     bit(1)      NOT NULL,
+    can_edit_project    bit(1)      NOT NULL,
+    can_see_other_tasks bit(1)      NOT NULL,
+    can_add_tasks       bit(1)      NOT NULL,
+    can_delete_tasks    bit(1)      NOT NULL,
+    FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+)
+
+/**
+ * Tags table
+ *
  * id - tag ID
  * project_id - project id
  * colour - tag mark colour

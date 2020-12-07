@@ -5,6 +5,7 @@
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS tasks_tags;
 DROP TABLE IF EXISTS tags;
+DROP TABLE IF EXISTS user_project_access;
 DROP TABLE IF EXISTS tasks_relations;
 DROP TABLE IF EXISTS tasks;
 DROP TABLE IF EXISTS projects;
