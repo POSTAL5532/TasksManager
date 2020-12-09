@@ -56,24 +56,24 @@ VALUES ('4028e48f713215020171321690280011', 'WhiteBlack', '#ffffff', '#000000'),
        ('4028e48f713215020171321690280012', 'YellowBlack', '#ffd400', '#000000'),
        ('4028e48f713215020171321690280013', 'RedWhite', '#ff0000', '#ffffff');
 
-INSERT INTO projects (id, owner_id, name, short_name, description, colour_theme_id, status, creation_date)
-VALUES ('4028e48f713215020171321690280101', '4028e48f713215020171321690280001', 'Start TasksManager', 'STM',
+INSERT INTO projects (id, name, short_name, description, colour_theme_id, status, creation_date)
+VALUES ('4028e48f713215020171321690280101', 'Start TasksManager', 'STM',
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s, when an unknown printer took a galley',
         '4028e48f713215020171321690280011', 'PUBLISHED', '2020-09-05'),
 
-       ('4028e48f713215020171321690280102', '4028e48f713215020171321690280001', 'SomeProject', 'SPP',
+       ('4028e48f713215020171321690280102', 'SomeProject', 'SPP',
         ' Proin placerat interdum dolor sed ultrices. Sed dapibus quis tellus sit amet convallis. Donec lacinia consectetur lacus, vitae congue nunc ultrices nec. Sed sed augue risus. Nam sagittis efficitur arcu',
         '4028e48f713215020171321690280011', 'PUBLISHED', '2012-12-12'),
 
-       ('4028e48f713215020171321690280103', '4028e48f713215020171321690280002', 'End TasksManger', 'ETM',
+       ('4028e48f713215020171321690280103', 'End TasksManger', 'ETM',
         'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a',
         '4028e48f713215020171321690280012', 'PUBLISHED', '2020-03-23'),
 
-       ('4028e48f713215020171321690280104', '4028e48f713215020171321690280001', 'Sell TasksManager', 'MMT',
+       ('4028e48f713215020171321690280104', 'Sell TasksManager', 'MMT',
         'Ut aliquet diam ac ultricies pellentesque. Morbi quis auctor eros. Phasellus vel magna et augue fringilla fermentum commodo vel sem. Duis tempus libero dolor, eu sagittis ex pulvinar nec.',
         '4028e48f713215020171321690280012', 'DRAFT', '2020-05-25'),
 
-       ('4028e48f713215020171321690280105', '4028e48f713215020171321690280002', 'Some Tasks', 'SST',
+       ('4028e48f713215020171321690280105', 'Some Tasks', 'SST',
         'Nam rutrum dictum justo et aliquam. Vivamus luctus nec odio ultrices ultrices. Duis quis vehicula libero, ut accumsan ante. Nulla in pharetra elit. Suspendisse potenti.',
         '4028e48f713215020171321690280013', 'DRAFT', '2020-09-18');
 
@@ -112,7 +112,15 @@ VALUES ('4028e48f713215020171321690217001', '4028e48f713215020171321690203001', 
        ('4028e48f713215020171321690247001', '4028e48f713215020171321690206001', 'SIMPLE', '4028e48f713215020171321690204001'),
        ('4028e48f713215020171321690257001', '4028e48f713215020171321690207001', 'BLOCKER', '4028e48f713215020171321690205001');
 
-INSERT INTO user_project_access (id, project_id, user_id, owner, can_see_team, can_see_project,
-                            can_edit_project, can_see_other_tasks, can_add_tasks, can_delete_tasks)
+INSERT INTO user_project_access (id, project_id, user_id, is_owner, can_see_team, can_see_project,
+                                 can_edit_project, can_see_other_tasks, can_add_tasks, can_delete_tasks)
 VALUES ('4028e48f713215020171321121280101', '4028e48f713215020171321690280101', '4028e48f713215020171321690280001',
+        1, 1, 1, 1, 1, 1, 1),
+       ('4028e48f713215020171321121280102', '4028e48f713215020171321690280102', '4028e48f713215020171321690280001',
+        1, 1, 1, 1, 1, 1, 1),
+       ('4028e48f713215020171321121280103', '4028e48f713215020171321690280104', '4028e48f713215020171321690280001',
+        1, 1, 1, 1, 1, 1, 1),
+       ('4028e48f713215020171321121280104', '4028e48f713215020171321690280103', '4028e48f713215020171321690280002',
+        1, 1, 1, 1, 1, 1, 1),
+       ('4028e48f713215020171321121280105', '4028e48f713215020171321690280104', '4028e48f713215020171321690280002',
         1, 1, 1, 1, 1, 1, 1);

@@ -16,6 +16,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.tasksmanager.service.model.ApiError;
+import com.tasksmanager.service.model.ApiErrorType;
 import com.tasksmanager.service.model.NameValue;
 
 /**
@@ -23,18 +24,6 @@ import com.tasksmanager.service.model.NameValue;
  */
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
-
-    /**
-     * NoSuchElementException handler. Convert NoSuchElementException to response with 404 HTTP code.
-     *
-     * @param exception exception
-     * @param request   request
-     * @return 404 HTTP response
-     */
-    @ExceptionHandler(value = NoSuchElementException.class)
-    public final ResponseEntity<Object> noSuchElementException(NoSuchElementException exception, WebRequest request) {
-        return handleExceptionInternal(exception, exception.getMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND, request);
-    }
 
     /**
      * MethodArgumentNotValidException handler. Convert MethodArgumentNotValidException to response with 400 HTTP code
@@ -58,8 +47,47 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             errors.add(new NameValue(objectError.getObjectName(), objectError.getDefaultMessage()));
         }
 
-        ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, "Request validation error", errors);
+        ApiError apiError = new ApiError(ApiErrorType.VALIDATION_ERROR, HttpStatus.BAD_REQUEST, "Request validation error", errors);
 
+        return handleExceptionInternal(exception, apiError, new HttpHeaders(), apiError.getStatus(), request);
+    }
+
+    /**
+     * NoSuchElementException handler. Convert NoSuchElementException to response with 404 HTTP code.
+     *
+     * @param exception exception
+     * @param request   request
+     * @return 404 HTTP response
+     */
+    @ExceptionHandler(value = NoSuchElementException.class)
+    public final ResponseEntity<Object> noSuchElementException(NoSuchElementException exception, WebRequest request) {
+        ApiError apiError = new ApiError(ApiErrorType.NOT_FOUND_ERROR, HttpStatus.NOT_FOUND, exception.getMessage());
+        return handleExceptionInternal(exception, apiError, new HttpHeaders(), apiError.getStatus(), request);
+    }
+
+    /**
+     * UserHasNotToProjectAccessException handler. Convert NoUserProjectAccessException to response with 403 HTTP code.
+     *
+     * @param exception exception
+     * @param request   request
+     * @return 403 HTTP response
+     */
+    @ExceptionHandler(value = UserHasNotToProjectAccessException.class)
+    public final ResponseEntity<Object> noUserProjectAccessException(UserHasNotToProjectAccessException exception, WebRequest request) {
+        ApiError apiError = new ApiError(ApiErrorType.PROJECT_LEVEL_ACCESS_ERROR, HttpStatus.FORBIDDEN, exception.getMessage());
+        return handleExceptionInternal(exception, apiError, new HttpHeaders(), apiError.getStatus(), request);
+    }
+
+    /**
+     * UserHasNotToOperationAccessException handler. Convert UserHasNotToOperationAccessException to response with 403 HTTP code.
+     *
+     * @param exception exception
+     * @param request   request
+     * @return 403 HTTP response
+     */
+    @ExceptionHandler(value = UserHasNotToOperationAccessException.class)
+    public final ResponseEntity<Object> noUserProjectAccessException(UserHasNotToOperationAccessException exception, WebRequest request) {
+        ApiError apiError = new ApiError(ApiErrorType.OPERATION_LEVEL_ACCESS_ERROR, HttpStatus.FORBIDDEN, exception.getMessage());
         return handleExceptionInternal(exception, apiError, new HttpHeaders(), apiError.getStatus(), request);
     }
 }

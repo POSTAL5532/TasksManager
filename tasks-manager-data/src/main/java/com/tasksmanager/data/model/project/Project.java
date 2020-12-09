@@ -19,9 +19,6 @@ import com.tasksmanager.data.model.AbstractEntity;
 @Table(name = "projects")
 public class Project extends AbstractEntity {
 
-    @Column(name = "owner_id")
-    private String ownerId;
-
     private String name;
 
     @Column(name = "short_name")
@@ -40,14 +37,6 @@ public class Project extends AbstractEntity {
 
     public Project() {
         super();
-    }
-
-    public String getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId;
     }
 
     public String getName() {
@@ -101,8 +90,7 @@ public class Project extends AbstractEntity {
     @Override
     public String toString() {
         return "Project{" +
-            "ownerId='" + ownerId + '\'' +
-            ", name='" + name + '\'' +
+            "name='" + name + '\'' +
             ", shortName='" + shortName + '\'' +
             ", description='" + description + '\'' +
             ", colourThemeId='" + colourThemeId + '\'' +

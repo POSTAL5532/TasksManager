@@ -18,6 +18,11 @@ public class ApiError {
     private HttpStatus status;
 
     /**
+     * Api error type.
+     */
+    private ApiErrorType apiErrorType;
+
+    /**
      * General error message.
      */
     private String message;
@@ -27,38 +32,15 @@ public class ApiError {
      */
     private List<NameValue> errors;
 
-    public ApiError(HttpStatus status, String message, List<NameValue> errors) {
+    public ApiError(ApiErrorType apiErrorType, HttpStatus status, String message, List<NameValue> errors) {
         this.status = status;
         this.message = message;
-
         this.errors = errors == null ? new ArrayList<>() : errors;
+        this.apiErrorType = apiErrorType;
     }
 
-    public ApiError(HttpStatus status, String message) {
-        this(status, message, null);
-    }
-
-    public ApiError(HttpStatus status, List<NameValue> errors) {
-        this(status, null, errors);
-    }
-
-    public ApiError(String message, List<NameValue> errors) {
-        this(null, message, errors);
-    }
-
-    public ApiError(String message) {
-        this(null, message, null);
-    }
-
-    public ApiError(List<NameValue> errors) {
-        this(null, null, errors);
-    }
-
-    public ApiError(HttpStatus status) {
-        this(status, null, null);
-    }
-
-    public ApiError() {
+    public ApiError(ApiErrorType apiErrorType, HttpStatus status, String message) {
+        this(apiErrorType, status, message, null);
     }
 
     public HttpStatus getStatus() {
@@ -67,6 +49,14 @@ public class ApiError {
 
     public void setStatus(HttpStatus status) {
         this.status = status;
+    }
+
+    public ApiErrorType getApiErrorType() {
+        return apiErrorType;
+    }
+
+    public void setApiErrorType(ApiErrorType apiErrorType) {
+        this.apiErrorType = apiErrorType;
     }
 
     public String getMessage() {
@@ -89,6 +79,7 @@ public class ApiError {
     public String toString() {
         return "ApiError{" +
             "status=" + status +
+            ", apiErrorType=" + apiErrorType +
             ", message='" + message + '\'' +
             ", errors=" + errors +
             '}';

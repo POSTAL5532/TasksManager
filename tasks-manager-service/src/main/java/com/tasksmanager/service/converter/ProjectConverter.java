@@ -21,7 +21,6 @@ public class ProjectConverter implements DtoEntityConverter<Project, ProjectDto>
     public Project convertToEntity(ProjectDto dto) {
         Project project = new Project();
         project.setId(dto.getId());
-        project.setOwnerId(dto.getOwnerId());
         project.setName(dto.getName());
         project.setShortName(dto.getShortName());
         project.setDescription(dto.getDescription());
@@ -39,7 +38,6 @@ public class ProjectConverter implements DtoEntityConverter<Project, ProjectDto>
     public ProjectDto convertToDto(Project entity) {
         ProjectDto projectDto = new ProjectDto();
         projectDto.setId(entity.getId());
-        projectDto.setOwnerId(entity.getOwnerId());
         projectDto.setName(entity.getName());
         projectDto.setShortName(entity.getShortName());
         projectDto.setDescription(entity.getDescription());

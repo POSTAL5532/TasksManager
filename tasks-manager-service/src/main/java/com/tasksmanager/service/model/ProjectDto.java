@@ -16,9 +16,6 @@ public class ProjectDto {
     private String id;
 
     @NotBlank
-    private String ownerId;
-
-    @NotBlank
     private String name;
 
     @NotBlank
@@ -41,14 +38,6 @@ public class ProjectDto {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId;
     }
 
     public String getName() {
@@ -103,7 +92,6 @@ public class ProjectDto {
     public String toString() {
         return "ProjectDto{" +
             "id='" + id + '\'' +
-            ", ownerId='" + ownerId + '\'' +
             ", name='" + name + '\'' +
             ", shortName='" + shortName + '\'' +
             ", description='" + description + '\'' +
