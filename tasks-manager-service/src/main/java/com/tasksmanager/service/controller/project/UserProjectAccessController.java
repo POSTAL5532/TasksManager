@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tasksmanager.service.converter.UserProjectAccessConverter;
 import com.tasksmanager.service.model.UserProjectAccessDto;
-import com.tasksmanager.service.security.preauthorizeconditions.AuthorizedLikeUser;
 import com.tasksmanager.service.service.UserProjectAccessService;
 
 /**

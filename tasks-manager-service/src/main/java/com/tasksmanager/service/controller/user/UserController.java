@@ -11,7 +11,6 @@ import com.tasksmanager.service.controller.user.payload.ChangePasswordRequest;
 import com.tasksmanager.service.controller.user.payload.ChangeUserNamesRequest;
 import com.tasksmanager.service.converter.UserConverter;
 import com.tasksmanager.service.model.UserDto;
-import com.tasksmanager.service.security.preauthorizeconditions.AuthorizedLikeUser;
 import com.tasksmanager.service.service.UserService;
 import com.tasksmanager.service.utils.TokenUtils;
 
@@ -42,7 +41,6 @@ public class UserController {
      * @return HTTP OK with User info
      */
     @GetMapping("/current")
-    @AuthorizedLikeUser
     public ResponseEntity<UserDto> getCurrentUserInfo() {
         UserDto dto = this.userConverter.convertToDto(this.userService.getCurrentAuthenticatedUser());
         return ResponseEntity.ok(dto);
@@ -55,7 +53,6 @@ public class UserController {
      * @return HTTP OK
      */
     @PutMapping("/changeemail")
-    @AuthorizedLikeUser
     public ResponseEntity<Void> changeEmail(@Valid @RequestBody ChangeEmailRequest changeEmailRequest, OAuth2Authentication authentication) {
         this.userService.changeCurrentUserEmail(changeEmailRequest.getEmail());
         tokenUtils.revokeCurrentUserToken(authentication);
@@ -69,7 +66,6 @@ public class UserController {
      * @return HTTP OK
      */
     @PutMapping("/changepassword")
-    @AuthorizedLikeUser
     public ResponseEntity<Void> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest, OAuth2Authentication authentication) {
         this.userService.changeCurrentUserPassword(changePasswordRequest.getNewPassword());
         tokenUtils.revokeCurrentUserToken(authentication);
@@ -83,7 +79,6 @@ public class UserController {
      * @return HTTP OK
      */
     @PutMapping("/changenames")
-    @AuthorizedLikeUser
     public ResponseEntity<Void> changeName(@Valid @RequestBody ChangeUserNamesRequest changeRequest) {
         this.userService.changeCurrentUserNames(changeRequest.getFirstName(), changeRequest.getLastName());
         return ResponseEntity.ok().build();
