@@ -3,31 +3,34 @@ package com.tasksmanager.service.model;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 /**
  * Project DTO model
  *
  * @author SIE
  */
-// TODO improve validation (Regex)
 public class ProjectDto {
 
     private String id;
 
     @NotBlank
+    @Length(min = 2, max = 255)
     private String name;
 
     @NotBlank
+    @Length(min = 2, max = 4)
     private String shortName;
 
     @NotBlank
+    @Length(min = 1, max = 32700)
     private String description;
 
     @NotBlank
     private String colourThemeId;
 
-    @NotNull
+    @NotBlank
     private String status;
 
     private LocalDate creationDate;
