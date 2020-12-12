@@ -108,6 +108,7 @@ CREATE TABLE tasks
 (
     id               varchar(36)  NOT NULL,
     project_id       varchar(36)  NOT NULL,
+    parent_task_id   varchar(36),
     author_id        varchar(36),
     executor_id      varchar(36),
     name             varchar(255) NOT NULL,
@@ -119,6 +120,7 @@ CREATE TABLE tasks
     ending_date      date,
     change_date      timestamp,
     FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE,
+    FOREIGN KEY (parent_task_id) REFERENCES tasks (id) ON DELETE CASCADE,
     FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE SET NULL,
     FOREIGN KEY (executor_id) REFERENCES users (id) ON DELETE SET NULL,
     PRIMARY KEY (id)

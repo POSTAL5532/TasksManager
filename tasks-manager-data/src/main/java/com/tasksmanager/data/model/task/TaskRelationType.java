@@ -7,8 +7,6 @@ package com.tasksmanager.data.model.task;
  */
 public enum TaskRelationType {
 
-    SUB_TASK,
-
     BLOCKER,
 
     SIMPLE
