@@ -5,11 +5,16 @@ import javax.validation.constraints.Pattern;
 
 import com.tasksmanager.service.utils.ValidationUtils;
 
+import lombok.Getter;
+import lombok.ToString;
+
 /**
  * Change user names request.
  *
  * @author SIE
  */
+@Getter
+@ToString
 public class ChangeUserNamesRequest {
 
     @NotBlank(message = "First name must be specified")
@@ -19,28 +24,4 @@ public class ChangeUserNamesRequest {
     @NotBlank(message = "Last name must be specified")
     @Pattern(regexp = ValidationUtils.USER_NAME_PATTERN, message = "Last name is incorrect")
     private String lastName;
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    @Override
-    public String toString() {
-        return "ChangeUserNamesRequest{" +
-            "firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
-            '}';
-    }
 }

@@ -6,11 +6,16 @@ import javax.validation.constraints.Pattern;
 import com.tasksmanager.service.controller.user.validator.CorrectUserPassword;
 import com.tasksmanager.service.utils.ValidationUtils;
 
+import lombok.Getter;
+import lombok.ToString;
+
 /**
  * Change current user password Request.
  *
  * @author SIE
  */
+@Getter
+@ToString
 public class ChangePasswordRequest {
 
     @NotBlank(message = "Previous password must be specified")
@@ -21,28 +26,4 @@ public class ChangePasswordRequest {
     @NotBlank(message = "New password must be specified")
     @Pattern(regexp = ValidationUtils.PASSWORD_PATTERN, message = "New password is incorrect")
     private String newPassword;
-
-    public String getPrevPassword() {
-        return prevPassword;
-    }
-
-    public void setPrevPassword(String prevPassword) {
-        this.prevPassword = prevPassword;
-    }
-
-    public String getNewPassword() {
-        return newPassword;
-    }
-
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
-    }
-
-    @Override
-    public String toString() {
-        return "ChangePasswordRequest{" +
-            "prevPassword='" + prevPassword + '\'' +
-            ", newPassword='" + newPassword + '\'' +
-            '}';
-    }
 }
