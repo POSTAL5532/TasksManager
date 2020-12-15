@@ -10,6 +10,10 @@ import javax.persistence.Table;
 
 import com.tasksmanager.data.model.AbstractEntity;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * Comment entity
  *
@@ -17,6 +21,9 @@ import com.tasksmanager.data.model.AbstractEntity;
  */
 @Entity
 @Table(name = "comments")
+@Getter
+@Setter
+@ToString
 public class Comment extends AbstractEntity {
 
     @Column(name = "author_id")
@@ -39,66 +46,5 @@ public class Comment extends AbstractEntity {
 
     public Comment() {
         super();
-    }
-
-    public String getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(String authorId) {
-        this.authorId = authorId;
-    }
-
-    public String getEntityId() {
-        return entityId;
-    }
-
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
-    public CommentEntityType getCommentEntityType() {
-        return commentEntityType;
-    }
-
-    public void setCommentEntityType(CommentEntityType commentEntityType) {
-        this.commentEntityType = commentEntityType;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Timestamp getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Timestamp getChangeDate() {
-        return changeDate;
-    }
-
-    public void setChangeDate(Timestamp changeDate) {
-        this.changeDate = changeDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Comment{" +
-            "authorId='" + authorId + '\'' +
-            ", entityId='" + entityId + '\'' +
-            ", commentEntityType=" + commentEntityType +
-            ", content='" + content + '\'' +
-            ", creationDate=" + creationDate +
-            ", changeDate=" + changeDate +
-            ", id='" + id + '\'' +
-            '}';
     }
 }

@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tasksmanager.data.model.Tag.Tag;
+import com.tasksmanager.data.model.tag.Tag;
 import com.tasksmanager.data.repository.TagRepository;
 
 /**

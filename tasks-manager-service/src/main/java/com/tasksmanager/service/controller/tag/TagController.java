@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tasksmanager.data.model.Tag.Tag;
+import com.tasksmanager.data.model.tag.Tag;
 import com.tasksmanager.service.converter.TagConverter;
 import com.tasksmanager.service.model.TagDto;
 import com.tasksmanager.service.service.TagService;

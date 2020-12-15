@@ -5,11 +5,18 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * Api error response model.
  *
  * @author SIE
  */
+@Getter
+@Setter
+@ToString
 public class ApiError {
 
     /**
@@ -41,47 +48,5 @@ public class ApiError {
 
     public ApiError(ApiErrorType apiErrorType, HttpStatus status, String message) {
         this(apiErrorType, status, message, null);
-    }
-
-    public HttpStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(HttpStatus status) {
-        this.status = status;
-    }
-
-    public ApiErrorType getApiErrorType() {
-        return apiErrorType;
-    }
-
-    public void setApiErrorType(ApiErrorType apiErrorType) {
-        this.apiErrorType = apiErrorType;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public List<NameValue> getErrors() {
-        return errors;
-    }
-
-    public void setErrors(List<NameValue> errors) {
-        this.errors = errors;
-    }
-
-    @Override
-    public String toString() {
-        return "ApiError{" +
-            "status=" + status +
-            ", apiErrorType=" + apiErrorType +
-            ", message='" + message + '\'' +
-            ", errors=" + errors +
-            '}';
     }
 }

@@ -2,7 +2,7 @@ package com.tasksmanager.service.converter;
 
 import org.springframework.stereotype.Service;
 
-import com.tasksmanager.data.model.Tag.Tag;
+import com.tasksmanager.data.model.tag.Tag;
 import com.tasksmanager.service.model.TagDto;
 
 /**

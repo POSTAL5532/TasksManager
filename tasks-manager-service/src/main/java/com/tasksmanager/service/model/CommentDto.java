@@ -4,11 +4,18 @@ import java.time.LocalDateTime;
 
 import javax.validation.constraints.NotBlank;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * Comment DTO
  *
  * @author SIE
  */
+@Getter
+@Setter
+@ToString
 public class CommentDto {
 
     private String id;
@@ -28,73 +35,4 @@ public class CommentDto {
     private LocalDateTime creationDate;
 
     private LocalDateTime changeDate;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getAuthorId() {
-        return authorId;
-    }
-
-    public void setAuthorId(String authorId) {
-        this.authorId = authorId;
-    }
-
-    public String getEntityId() {
-        return entityId;
-    }
-
-    public void setEntityId(String entityId) {
-        this.entityId = entityId;
-    }
-
-    public String getCommentEntityType() {
-        return commentEntityType;
-    }
-
-    public void setCommentEntityType(String commentEntityType) {
-        this.commentEntityType = commentEntityType;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public LocalDateTime getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public LocalDateTime getChangeDate() {
-        return changeDate;
-    }
-
-    public void setChangeDate(LocalDateTime changeDate) {
-        this.changeDate = changeDate;
-    }
-
-    @Override
-    public String toString() {
-        return "CommentDto{" +
-            "id='" + id + '\'' +
-            ", authorId='" + authorId + '\'' +
-            ", entityId='" + entityId + '\'' +
-            ", commentEntityType=" + commentEntityType +
-            ", content='" + content + '\'' +
-            ", creationDate=" + creationDate +
-            ", changeDate=" + changeDate +
-            '}';
-    }
 }

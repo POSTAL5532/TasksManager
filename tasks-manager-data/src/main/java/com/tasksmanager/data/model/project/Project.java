@@ -10,6 +10,10 @@ import javax.persistence.Table;
 
 import com.tasksmanager.data.model.AbstractEntity;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * Project model
  *
@@ -17,6 +21,9 @@ import com.tasksmanager.data.model.AbstractEntity;
  */
 @Entity
 @Table(name = "projects")
+@Getter
+@Setter
+@ToString
 public class Project extends AbstractEntity {
 
     private String name;
@@ -37,66 +44,5 @@ public class Project extends AbstractEntity {
 
     public Project() {
         super();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getColourThemeId() {
-        return colourThemeId;
-    }
-
-    public void setColourThemeId(String colourThemeId) {
-        this.colourThemeId = colourThemeId;
-    }
-
-    public ProjectStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ProjectStatus status) {
-        this.status = status;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Project{" +
-            "name='" + name + '\'' +
-            ", shortName='" + shortName + '\'' +
-            ", description='" + description + '\'' +
-            ", colourThemeId='" + colourThemeId + '\'' +
-            ", status=" + status +
-            ", creationDate=" + creationDate +
-            ", id='" + id + '\'' +
-            '}';
     }
 }

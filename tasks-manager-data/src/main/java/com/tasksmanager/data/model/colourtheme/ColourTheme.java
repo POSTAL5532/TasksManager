@@ -6,6 +6,10 @@ import javax.persistence.Table;
 
 import com.tasksmanager.data.model.AbstractEntity;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * Colour themes model
  *
@@ -13,6 +17,9 @@ import com.tasksmanager.data.model.AbstractEntity;
  */
 @Entity
 @Table(name = "colour_themes")
+@Getter
+@Setter
+@ToString
 public class ColourTheme extends AbstractEntity {
 
     private String name;
@@ -25,39 +32,5 @@ public class ColourTheme extends AbstractEntity {
 
     public ColourTheme() {
         super();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getMainColour() {
-        return mainColour;
-    }
-
-    public void setMainColour(String mainColour) {
-        this.mainColour = mainColour;
-    }
-
-    public String getSecondaryColour() {
-        return secondaryColour;
-    }
-
-    public void setSecondaryColour(String secondaryColour) {
-        this.secondaryColour = secondaryColour;
-    }
-
-    @Override
-    public String toString() {
-        return "ColourThemes{" +
-            "name='" + name + '\'' +
-            ", mainColour='" + mainColour + '\'' +
-            ", secondaryColour='" + secondaryColour + '\'' +
-            ", id='" + id + '\'' +
-            '}';
     }
 }
