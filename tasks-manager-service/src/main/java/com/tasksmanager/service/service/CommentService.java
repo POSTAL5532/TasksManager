@@ -7,8 +7,8 @@ import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tasksmanager.data.model.comment.Comment;
-import com.tasksmanager.data.repository.CommentRepository;
+import com.tasksmanager.service.model.comment.Comment;
+import com.tasksmanager.service.repository.CommentRepository;
 
 /**
  * Comment service.

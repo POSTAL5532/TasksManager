@@ -5,10 +5,8 @@ import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tasksmanager.data.model.project.UserProjectAccess;
-import com.tasksmanager.data.repository.UserProjectAccessRepository;
-import com.tasksmanager.service.exception.UserHasNotToOperationAccessException;
-import com.tasksmanager.service.exception.UserHasNotToProjectAccessException;
+import com.tasksmanager.service.model.project.UserProjectAccess;
+import com.tasksmanager.service.repository.UserProjectAccessRepository;
 
 /**
  * User project access service.
@@ -35,7 +33,7 @@ public class UserProjectAccessService {
     public UserProjectAccess getAccessToProjectForUser(String projectId, String userId) {
         return this.userProjectAccessRepository
             .findByProjectIdAndUserId(projectId, userId)
-            .orElseThrow(() -> new UserHasNotToProjectAccessException("User has not access to project."));
+            .orElseThrow(() -> new NoSuchElementException("User has not access to project."));
     }
 
 
@@ -63,7 +61,7 @@ public class UserProjectAccessService {
         UserProjectAccess currentUserAccess = this.getAccessToProjectForUser(access.getProjectId(), currentUserId);
 
         if (!currentUserAccess.isOwner()) {
-            throw new UserHasNotToOperationAccessException("Current user is not owner of this project.");
+            throw new NoSuchElementException("Current user is not owner of this project.");
         }
 
         if (currentUserAccess.getUserId().equals(access.getUserId())) {
@@ -87,7 +85,7 @@ public class UserProjectAccessService {
         UserProjectAccess currentUserAccess = this.getAccessToProjectForUser(access.getProjectId(), currentUser);
 
         if (!currentUserAccess.isOwner()) {
-            throw new UserHasNotToOperationAccessException("Current user is not owner of this project.");
+            throw new NoSuchElementException("Current user is not owner of this project.");
         }
 
         if (!this.userProjectAccessRepository.existsById(access.getId())) {

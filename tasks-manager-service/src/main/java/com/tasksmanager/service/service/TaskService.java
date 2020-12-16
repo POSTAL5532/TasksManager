@@ -7,8 +7,8 @@ import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tasksmanager.data.model.task.Task;
-import com.tasksmanager.data.repository.TaskRepository;
+import com.tasksmanager.service.model.task.Task;
+import com.tasksmanager.service.repository.TaskRepository;
 
 /**
  * Task service

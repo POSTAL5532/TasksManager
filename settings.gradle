@@ -1,5 +1,5 @@
 rootProject.name = 'TasksManager'
 
-include 'tasks-manager-data'
 include 'tasks-manager-service'
+include 'tasks-manager-api'
 include 'tasks-manager-client'

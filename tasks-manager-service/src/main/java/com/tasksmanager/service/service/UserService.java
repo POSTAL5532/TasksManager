@@ -2,18 +2,16 @@ package com.tasksmanager.service.service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.NoSuchElementException;
 
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tasksmanager.data.model.user.User;
-import com.tasksmanager.data.model.user.UserConfirmStatus;
-import com.tasksmanager.data.model.user.UserRole;
-import com.tasksmanager.data.model.user.UserStatus;
-import com.tasksmanager.data.repository.UserRepository;
-import com.tasksmanager.service.controller.auth.payload.SignUpRequest;
+import com.tasksmanager.service.model.user.User;
+import com.tasksmanager.service.model.user.UserConfirmStatus;
+import com.tasksmanager.service.model.user.UserRole;
+import com.tasksmanager.service.model.user.UserStatus;
+import com.tasksmanager.service.repository.UserRepository;
 
 /**
  * User service {@link User}
@@ -26,11 +24,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    private final PasswordEncoder passwordEncoder;
-
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -40,7 +35,7 @@ public class UserService {
     public User getById(String id) {
         return userRepository
             .findById(id)
-            .orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + id));
+            .orElseThrow(() -> new NoSuchElementException("User not found with id : " + id));
     }
 
     /**
@@ -50,22 +45,24 @@ public class UserService {
     public User getByEmail(String email) {
         return userRepository
             .findByEmail(email)
-            .orElseThrow(() -> new UsernameNotFoundException("User not found with email : " + email));
+            .orElseThrow(() -> new NoSuchElementException("User not found with email : " + email));
     }
 
     /**
      * Add new user.
      *
-     * @param request new user request // TODO wrong dependency of WEB layer
-     * @return new user ID
+     * @param firstName usr first name
+     * @param lastName  user last name
+     * @param email     user email
+     * @return new user ID`
      */
     @Transactional(readOnly = false)
-    public String addNewUser(SignUpRequest request) {
+    public String addNewUser(String firstName, String lastName, String email, String password) {
         User newUser = new User();
-        newUser.setFirstName(request.getFirstName());
-        newUser.setLastName(request.getLastName());
-        newUser.setEmail(request.getEmail());
-        newUser.setPassword(passwordEncoder.encode(request.getPassword()));
+        newUser.setFirstName(firstName);
+        newUser.setLastName(lastName);
+        newUser.setEmail(email);
+        newUser.setPassword(password);
         newUser.setRole(UserRole.ROLE_USER);
         newUser.setStatus(UserStatus.ACTIVE);
         newUser.setConfirmStatus(UserConfirmStatus.UNCONFIRMED);

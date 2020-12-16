@@ -7,9 +7,9 @@ import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tasksmanager.data.model.project.Project;
-import com.tasksmanager.data.model.project.UserProjectAccess;
-import com.tasksmanager.data.repository.ProjectRepository;
+import com.tasksmanager.service.model.project.Project;
+import com.tasksmanager.service.model.project.UserProjectAccess;
+import com.tasksmanager.service.repository.ProjectRepository;
 
 /**
  * Project service.

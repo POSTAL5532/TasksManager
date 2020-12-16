@@ -9,7 +9,7 @@ allprojects {
 }
 
 //Java-projects config
-[':tasks-manager-data', ':tasks-manager-service'].each { name ->
+[':tasks-manager-service', ':tasks-manager-api'].each { name ->
     project(":$name") {
         apply plugin: 'java'
 
