@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tasksmanager.service.model.project.Project;
-import com.tasksmanager.service.model.project.UserProjectAccess;
+import com.tasksmanager.service.model.project.ProjectParticipantAccess;
 import com.tasksmanager.service.repository.ProjectRepository;
 
 /**
@@ -22,11 +22,11 @@ public class ProjectService {
 
     private final ProjectRepository projectRepository;
 
-    private final UserProjectAccessService accessService;
+    private final ProjectParticipantAccessService participantAccessService;
 
-    public ProjectService(ProjectRepository projectRepository, UserProjectAccessService accessService) {
+    public ProjectService(ProjectRepository projectRepository, ProjectParticipantAccessService participantAccessService) {
         this.projectRepository = projectRepository;
-        this.accessService = accessService;
+        this.participantAccessService = participantAccessService;
     }
 
     /**
@@ -52,11 +52,11 @@ public class ProjectService {
 
         String newProjectId = this.projectRepository.save(newProject).getId();
 
-        UserProjectAccess access = new UserProjectAccess();
+        ProjectParticipantAccess access = new ProjectParticipantAccess();
         access.setUserId(currentUserId);
         access.setProjectId(newProjectId);
-        this.accessService.setOwnerDefaultAccess(access);
-        this.accessService.addAccess(access);
+        this.participantAccessService.setOwnerDefaultAccess(access);
+        this.participantAccessService.addAccess(access);
 
         return newProjectId;
     }

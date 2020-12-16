@@ -11,40 +11,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tasksmanager.api.converter.UserProjectAccessConverter;
+import com.tasksmanager.api.converter.ProjectParticipantAccessConverter;
 import com.tasksmanager.api.exception.UserHasNotToOperationAccessException;
-import com.tasksmanager.api.model.UserProjectAccessDto;
+import com.tasksmanager.api.model.ProjectParticipantAccessDto;
 import com.tasksmanager.api.security.UserDetailsServiceImpl;
-import com.tasksmanager.service.service.UserProjectAccessService;
+import com.tasksmanager.service.service.ProjectParticipantAccessService;
 
 /**
- * User project access controller.
+ * Project participant access controller.
  *
  * @author SIE
  */
 @RestController
-@RequestMapping("/api/projectaccesses")
+@RequestMapping("/api/participantaccess")
 public class UserProjectAccessController {
 
-    private final UserProjectAccessService userProjectAccessService;
+    private final ProjectParticipantAccessService participantAccessService;
 
-    private final UserProjectAccessConverter userProjectAccessConverter;
+    private final ProjectParticipantAccessConverter participantAccessConverter;
 
     private final UserDetailsServiceImpl userDetailsService;
 
-    public UserProjectAccessController(UserProjectAccessService userProjectAccessService, UserProjectAccessConverter userProjectAccessConverter, UserDetailsServiceImpl userDetailsService) {
-        this.userProjectAccessService = userProjectAccessService;
-        this.userProjectAccessConverter = userProjectAccessConverter;
+    public UserProjectAccessController(ProjectParticipantAccessService userProjectAccessService, ProjectParticipantAccessConverter participantAccessConverter, UserDetailsServiceImpl userDetailsService) {
+        this.participantAccessService = userProjectAccessService;
+        this.participantAccessConverter = participantAccessConverter;
         this.userDetailsService = userDetailsService;
     }
 
     @PostMapping
-    public ResponseEntity<String> addAccess(@Valid @RequestBody UserProjectAccessDto access) {
+    public ResponseEntity<String> addAccess(@Valid @RequestBody ProjectParticipantAccessDto access) {
         String newAccessId;
 
         try{
-            newAccessId = userProjectAccessService.addNewUserAccess(
-                userProjectAccessConverter.convertToEntity(access),
+            newAccessId = participantAccessService.addNewUserAccess(
+                participantAccessConverter.convertToEntity(access),
                 userDetailsService.getCurrentAuthenticatedUserId()
             );
         }catch (NoSuchElementException exception) {
@@ -55,10 +55,10 @@ public class UserProjectAccessController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> changeAccess(@Valid @RequestBody UserProjectAccessDto access) {
+    public ResponseEntity<Void> changeAccess(@Valid @RequestBody ProjectParticipantAccessDto access) {
         try{
-            userProjectAccessService.editAccess(
-                userProjectAccessConverter.convertToEntity(access),
+            participantAccessService.editAccess(
+                participantAccessConverter.convertToEntity(access),
                 userDetailsService.getCurrentAuthenticatedUserId()
             );
         }catch (NoSuchElementException exception) {

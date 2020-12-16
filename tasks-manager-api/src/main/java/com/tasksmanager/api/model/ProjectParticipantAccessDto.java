@@ -8,14 +8,14 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * Project access dto model.
+ * Project participant access dto model.
  *
  * @author SIE
  */
 @Getter
 @Setter
 @ToString
-public class UserProjectAccessDto {
+public class ProjectParticipantAccessDto {
 
     private String id;
 

@@ -146,7 +146,7 @@ CREATE TABLE tasks_relations
 )
 
 /**
- * Tags table
+ * Project participant access table
  *
  * id - user project access ID
  * project_id - project id
@@ -159,7 +159,7 @@ CREATE TABLE tasks_relations
  * can_add_tasks - user can add tasks to project
  * can_delete_tasks - user can delete tasks from project
  */
-CREATE TABLE user_project_access
+CREATE TABLE project_participant_access
 (
     id                  varchar(36) NOT NULL,
     project_id          varchar(36) NOT NULL,

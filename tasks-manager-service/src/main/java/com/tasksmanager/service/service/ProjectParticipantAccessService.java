@@ -5,21 +5,21 @@ import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tasksmanager.service.model.project.UserProjectAccess;
-import com.tasksmanager.service.repository.UserProjectAccessRepository;
+import com.tasksmanager.service.model.project.ProjectParticipantAccess;
+import com.tasksmanager.service.repository.ProjectParticipantAccessRepository;
 
 /**
- * User project access service.
+ * Project participant access service.
  *
  * @author SIE
  */
 @Service
 @Transactional(readOnly = true)
-public class UserProjectAccessService {
+public class ProjectParticipantAccessService {
 
-    private final UserProjectAccessRepository userProjectAccessRepository;
+    private final ProjectParticipantAccessRepository userProjectAccessRepository;
 
-    public UserProjectAccessService(UserProjectAccessRepository userProjectAccessRepository) {
+    public ProjectParticipantAccessService(ProjectParticipantAccessRepository userProjectAccessRepository) {
         this.userProjectAccessRepository = userProjectAccessRepository;
     }
 
@@ -30,7 +30,7 @@ public class UserProjectAccessService {
      * @param userId    user id
      * @return access
      */
-    public UserProjectAccess getAccessToProjectForUser(String projectId, String userId) {
+    public ProjectParticipantAccess getAccessToProjectForUser(String projectId, String userId) {
         return this.userProjectAccessRepository
             .findByProjectIdAndUserId(projectId, userId)
             .orElseThrow(() -> new NoSuchElementException("User has not access to project."));
@@ -44,7 +44,7 @@ public class UserProjectAccessService {
      * @return new access id
      */
     @Transactional(readOnly = false)
-    public String addAccess(UserProjectAccess access) {
+    public String addAccess(ProjectParticipantAccess access) {
         return this.userProjectAccessRepository.save(access).getId();
     }
 
@@ -57,8 +57,8 @@ public class UserProjectAccessService {
      * @param currentUserId current user id
      */
     @Transactional(readOnly = false)
-    public String addNewUserAccess(UserProjectAccess access, String currentUserId) {
-        UserProjectAccess currentUserAccess = this.getAccessToProjectForUser(access.getProjectId(), currentUserId);
+    public String addNewUserAccess(ProjectParticipantAccess access, String currentUserId) {
+        ProjectParticipantAccess currentUserAccess = this.getAccessToProjectForUser(access.getProjectId(), currentUserId);
 
         if (!currentUserAccess.isOwner()) {
             throw new NoSuchElementException("Current user is not owner of this project.");
@@ -81,8 +81,8 @@ public class UserProjectAccessService {
      * @param access access object
      */
     @Transactional(readOnly = false)
-    public void editAccess(UserProjectAccess access, String currentUser) {
-        UserProjectAccess currentUserAccess = this.getAccessToProjectForUser(access.getProjectId(), currentUser);
+    public void editAccess(ProjectParticipantAccess access, String currentUser) {
+        ProjectParticipantAccess currentUserAccess = this.getAccessToProjectForUser(access.getProjectId(), currentUser);
 
         if (!currentUserAccess.isOwner()) {
             throw new NoSuchElementException("Current user is not owner of this project.");
@@ -107,7 +107,7 @@ public class UserProjectAccessService {
      *
      * @param ownerAccess owner access object
      */
-    public void setOwnerDefaultAccess(UserProjectAccess ownerAccess) {
+    public void setOwnerDefaultAccess(ProjectParticipantAccess ownerAccess) {
         ownerAccess.setCanAddTasks(true);
         ownerAccess.setCanDeleteTasks(true);
         ownerAccess.setCanEditProject(true);

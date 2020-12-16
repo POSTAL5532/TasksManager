@@ -7,13 +7,13 @@ import javax.persistence.Table;
 import com.tasksmanager.service.model.AbstractEntity;
 
 /**
- * User project access model.
+ * Project participant access model.
  *
  * @author SIE
  */
 @Entity
-@Table(name = "user_project_access")
-public class UserProjectAccess extends AbstractEntity {
+@Table(name = "project_participant_access")
+public class ProjectParticipantAccess extends AbstractEntity {
 
     @Column(name = "project_id")
     private String projectId;
@@ -42,7 +42,7 @@ public class UserProjectAccess extends AbstractEntity {
     @Column(name = "can_delete_tasks")
     private Boolean canDeleteTasks;
 
-    public UserProjectAccess() {
+    public ProjectParticipantAccess() {
         super();
     }
 
