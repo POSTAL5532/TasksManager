@@ -34,6 +34,7 @@ public class UserPrincipal implements UserDetails {
     private UserConfirmStatus confirmStatus;
 
     public UserPrincipal(User user, Collection<? extends GrantedAuthority> authorities) {
+        this.id = user.getId();
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.status = user.getStatus();

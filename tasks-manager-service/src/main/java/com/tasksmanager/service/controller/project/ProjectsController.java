@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tasksmanager.data.model.project.Project;
 import com.tasksmanager.service.converter.ProjectConverter;
 import com.tasksmanager.service.model.ProjectDto;
+import com.tasksmanager.service.security.UserDetailsServiceImpl;
 import com.tasksmanager.service.service.ProjectService;
 
 /**
@@ -28,21 +29,26 @@ public class ProjectsController {
 
     private final ProjectConverter projectConverter;
 
-    public ProjectsController(ProjectService projectService, ProjectConverter projectConverter) {
+    private final UserDetailsServiceImpl userDetailsService;
+
+    public ProjectsController(ProjectService projectService, ProjectConverter projectConverter, UserDetailsServiceImpl userDetailsService) {
         this.projectService = projectService;
         this.projectConverter = projectConverter;
+        this.userDetailsService = userDetailsService;
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProjectDto> getProject(@PathVariable String id) {
-        Project project = this.projectService.getById(id);
-        return ResponseEntity.ok(this.projectConverter.convertToDto(project));
+        Project project = projectService.getById(id);
+        return ResponseEntity.ok(projectConverter.convertToDto(project));
     }
 
     @PostMapping
     public ResponseEntity<String> createProject(@Valid @RequestBody ProjectDto project) {
-        Project newProject = this.projectConverter.convertToEntity(project);
-        String newProjectId = this.projectService.addNewProject(newProject);
+        String newProjectId = projectService.addNewProject(
+            projectConverter.convertToEntity(project),
+            userDetailsService.getCurrentAuthenticatedUserId()
+        );
         return ResponseEntity.ok(newProjectId);
     }
 }

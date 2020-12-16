@@ -50,7 +50,7 @@ public class TagController {
     @PutMapping
     public ResponseEntity<Void> updateTag(@Valid @RequestBody TagDto tag) {
         Tag changedTag = this.tagConverter.convertToEntity(tag);
-        this.tagService.updateTag(changedTag);
+        this.tagService.changeTag(changedTag);
         return ResponseEntity.ok().build();
     }
 }

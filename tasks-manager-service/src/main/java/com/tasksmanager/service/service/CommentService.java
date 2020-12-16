@@ -11,7 +11,7 @@ import com.tasksmanager.data.model.comment.Comment;
 import com.tasksmanager.data.repository.CommentRepository;
 
 /**
- * Comment service
+ * Comment service.
  *
  * @author SIE
  */
@@ -25,20 +25,35 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
+    /**
+     * @param id comment ID
+     * @return comment
+     */
     public Comment getById(String id) {
         return this.commentRepository
             .findById(id)
             .orElseThrow(() -> new NoSuchElementException("Comment not found"));
     }
 
+    /**
+     * Add new comment.
+     *
+     * @param newComment comment object
+     * @return new comment ID
+     */
     @Transactional(readOnly = false)
     public String addNewComment(Comment newComment) {
         newComment.setCreationDate(Timestamp.valueOf(LocalDateTime.now()));
         return this.commentRepository.save(newComment).getId();
     }
 
+    /**
+     * Change exist comment.
+     *
+     * @param comment comment object
+     */
     @Transactional(readOnly = false)
-    public void updateComment(Comment comment) {
+    public void changeComment(Comment comment) {
         comment.setChangeDate(Timestamp.valueOf(LocalDateTime.now()));
         this.commentRepository.save(comment);
     }

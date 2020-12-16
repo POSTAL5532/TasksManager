@@ -50,7 +50,7 @@ public class CommentController {
     @PutMapping
     public ResponseEntity<Void> updateComment(@Valid @RequestBody CommentDto comment) {
         Comment changedComment = this.commentConverter.convertToEntity(comment);
-        this.commentService.updateComment(changedComment);
+        this.commentService.changeComment(changedComment);
         return ResponseEntity.ok().build();
     }
 }

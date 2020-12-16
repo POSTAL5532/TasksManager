@@ -9,7 +9,7 @@ import com.tasksmanager.data.model.tag.Tag;
 import com.tasksmanager.data.repository.TagRepository;
 
 /**
- * Tag service
+ * Tag service.
  *
  * @author SIE
  */
@@ -23,19 +23,34 @@ public class TagService {
         this.tagRepository = tagRepository;
     }
 
+    /**
+     * @param id tag ID
+     * @return tag
+     */
     public Tag getById(String id) {
         return this.tagRepository
             .findById(id)
             .orElseThrow(() -> new NoSuchElementException("Tag not found"));
     }
 
+    /**
+     * Add new tag.
+     *
+     * @param newTag new tag object
+     * @return new tag ID
+     */
     @Transactional(readOnly = false)
     public String addNewTask(Tag newTag) {
         return this.tagRepository.save(newTag).getId();
     }
 
+    /**
+     * Change exist tag.
+     *
+     * @param tag tag object
+     */
     @Transactional(readOnly = false)
-    public void updateTag(Tag tag) {
+    public void changeTag(Tag tag) {
         this.tagRepository.save(tag);
     }
 }

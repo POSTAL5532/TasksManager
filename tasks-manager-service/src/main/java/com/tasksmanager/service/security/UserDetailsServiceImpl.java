@@ -1,5 +1,6 @@
 package com.tasksmanager.service.security;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,5 +27,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = this.userService.getByEmail(email);
         return UserPrincipal.create(user);
+    }
+
+    public String getCurrentAuthenticatedUserId() {
+        return this.getCurrentAuthenticatedUserPrincipal().getId();
+    }
+
+    public UserPrincipal getCurrentAuthenticatedUserPrincipal() {
+        return (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 }

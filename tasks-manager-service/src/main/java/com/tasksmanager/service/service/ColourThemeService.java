@@ -24,16 +24,29 @@ public class ColourThemeService {
         this.colourThemeRepository = colourThemeRepository;
     }
 
+    /**
+     * @param id colour theme id
+     * @return colour theme
+     */
     public ColourTheme getById(String id) {
         return this.colourThemeRepository
             .findById(id)
             .orElseThrow(() -> new NoSuchElementException("Colour theme not found"));
     }
 
+    /**
+     * @return colour themes list
+     */
     public List<ColourTheme> getAll() {
         return this.colourThemeRepository.findAll();
     }
 
+    /**
+     * Add new colour theme.
+     *
+     * @param newColourTheme colour theme object
+     * @return new colour theme ID
+     */
     @Transactional(readOnly = false)
     public String addNewColourTheme(ColourTheme newColourTheme) {
         return this.colourThemeRepository.save(newColourTheme).getId();

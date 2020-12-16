@@ -6,11 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import com.tasksmanager.data.model.user.User;
 import com.tasksmanager.service.controller.user.payload.ChangeEmailRequest;
 import com.tasksmanager.service.controller.user.payload.ChangePasswordRequest;
 import com.tasksmanager.service.controller.user.payload.ChangeUserNamesRequest;
 import com.tasksmanager.service.converter.UserConverter;
 import com.tasksmanager.service.model.UserDto;
+import com.tasksmanager.service.security.UserDetailsServiceImpl;
 import com.tasksmanager.service.service.UserService;
 import com.tasksmanager.service.utils.TokenUtils;
 
@@ -29,10 +31,13 @@ public class UserController {
 
     private final TokenUtils tokenUtils;
 
-    public UserController(UserService userService, UserConverter userConverter, TokenUtils tokenUtils) {
+    private final UserDetailsServiceImpl userDetailsService;
+
+    public UserController(UserService userService, UserConverter userConverter, TokenUtils tokenUtils, UserDetailsServiceImpl userDetailsService) {
         this.userService = userService;
         this.userConverter = userConverter;
         this.tokenUtils = tokenUtils;
+        this.userDetailsService = userDetailsService;
     }
 
     /**
@@ -42,7 +47,8 @@ public class UserController {
      */
     @GetMapping("/current")
     public ResponseEntity<UserDto> getCurrentUserInfo() {
-        UserDto dto = this.userConverter.convertToDto(this.userService.getCurrentAuthenticatedUser());
+        User currentUser = this.userService.getById(this.userDetailsService.getCurrentAuthenticatedUserId());
+        UserDto dto = this.userConverter.convertToDto(currentUser);
         return ResponseEntity.ok(dto);
     }
 
@@ -54,7 +60,8 @@ public class UserController {
      */
     @PutMapping("/changeemail")
     public ResponseEntity<Void> changeEmail(@Valid @RequestBody ChangeEmailRequest changeEmailRequest, OAuth2Authentication authentication) {
-        this.userService.changeCurrentUserEmail(changeEmailRequest.getEmail());
+        String currentUserId = this.userDetailsService.getCurrentAuthenticatedUserId();
+        this.userService.changeUserEmail(changeEmailRequest.getEmail(), currentUserId);
         tokenUtils.revokeCurrentUserToken(authentication);
         return ResponseEntity.ok().build();
     }
@@ -67,7 +74,8 @@ public class UserController {
      */
     @PutMapping("/changepassword")
     public ResponseEntity<Void> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest, OAuth2Authentication authentication) {
-        this.userService.changeCurrentUserPassword(changePasswordRequest.getNewPassword());
+        String currentUserId = this.userDetailsService.getCurrentAuthenticatedUserId();
+        this.userService.changeUserPassword(changePasswordRequest.getNewPassword(), currentUserId);
         tokenUtils.revokeCurrentUserToken(authentication);
         return ResponseEntity.ok().build();
     }
@@ -80,7 +88,8 @@ public class UserController {
      */
     @PutMapping("/changenames")
     public ResponseEntity<Void> changeName(@Valid @RequestBody ChangeUserNamesRequest changeRequest) {
-        this.userService.changeCurrentUserNames(changeRequest.getFirstName(), changeRequest.getLastName());
+        String currentUserId = this.userDetailsService.getCurrentAuthenticatedUserId();
+        this.userService.changeUserNames(changeRequest.getFirstName(), changeRequest.getLastName(), currentUserId);
         return ResponseEntity.ok().build();
     }
 }

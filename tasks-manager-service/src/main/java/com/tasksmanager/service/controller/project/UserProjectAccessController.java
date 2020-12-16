@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tasksmanager.service.converter.UserProjectAccessConverter;
 import com.tasksmanager.service.model.UserProjectAccessDto;
+import com.tasksmanager.service.security.UserDetailsServiceImpl;
 import com.tasksmanager.service.service.UserProjectAccessService;
 
 /**
@@ -26,20 +27,29 @@ public class UserProjectAccessController {
 
     private final UserProjectAccessConverter userProjectAccessConverter;
 
-    public UserProjectAccessController(UserProjectAccessService userProjectAccessService, UserProjectAccessConverter userProjectAccessConverter) {
+    private final UserDetailsServiceImpl userDetailsService;
+
+    public UserProjectAccessController(UserProjectAccessService userProjectAccessService, UserProjectAccessConverter userProjectAccessConverter, UserDetailsServiceImpl userDetailsService) {
         this.userProjectAccessService = userProjectAccessService;
         this.userProjectAccessConverter = userProjectAccessConverter;
+        this.userDetailsService = userDetailsService;
     }
 
     @PostMapping
-    public ResponseEntity<Void> addAccess(@Valid @RequestBody UserProjectAccessDto access) {
-        this.userProjectAccessService.addNewUserAccess(this.userProjectAccessConverter.convertToEntity(access));
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> addAccess(@Valid @RequestBody UserProjectAccessDto access) {
+        String newAccessId = userProjectAccessService.addNewUserAccess(
+            userProjectAccessConverter.convertToEntity(access),
+            userDetailsService.getCurrentAuthenticatedUserId()
+        );
+        return ResponseEntity.ok(newAccessId);
     }
 
     @PutMapping
     public ResponseEntity<Void> changeAccess(@Valid @RequestBody UserProjectAccessDto access) {
-        this.userProjectAccessService.editAccess(this.userProjectAccessConverter.convertToEntity(access));
+        userProjectAccessService.editAccess(
+            userProjectAccessConverter.convertToEntity(access),
+            userDetailsService.getCurrentAuthenticatedUserId()
+        );
         return ResponseEntity.ok().build();
     }
 }

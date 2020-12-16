@@ -50,7 +50,7 @@ public class TasksController {
     @PutMapping
     public ResponseEntity<Void> updateTask(@Valid @RequestBody TaskDto task) {
         Task changedTask = this.taskConverter.convertToEntity(task);
-        this.taskService.updateTask(changedTask);
+        this.taskService.changeTask(changedTask);
         return ResponseEntity.ok().build();
     }
 }
