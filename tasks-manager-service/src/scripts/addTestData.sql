@@ -102,7 +102,7 @@ INSERT INTO tasks_relations (id, task_id, relation_type, related_task_id)
 VALUES ('4028e48f713215020171321690217001', '4028e48f713215020171321690201003', 'BLOCKER', '4028e48f713215020171321690201005'),
        ('4028e48f713215020171321690257002', '4028e48f713215020171321690201004', 'SIMPLE', '4028e48f713215020171321690201006');
 
-INSERT INTO user_project_access (id, project_id, user_id, is_owner, can_see_team, can_see_project,
+INSERT INTO project_participant_access (id, project_id, user_id, is_owner, can_see_team, can_see_project,
                                  can_edit_project, can_see_other_tasks, can_add_tasks, can_delete_tasks)
 VALUES ('4028e48f713215020171321121280101', '4028e48f713215020171321690280101', '4028e48f713215020171321690280001',
         1, 1, 1, 1, 1, 1, 1),

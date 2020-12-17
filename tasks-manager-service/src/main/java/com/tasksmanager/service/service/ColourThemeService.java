@@ -1,45 +1,28 @@
 package com.tasksmanager.service.service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tasksmanager.service.model.colourtheme.ColourTheme;
-import com.tasksmanager.service.repository.ColourThemeRepository;
 
 /**
  * Colour theme service
  *
  * @author SIE
  */
-@Service
-@Transactional(readOnly = true)
-public class ColourThemeService {
-
-    private final ColourThemeRepository colourThemeRepository;
-
-    public ColourThemeService(ColourThemeRepository colourThemeRepository) {
-        this.colourThemeRepository = colourThemeRepository;
-    }
+public interface ColourThemeService {
 
     /**
      * @param id colour theme id
      * @return colour theme
      */
-    public ColourTheme getById(String id) {
-        return this.colourThemeRepository
-            .findById(id)
-            .orElseThrow(() -> new NoSuchElementException("Colour theme not found"));
-    }
+    ColourTheme getById(String id);
 
     /**
      * @return colour themes list
      */
-    public List<ColourTheme> getAll() {
-        return this.colourThemeRepository.findAll();
-    }
+    List<ColourTheme> getAll();
 
     /**
      * Add new colour theme.
@@ -48,7 +31,5 @@ public class ColourThemeService {
      * @return new colour theme ID
      */
     @Transactional(readOnly = false)
-    public String addNewColourTheme(ColourTheme newColourTheme) {
-        return this.colourThemeRepository.save(newColourTheme).getId();
-    }
+    String addNewColourTheme(ColourTheme newColourTheme);
 }
