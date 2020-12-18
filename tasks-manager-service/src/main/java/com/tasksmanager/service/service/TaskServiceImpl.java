@@ -29,9 +29,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     @Transactional(readOnly = false)
-    public String addNewTask(Task newTask) {
+    public Task addNewTask(Task newTask) {
         newTask.setCreationDate(Timestamp.valueOf(LocalDateTime.now()));
-        return this.taskRepository.save(newTask).getId();
+        return this.taskRepository.save(newTask);
     }
 
     @Override

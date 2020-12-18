@@ -32,7 +32,7 @@ public interface UserService {
      * @return new user ID`
      */
     @Transactional(readOnly = false)
-    String addNewUser(String firstName, String lastName, String email, String password);
+    User addNewUser(String firstName, String lastName, String email, String password);
 
     /**
      * @param email user email

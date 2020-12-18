@@ -27,7 +27,7 @@ public interface ProjectParticipantAccessService {
      * @return new access id
      */
     @Transactional(readOnly = false)
-    String addAccess(ProjectParticipantAccess access);
+    ProjectParticipantAccess addAccess(ProjectParticipantAccess access);
 
     /**
      * Add new access to project if current user is owner of project. If access add for owner access rules update to full access.
@@ -38,7 +38,7 @@ public interface ProjectParticipantAccessService {
      * @param currentUserId current user id
      */
     @Transactional(readOnly = false)
-    String addNewUserAccess(ProjectParticipantAccess access, String currentUserId);
+    ProjectParticipantAccess addNewUserAccess(ProjectParticipantAccess access, String currentUserId);
 
     /**
      * Change access to project if current user is owner of project. If access changing for owner access rules update to full access.

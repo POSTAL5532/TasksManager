@@ -24,7 +24,7 @@ public interface TaskService {
      * @return new task ID
      */
     @Transactional(readOnly = false)
-    String addNewTask(Task newTask);
+    Task addNewTask(Task newTask);
 
     /**
      * Change exist task.

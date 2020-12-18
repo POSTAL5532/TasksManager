@@ -31,5 +31,5 @@ public interface ColourThemeService {
      * @return new colour theme ID
      */
     @Transactional(readOnly = false)
-    String addNewColourTheme(ColourTheme newColourTheme);
+    ColourTheme addNewColourTheme(ColourTheme newColourTheme);
 }

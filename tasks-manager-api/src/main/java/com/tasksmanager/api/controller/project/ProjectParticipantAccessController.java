@@ -24,7 +24,7 @@ import com.tasksmanager.service.service.ProjectParticipantAccessService;
  */
 @RestController
 @RequestMapping("/api/participantaccess")
-public class UserProjectAccessController {
+public class ProjectParticipantAccessController {
 
     private final ProjectParticipantAccessService participantAccessService;
 
@@ -32,7 +32,7 @@ public class UserProjectAccessController {
 
     private final UserDetailsServiceImpl userDetailsService;
 
-    public UserProjectAccessController(ProjectParticipantAccessService userProjectAccessService, ProjectParticipantAccessConverter participantAccessConverter, UserDetailsServiceImpl userDetailsService) {
+    public ProjectParticipantAccessController(ProjectParticipantAccessService userProjectAccessService, ProjectParticipantAccessConverter participantAccessConverter, UserDetailsServiceImpl userDetailsService) {
         this.participantAccessService = userProjectAccessService;
         this.participantAccessConverter = participantAccessConverter;
         this.userDetailsService = userDetailsService;
@@ -42,12 +42,13 @@ public class UserProjectAccessController {
     public ResponseEntity<String> addAccess(@Valid @RequestBody ProjectParticipantAccessDto access) {
         String newAccessId;
 
-        try{
+        try {
             newAccessId = participantAccessService.addNewUserAccess(
                 participantAccessConverter.convertToEntity(access),
                 userDetailsService.getCurrentAuthenticatedUserId()
-            );
-        }catch (NoSuchElementException exception) {
+            ).getProjectId();
+        }
+        catch (NoSuchElementException exception) {
             throw new UserHasNotToOperationAccessException(exception.getMessage());
         }
 
@@ -56,12 +57,13 @@ public class UserProjectAccessController {
 
     @PutMapping
     public ResponseEntity<Void> changeAccess(@Valid @RequestBody ProjectParticipantAccessDto access) {
-        try{
+        try {
             participantAccessService.editAccess(
                 participantAccessConverter.convertToEntity(access),
                 userDetailsService.getCurrentAuthenticatedUserId()
             );
-        }catch (NoSuchElementException exception) {
+        }
+        catch (NoSuchElementException exception) {
             throw new UserHasNotToOperationAccessException(exception.getMessage());
         }
 

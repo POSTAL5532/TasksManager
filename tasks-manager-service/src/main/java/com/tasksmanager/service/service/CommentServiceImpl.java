@@ -29,9 +29,9 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional(readOnly = false)
-    public String addNewComment(Comment newComment) {
+    public Comment addNewComment(Comment newComment) {
         newComment.setCreationDate(Timestamp.valueOf(LocalDateTime.now()));
-        return this.commentRepository.save(newComment).getId();
+        return this.commentRepository.save(newComment);
     }
 
     @Override

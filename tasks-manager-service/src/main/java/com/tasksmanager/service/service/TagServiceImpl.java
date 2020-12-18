@@ -27,8 +27,8 @@ public class TagServiceImpl implements TagService {
 
     @Override
     @Transactional(readOnly = false)
-    public String addNewTask(Tag newTag) {
-        return this.tagRepository.save(newTag).getId();
+    public Tag addNewTask(Tag newTag) {
+        return this.tagRepository.save(newTag);
     }
 
     @Override

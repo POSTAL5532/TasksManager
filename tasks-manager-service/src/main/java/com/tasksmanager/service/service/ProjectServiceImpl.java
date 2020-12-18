@@ -33,17 +33,17 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     @Transactional(readOnly = false)
-    public String addNewProject(Project newProject, String currentUserId) {
-        newProject.setCreationDate(Date.valueOf(LocalDate.now()));
+    public Project addNewProject(Project project, String currentUserId) {
+        project.setCreationDate(Date.valueOf(LocalDate.now()));
 
-        String newProjectId = this.projectRepository.save(newProject).getId();
+        Project newProject = this.projectRepository.save(project);
 
         ProjectParticipantAccess access = new ProjectParticipantAccess();
         access.setUserId(currentUserId);
-        access.setProjectId(newProjectId);
+        access.setProjectId(newProject.getId());
         this.participantAccessService.setOwnerDefaultAccess(access);
         this.participantAccessService.addAccess(access);
 
-        return newProjectId;
+        return newProject;
     }
 }

@@ -27,13 +27,13 @@ public class ProjectParticipantAccessServiceImpl implements ProjectParticipantAc
 
     @Override
     @Transactional(readOnly = false)
-    public String addAccess(ProjectParticipantAccess access) {
-        return this.userProjectAccessRepository.save(access).getId();
+    public ProjectParticipantAccess addAccess(ProjectParticipantAccess access) {
+        return this.userProjectAccessRepository.save(access);
     }
 
     @Override
     @Transactional(readOnly = false)
-    public String addNewUserAccess(ProjectParticipantAccess access, String currentUserId) {
+    public ProjectParticipantAccess addNewUserAccess(ProjectParticipantAccess access, String currentUserId) {
         ProjectParticipantAccess currentUserAccess = this.getAccessToProjectForUser(access.getProjectId(), currentUserId);
 
         if (!currentUserAccess.isOwner()) {

@@ -24,7 +24,7 @@ public interface TagService {
      * @return new tag ID
      */
     @Transactional(readOnly = false)
-    String addNewTask(Tag newTag);
+    Tag addNewTask(Tag newTag);
 
     /**
      * Change exist tag.

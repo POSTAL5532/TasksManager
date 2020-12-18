@@ -43,7 +43,7 @@ public class TasksController {
     @PostMapping
     public ResponseEntity<String> createTask(@Valid @RequestBody TaskDto task) {
         Task newTask = this.taskConverter.convertToEntity(task);
-        String newTaskId = this.taskService.addNewTask(newTask);
+        String newTaskId = this.taskService.addNewTask(newTask).getId();
         return ResponseEntity.ok(newTaskId);
     }
 

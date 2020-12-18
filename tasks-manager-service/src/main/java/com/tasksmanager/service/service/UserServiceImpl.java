@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = false)
-    public String addNewUser(String firstName, String lastName, String email, String password) {
+    public User addNewUser(String firstName, String lastName, String email, String password) {
         User newUser = new User();
         newUser.setFirstName(firstName);
         newUser.setLastName(lastName);
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         newUser.setConfirmStatus(UserConfirmStatus.UNCONFIRMED);
         newUser.setRegDate(Date.valueOf(LocalDate.now()));
 
-        return userRepository.save(newUser).getId();
+        return userRepository.save(newUser);
     }
 
     @Override

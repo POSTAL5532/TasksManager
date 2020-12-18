@@ -48,7 +48,7 @@ public class ProjectsController {
         String newProjectId = projectService.addNewProject(
             projectConverter.convertToEntity(project),
             userDetailsService.getCurrentAuthenticatedUserId()
-        );
+        ).getId();
         return ResponseEntity.ok(newProjectId);
     }
 }

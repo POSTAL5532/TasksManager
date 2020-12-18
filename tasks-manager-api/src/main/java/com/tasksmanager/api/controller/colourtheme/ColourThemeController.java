@@ -55,7 +55,7 @@ public class ColourThemeController {
     @PostMapping
     public ResponseEntity<String> createColourTheme(@Valid @RequestBody ColourThemeDto colourTheme) {
         ColourTheme newColourTheme = this.colourThemeConverter.convertToEntity(colourTheme);
-        String newColourThemeId = this.colourThemeService.addNewColourTheme(newColourTheme);
+        String newColourThemeId = this.colourThemeService.addNewColourTheme(newColourTheme).getId();
         return ResponseEntity.ok(newColourThemeId);
     }
 }

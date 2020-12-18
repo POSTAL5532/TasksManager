@@ -25,5 +25,5 @@ public interface ProjectService {
      * @return new project id
      */
     @Transactional(readOnly = false)
-    String addNewProject(Project newProject, String currentUserId);
+    Project addNewProject(Project newProject, String currentUserId);
 }

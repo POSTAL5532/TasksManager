@@ -24,7 +24,7 @@ public interface CommentService {
      * @return new comment ID
      */
     @Transactional(readOnly = false)
-    String addNewComment(Comment newComment);
+    Comment addNewComment(Comment newComment);
 
     /**
      * Change exist comment.

@@ -43,7 +43,7 @@ public class TagController {
     @PostMapping
     public ResponseEntity<String> createTag(@Valid @RequestBody TagDto tag) {
         Tag newTag = this.tagConverter.convertToEntity(tag);
-        String newTagId = this.tagService.addNewTask(newTag);
+        String newTagId = this.tagService.addNewTask(newTag).getId();
         return ResponseEntity.ok(newTagId);
     }
 

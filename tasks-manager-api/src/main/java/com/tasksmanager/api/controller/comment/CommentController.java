@@ -43,7 +43,7 @@ public class CommentController {
     @PostMapping
     public ResponseEntity<String> createComment(@Valid @RequestBody CommentDto comment) {
         Comment newComment = this.commentConverter.convertToEntity(comment);
-        String newCommentId = this.commentService.addNewComment(newComment);
+        String newCommentId = this.commentService.addNewComment(newComment).getId();
         return ResponseEntity.ok(newCommentId);
     }
 
