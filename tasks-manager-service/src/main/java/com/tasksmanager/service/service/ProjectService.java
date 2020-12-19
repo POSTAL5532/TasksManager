@@ -25,6 +25,5 @@ public interface ProjectService extends SaveUpdateRepository<Project, ProjectRep
      * @param currentUserId current user id to set for project owner
      * @return new project id
      */
-    @Transactional(readOnly = false)
     Project addNewProject(Project newProject, String currentUserId);
 }

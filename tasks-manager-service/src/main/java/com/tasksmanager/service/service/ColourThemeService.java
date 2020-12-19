@@ -31,6 +31,5 @@ public interface ColourThemeService extends SaveUpdateRepository<ColourTheme, Co
      * @param newColourTheme colour theme object
      * @return new colour theme ID
      */
-    @Transactional(readOnly = false)
     ColourTheme addNewColourTheme(ColourTheme newColourTheme);
 }

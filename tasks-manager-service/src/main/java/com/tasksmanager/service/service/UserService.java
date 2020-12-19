@@ -32,7 +32,6 @@ public interface UserService extends SaveUpdateRepository<User, UserRepository> 
      * @param email     user email
      * @return new user ID`
      */
-    @Transactional(readOnly = false)
     User addNewUser(String firstName, String lastName, String email, String password);
 
     /**

@@ -24,7 +24,6 @@ public interface TagService extends SaveUpdateRepository<Tag, TagRepository> {
      * @param newTag new tag object
      * @return new tag ID
      */
-    @Transactional(readOnly = false)
     Tag addNewTask(Tag newTag);
 
     /**
@@ -32,6 +31,5 @@ public interface TagService extends SaveUpdateRepository<Tag, TagRepository> {
      *
      * @param tag tag object
      */
-    @Transactional(readOnly = false)
     void changeTag(Tag tag);
 }

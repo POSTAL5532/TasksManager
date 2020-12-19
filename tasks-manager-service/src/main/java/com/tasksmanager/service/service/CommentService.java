@@ -24,7 +24,6 @@ public interface CommentService extends SaveUpdateRepository<Comment, CommentRep
      * @param newComment comment object
      * @return new comment ID
      */
-    @Transactional(readOnly = false)
     Comment addNewComment(Comment newComment);
 
     /**
@@ -32,6 +31,5 @@ public interface CommentService extends SaveUpdateRepository<Comment, CommentRep
      *
      * @param comment comment object
      */
-    @Transactional(readOnly = false)
     void changeComment(Comment comment);
 }

@@ -29,7 +29,6 @@ public interface ProjectParticipantAccessService extends SaveUpdateRepository<Pr
      * @param currentUserId current user id
      * @return new access id
      */
-    @Transactional(readOnly = false)
     ProjectParticipantAccess addNewUserAccess(ProjectParticipantAccess access, String currentUserId);
 
     /**
@@ -38,7 +37,6 @@ public interface ProjectParticipantAccessService extends SaveUpdateRepository<Pr
      *
      * @param access access object
      */
-    @Transactional(readOnly = false)
     void changeAccess(ProjectParticipantAccess access, String currentUser);
 
     /**

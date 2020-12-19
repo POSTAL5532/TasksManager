@@ -24,7 +24,6 @@ public interface TaskService extends SaveUpdateRepository<Task, TaskRepository> 
      * @param newTask new task object
      * @return new task ID
      */
-    @Transactional(readOnly = false)
     Task addNewTask(Task newTask);
 
     /**
@@ -32,6 +31,5 @@ public interface TaskService extends SaveUpdateRepository<Task, TaskRepository> 
      *
      * @param task task object
      */
-    @Transactional(readOnly = false)
     void changeTask(Task task);
 }
