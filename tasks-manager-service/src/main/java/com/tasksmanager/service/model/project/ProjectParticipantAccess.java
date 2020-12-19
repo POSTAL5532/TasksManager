@@ -120,7 +120,7 @@ public class ProjectParticipantAccess extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "UserProjectAccess{" +
+        return "ProjectParticipantAccess{" +
             "projectId='" + projectId + '\'' +
             ", userId='" + userId + '\'' +
             ", isOwner=" + isOwner +

@@ -66,14 +66,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * UserHasNotToProjectAccessException handler. Convert NoUserProjectAccessException to response with 403 HTTP code.
+     * UserHasNotToProjectAccessException handler. Convert UserHasNotToProjectAccessException to response with 403 HTTP code.
      *
      * @param exception exception
      * @param request   request
      * @return 403 HTTP response
      */
     @ExceptionHandler(value = UserHasNotToProjectAccessException.class)
-    public final ResponseEntity<Object> noUserProjectAccessException(UserHasNotToProjectAccessException exception, WebRequest request) {
+    public final ResponseEntity<Object> userHasNotToProjectAccessException(UserHasNotToProjectAccessException exception, WebRequest request) {
         ApiError apiError = new ApiError(ApiErrorType.PROJECT_LEVEL_ACCESS_ERROR, HttpStatus.FORBIDDEN, exception.getMessage());
         return handleExceptionInternal(exception, apiError, new HttpHeaders(), apiError.getStatus(), request);
     }
@@ -86,7 +86,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      * @return 403 HTTP response
      */
     @ExceptionHandler(value = UserHasNotToOperationAccessException.class)
-    public final ResponseEntity<Object> noUserProjectAccessException(UserHasNotToOperationAccessException exception, WebRequest request) {
+    public final ResponseEntity<Object> userHasNotToOperationAccessException(UserHasNotToOperationAccessException exception, WebRequest request) {
         ApiError apiError = new ApiError(ApiErrorType.OPERATION_LEVEL_ACCESS_ERROR, HttpStatus.FORBIDDEN, exception.getMessage());
         return handleExceptionInternal(exception, apiError, new HttpHeaders(), apiError.getStatus(), request);
     }

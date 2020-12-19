@@ -12,15 +12,15 @@ import com.tasksmanager.service.repository.ProjectParticipantAccessRepository;
 @Transactional(readOnly = true)
 public class ProjectParticipantAccessServiceImpl implements ProjectParticipantAccessService {
 
-    private final ProjectParticipantAccessRepository userProjectAccessRepository;
+    private final ProjectParticipantAccessRepository projectParticipantAccessRepository;
 
-    public ProjectParticipantAccessServiceImpl(ProjectParticipantAccessRepository userProjectAccessRepository) {
-        this.userProjectAccessRepository = userProjectAccessRepository;
+    public ProjectParticipantAccessServiceImpl(ProjectParticipantAccessRepository projectParticipantAccessRepository) {
+        this.projectParticipantAccessRepository = projectParticipantAccessRepository;
     }
 
     @Override
     public ProjectParticipantAccess getAccessToProjectForUser(String projectId, String userId) {
-        return this.userProjectAccessRepository
+        return this.projectParticipantAccessRepository
             .findByProjectIdAndUserId(projectId, userId)
             .orElseThrow(() -> new NoSuchElementException("User has not access to project."));
     }
@@ -53,7 +53,7 @@ public class ProjectParticipantAccessServiceImpl implements ProjectParticipantAc
             throw new NoSuchElementException("Current user is not owner of this project.");
         }
 
-        if (!this.userProjectAccessRepository.existsById(access.getId())) {
+        if (!this.projectParticipantAccessRepository.existsById(access.getId())) {
             throw new NoSuchElementException("Access not found");
         }
 
@@ -79,6 +79,6 @@ public class ProjectParticipantAccessServiceImpl implements ProjectParticipantAc
 
     @Override
     public ProjectParticipantAccessRepository getRepository() {
-        return this.userProjectAccessRepository;
+        return this.projectParticipantAccessRepository;
     }
 }

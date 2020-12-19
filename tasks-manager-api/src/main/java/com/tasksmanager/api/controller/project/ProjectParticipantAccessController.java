@@ -26,14 +26,14 @@ import com.tasksmanager.service.service.ProjectParticipantAccessService;
 @RequestMapping("/api/participantaccess")
 public class ProjectParticipantAccessController {
 
-    private final ProjectParticipantAccessService participantAccessService;
+    private final ProjectParticipantAccessService projectParticipantAccessService;
 
     private final ProjectParticipantAccessConverter participantAccessConverter;
 
     private final UserDetailsServiceImpl userDetailsService;
 
-    public ProjectParticipantAccessController(ProjectParticipantAccessService userProjectAccessService, ProjectParticipantAccessConverter participantAccessConverter, UserDetailsServiceImpl userDetailsService) {
-        this.participantAccessService = userProjectAccessService;
+    public ProjectParticipantAccessController(ProjectParticipantAccessService projectParticipantAccessService, ProjectParticipantAccessConverter participantAccessConverter, UserDetailsServiceImpl userDetailsService) {
+        this.projectParticipantAccessService = projectParticipantAccessService;
         this.participantAccessConverter = participantAccessConverter;
         this.userDetailsService = userDetailsService;
     }
@@ -43,7 +43,7 @@ public class ProjectParticipantAccessController {
         String newAccessId;
 
         try {
-            newAccessId = participantAccessService.addNewUserAccess(
+            newAccessId = projectParticipantAccessService.addNewUserAccess(
                 participantAccessConverter.convertToEntity(access),
                 userDetailsService.getCurrentAuthenticatedUserId()
             ).getProjectId();
@@ -58,7 +58,7 @@ public class ProjectParticipantAccessController {
     @PutMapping
     public ResponseEntity<Void> changeAccess(@Valid @RequestBody ProjectParticipantAccessDto access) {
         try {
-            participantAccessService.changeAccess(
+            projectParticipantAccessService.changeAccess(
                 participantAccessConverter.convertToEntity(access),
                 userDetailsService.getCurrentAuthenticatedUserId()
             );
