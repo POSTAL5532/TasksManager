@@ -34,6 +34,11 @@ public class ColourThemeServiceImpl implements ColourThemeService {
     @Override
     @Transactional(readOnly = false)
     public ColourTheme addNewColourTheme(ColourTheme newColourTheme) {
-        return this.colourThemeRepository.save(newColourTheme);
+        return this.save(newColourTheme);
+    }
+
+    @Override
+    public ColourThemeRepository getRepository() {
+        return this.colourThemeRepository;
     }
 }

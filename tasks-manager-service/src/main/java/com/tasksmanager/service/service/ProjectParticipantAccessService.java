@@ -3,13 +3,14 @@ package com.tasksmanager.service.service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tasksmanager.service.model.project.ProjectParticipantAccess;
+import com.tasksmanager.service.repository.ProjectParticipantAccessRepository;
 
 /**
  * Project participant access service.
  *
  * @author SIE
  */
-public interface ProjectParticipantAccessService {
+public interface ProjectParticipantAccessService extends SaveUpdateRepository<ProjectParticipantAccess, ProjectParticipantAccessRepository> {
 
     /**
      * Return access to project for user by user id and project id.
@@ -21,21 +22,12 @@ public interface ProjectParticipantAccessService {
     ProjectParticipantAccess getAccessToProjectForUser(String projectId, String userId);
 
     /**
-     * Add new access.
-     *
-     * @param access access object
-     * @return new access id
-     */
-    @Transactional(readOnly = false)
-    ProjectParticipantAccess addAccess(ProjectParticipantAccess access);
-
-    /**
      * Add new access to project if current user is owner of project. If access add for owner access rules update to full access.
      * If access add for other user - <code>isOwner<code/> set to <code>false<code/>.
      *
-     * @param access access object
-     * @return new access id
+     * @param access        access object
      * @param currentUserId current user id
+     * @return new access id
      */
     @Transactional(readOnly = false)
     ProjectParticipantAccess addNewUserAccess(ProjectParticipantAccess access, String currentUserId);
@@ -47,7 +39,7 @@ public interface ProjectParticipantAccessService {
      * @param access access object
      */
     @Transactional(readOnly = false)
-    void editAccess(ProjectParticipantAccess access, String currentUser);
+    void changeAccess(ProjectParticipantAccess access, String currentUser);
 
     /**
      * Update access rules to full access.

@@ -58,7 +58,7 @@ public class ProjectParticipantAccessController {
     @PutMapping
     public ResponseEntity<Void> changeAccess(@Valid @RequestBody ProjectParticipantAccessDto access) {
         try {
-            participantAccessService.editAccess(
+            participantAccessService.changeAccess(
                 participantAccessConverter.convertToEntity(access),
                 userDetailsService.getCurrentAuthenticatedUserId()
             );

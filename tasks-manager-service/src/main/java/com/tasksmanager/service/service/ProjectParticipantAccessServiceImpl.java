@@ -27,12 +27,6 @@ public class ProjectParticipantAccessServiceImpl implements ProjectParticipantAc
 
     @Override
     @Transactional(readOnly = false)
-    public ProjectParticipantAccess addAccess(ProjectParticipantAccess access) {
-        return this.userProjectAccessRepository.save(access);
-    }
-
-    @Override
-    @Transactional(readOnly = false)
     public ProjectParticipantAccess addNewUserAccess(ProjectParticipantAccess access, String currentUserId) {
         ProjectParticipantAccess currentUserAccess = this.getAccessToProjectForUser(access.getProjectId(), currentUserId);
 
@@ -47,12 +41,12 @@ public class ProjectParticipantAccessServiceImpl implements ProjectParticipantAc
             access.setIsOwner(false);
         }
 
-        return this.addAccess(access);
+        return this.save(access);
     }
 
     @Override
     @Transactional(readOnly = false)
-    public void editAccess(ProjectParticipantAccess access, String currentUser) {
+    public void changeAccess(ProjectParticipantAccess access, String currentUser) {
         ProjectParticipantAccess currentUserAccess = this.getAccessToProjectForUser(access.getProjectId(), currentUser);
 
         if (!currentUserAccess.isOwner()) {
@@ -70,7 +64,7 @@ public class ProjectParticipantAccessServiceImpl implements ProjectParticipantAc
             access.setIsOwner(false);
         }
 
-        this.userProjectAccessRepository.save(access);
+        this.update(access);
     }
 
     @Override
@@ -81,5 +75,10 @@ public class ProjectParticipantAccessServiceImpl implements ProjectParticipantAc
         ownerAccess.setCanSeeOtherTasks(true);
         ownerAccess.setCanSeeProject(true);
         ownerAccess.setCanSeeTeam(true);
+    }
+
+    @Override
+    public ProjectParticipantAccessRepository getRepository() {
+        return this.userProjectAccessRepository;
     }
 }

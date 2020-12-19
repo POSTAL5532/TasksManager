@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tasksmanager.service.model.colourtheme.ColourTheme;
+import com.tasksmanager.service.repository.ColourThemeRepository;
 
 /**
  * Colour theme service
  *
  * @author SIE
  */
-public interface ColourThemeService {
+public interface ColourThemeService extends SaveUpdateRepository<ColourTheme, ColourThemeRepository> {
 
     /**
      * @param id colour theme id

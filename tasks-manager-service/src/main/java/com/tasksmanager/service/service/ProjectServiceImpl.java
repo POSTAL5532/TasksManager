@@ -36,14 +36,19 @@ public class ProjectServiceImpl implements ProjectService {
     public Project addNewProject(Project project, String currentUserId) {
         project.setCreationDate(Date.valueOf(LocalDate.now()));
 
-        Project newProject = this.projectRepository.save(project);
+        Project newProject = this.save(project);
 
         ProjectParticipantAccess access = new ProjectParticipantAccess();
         access.setUserId(currentUserId);
         access.setProjectId(newProject.getId());
         this.participantAccessService.setOwnerDefaultAccess(access);
-        this.participantAccessService.addAccess(access);
+        this.participantAccessService.save(access);
 
         return newProject;
+    }
+
+    @Override
+    public ProjectRepository getRepository() {
+        return this.projectRepository;
     }
 }

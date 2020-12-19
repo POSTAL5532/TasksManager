@@ -3,13 +3,14 @@ package com.tasksmanager.service.service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tasksmanager.service.model.comment.Comment;
+import com.tasksmanager.service.repository.CommentRepository;
 
 /**
  * Comment service.
  *
  * @author SIE
  */
-public interface CommentService {
+public interface CommentService extends SaveUpdateRepository<Comment, CommentRepository> {
 
     /**
      * @param id comment ID

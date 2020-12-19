@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         newUser.setConfirmStatus(UserConfirmStatus.UNCONFIRMED);
         newUser.setRegDate(Date.valueOf(LocalDate.now()));
 
-        return userRepository.save(newUser);
+        return this.save(newUser);
     }
 
     @Override
@@ -63,14 +63,14 @@ public class UserServiceImpl implements UserService {
         User user = this.getById(userId);
         user.setEmail(email);
         user.setConfirmStatus(UserConfirmStatus.UNCONFIRMED);
-        userRepository.save(user);
+        this.update(user);
     }
 
     @Override
     public void changeUserPassword(String password, String userId) {
         User user = this.getById(userId);
         user.setPassword(password);
-        userRepository.save(user);
+        this.update(user);
     }
 
     @Override
@@ -78,7 +78,12 @@ public class UserServiceImpl implements UserService {
         User user = this.getById(userId);
         user.setFirstName(firstName);
         user.setLastName(lastName);
-        this.userRepository.save(user);
+        this.update(user);
+    }
+
+    @Override
+    public UserRepository getRepository() {
+        return this.userRepository;
     }
 }
 

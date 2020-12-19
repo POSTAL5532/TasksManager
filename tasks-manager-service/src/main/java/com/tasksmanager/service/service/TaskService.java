@@ -3,13 +3,14 @@ package com.tasksmanager.service.service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tasksmanager.service.model.task.Task;
+import com.tasksmanager.service.repository.TaskRepository;
 
 /**
  * Task service.
  *
  * @author SIE
  */
-public interface TaskService {
+public interface TaskService extends SaveUpdateRepository<Task, TaskRepository> {
 
     /**
      * @param id task id

@@ -31,13 +31,18 @@ public class CommentServiceImpl implements CommentService {
     @Transactional(readOnly = false)
     public Comment addNewComment(Comment newComment) {
         newComment.setCreationDate(Timestamp.valueOf(LocalDateTime.now()));
-        return this.commentRepository.save(newComment);
+        return this.save(newComment);
     }
 
     @Override
     @Transactional(readOnly = false)
     public void changeComment(Comment comment) {
         comment.setChangeDate(Timestamp.valueOf(LocalDateTime.now()));
-        this.commentRepository.save(comment);
+        this.update(comment);
+    }
+
+    @Override
+    public CommentRepository getRepository() {
+        return this.commentRepository;
     }
 }

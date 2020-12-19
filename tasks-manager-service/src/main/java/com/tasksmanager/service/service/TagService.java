@@ -3,13 +3,14 @@ package com.tasksmanager.service.service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tasksmanager.service.model.tag.Tag;
+import com.tasksmanager.service.repository.TagRepository;
 
 /**
  * Tag service.
  *
  * @author SIE
  */
-public interface TagService {
+public interface TagService extends SaveUpdateRepository<Tag, TagRepository> {
 
     /**
      * @param id tag ID

@@ -31,13 +31,18 @@ public class TaskServiceImpl implements TaskService {
     @Transactional(readOnly = false)
     public Task addNewTask(Task newTask) {
         newTask.setCreationDate(Timestamp.valueOf(LocalDateTime.now()));
-        return this.taskRepository.save(newTask);
+        return this.save(newTask);
     }
 
     @Override
     @Transactional(readOnly = false)
     public void changeTask(Task task) {
         task.setChangeDate(Timestamp.valueOf(LocalDateTime.now()));
-        this.taskRepository.save(task);
+        this.update(task);
+    }
+
+    @Override
+    public TaskRepository getRepository() {
+        return this.taskRepository;
     }
 }

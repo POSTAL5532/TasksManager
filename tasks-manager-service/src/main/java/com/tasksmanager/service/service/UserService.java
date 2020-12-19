@@ -3,13 +3,14 @@ package com.tasksmanager.service.service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tasksmanager.service.model.user.User;
+import com.tasksmanager.service.repository.UserRepository;
 
 /**
  * User service {@link User}
  *
  * @author SIE
  */
-public interface UserService {
+public interface UserService extends SaveUpdateRepository<User, UserRepository> {
 
     /**
      * @param id user ID
