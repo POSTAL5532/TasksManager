@@ -1,7 +1,5 @@
 package com.tasksmanager.service.service;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.tasksmanager.service.model.project.Project;
 import com.tasksmanager.service.repository.ProjectRepository;
 

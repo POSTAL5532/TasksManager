@@ -2,8 +2,6 @@ package com.tasksmanager.service.service;
 
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.tasksmanager.service.model.colourtheme.ColourTheme;
 import com.tasksmanager.service.repository.ColourThemeRepository;
 

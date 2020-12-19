@@ -1,7 +1,5 @@
 package com.tasksmanager.service.service;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.tasksmanager.service.model.comment.Comment;
 import com.tasksmanager.service.repository.CommentRepository;
 
