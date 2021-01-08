@@ -28,23 +28,25 @@ CREATE TABLE users
 /**
  * OAuth tokens table
  */
-CREATE TABLE oauth_access_token (
+CREATE TABLE oauth_access_token
+(
     authentication_id varchar(255) NOT NULL PRIMARY KEY,
-    token_id varchar(255) NOT NULL,
-    token blob NOT NULL,
-    user_name varchar(255) NOT NULL,
-    client_id varchar(255) NOT NULL,
-    authentication blob NOT NULL,
-    refresh_token varchar(255) NOT NULL
+    token_id          varchar(255) NOT NULL,
+    token             blob         NOT NULL,
+    user_name         varchar(255) NOT NULL,
+    client_id         varchar(255) NOT NULL,
+    authentication    blob         NOT NULL,
+    refresh_token     varchar(255) NOT NULL
 );
 
 /**
  * OAuth refresh-tokens table
  */
-CREATE TABLE oauth_refresh_token (
-    token_id varchar(255) NOT NULL,
-    token blob NOT NULL,
-    authentication blob NOT NULL
+CREATE TABLE oauth_refresh_token
+(
+    token_id       varchar(255) NOT NULL,
+    token          blob         NOT NULL,
+    authentication blob         NOT NULL
 );
 
 /**
@@ -86,7 +88,7 @@ CREATE TABLE projects
     creation_date   date         NOT NULL,
     FOREIGN KEY (colour_theme_id) REFERENCES colour_themes (id),
     PRIMARY KEY (id)
-)
+);
 
 /**
  * Tasks table
@@ -106,25 +108,25 @@ CREATE TABLE projects
  */
 CREATE TABLE tasks
 (
-    id               varchar(36)  NOT NULL,
-    project_id       varchar(36)  NOT NULL,
-    parent_task_id   varchar(36),
-    author_id        varchar(36),
-    executor_id      varchar(36),
-    name             varchar(255) NOT NULL,
-    description      longvarchar,
-    level            varchar(255) NOT NULL,
-    status           varchar(255) NOT NULL,
-    type             varchar(255) NOT NULL,
-    creation_date    timestamp    NOT NULL,
-    ending_date      date,
-    change_date      timestamp,
+    id             varchar(36)  NOT NULL,
+    project_id     varchar(36)  NOT NULL,
+    parent_task_id varchar(36),
+    author_id      varchar(36),
+    executor_id    varchar(36),
+    name           varchar(255) NOT NULL,
+    description    longvarchar,
+    level          varchar(255) NOT NULL,
+    status         varchar(255) NOT NULL,
+    type           varchar(255) NOT NULL,
+    creation_date  timestamp    NOT NULL,
+    ending_date    date,
+    change_date    timestamp,
     FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE,
     FOREIGN KEY (parent_task_id) REFERENCES tasks (id) ON DELETE CASCADE,
     FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE SET NULL,
     FOREIGN KEY (executor_id) REFERENCES users (id) ON DELETE SET NULL,
     PRIMARY KEY (id)
-)
+);
 
 /**
  * Tasks relations table
@@ -136,14 +138,14 @@ CREATE TABLE tasks
  */
 CREATE TABLE tasks_relations
 (
-    id               varchar(36)  NOT NULL,
-    task_id          varchar(36)  NOT NULL,
-    relation_type    varchar(255) NOT NULL,
-    related_task_id  varchar(36)  NOT NULL,
+    id              varchar(36)  NOT NULL,
+    task_id         varchar(36)  NOT NULL,
+    relation_type   varchar(255) NOT NULL,
+    related_task_id varchar(36)  NOT NULL,
     FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE,
     FOREIGN KEY (related_task_id) REFERENCES tasks (id) ON DELETE CASCADE,
     PRIMARY KEY (id)
-)
+);
 
 /**
  * Project participant access table
@@ -161,20 +163,21 @@ CREATE TABLE tasks_relations
  */
 CREATE TABLE project_participant_access
 (
-    id                  varchar(36) NOT NULL,
-    project_id          varchar(36) NOT NULL,
-    user_id             varchar(36) NOT NULL,
-    is_owner            bit(1)      NOT NULL,
-    can_see_team        bit(1)      NOT NULL,
-    can_see_project     bit(1)      NOT NULL,
-    can_edit_project    bit(1)      NOT NULL,
-    can_see_other_tasks bit(1)      NOT NULL,
-    can_add_tasks       bit(1)      NOT NULL,
-    can_delete_tasks    bit(1)      NOT NULL,
+    id                   varchar(36) NOT NULL,
+    project_id           varchar(36) NOT NULL,
+    user_id              varchar(36) NOT NULL,
+    is_owner             bit(1)      NOT NULL,
+    can_see_team         bit(1)      NOT NULL,
+    can_see_project      bit(1)      NOT NULL,
+    can_edit_project     bit(1)      NOT NULL,
+    can_see_other_tasks  bit(1)      NOT NULL,
+    can_add_tasks        bit(1)      NOT NULL,
+    can_edit_other_tasks bit(1)      NOT NULL,
+    can_delete_tasks     bit(1)      NOT NULL,
     FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
     PRIMARY KEY (id)
-)
+);
 
 /**
  * Tags table
@@ -186,13 +189,13 @@ CREATE TABLE project_participant_access
  */
 CREATE TABLE tags
 (
-    id               varchar(36)  NOT NULL,
-    project_id       varchar(36)  NOT NULL,
-    colour           varchar(7)   NOT NULL,
-    value            varchar(255) NOT NULL,
+    id         varchar(36)  NOT NULL,
+    project_id varchar(36)  NOT NULL,
+    colour     varchar(7)   NOT NULL,
+    value      varchar(255) NOT NULL,
     FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE CASCADE,
     PRIMARY KEY (id)
-)
+);
 
 /**
  * Tasks tags relations table
@@ -203,13 +206,13 @@ CREATE TABLE tags
  */
 CREATE TABLE tasks_tags
 (
-    id       varchar(36)  NOT NULL,
-    task_id  varchar(36)  NOT NULL,
-    tag_id   varchar(36)  NOT NULL,
+    id      varchar(36) NOT NULL,
+    task_id varchar(36) NOT NULL,
+    tag_id  varchar(36) NOT NULL,
     FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE,
     FOREIGN KEY (tag_id) REFERENCES tags (id) ON DELETE CASCADE,
     PRIMARY KEY (id)
-)
+);
 
 /**
  * Entity comments table
@@ -224,13 +227,13 @@ CREATE TABLE tasks_tags
  */
 CREATE TABLE comments
 (
-    id               varchar(36)  NOT NULL,
-    author_id        varchar(36),
-    entity_id        varchar(36)  NOT NULL,
-    entity_type      varchar(255) NOT NULL,
-    content          varchar(255) NOT NULL,
-    creation_date    timestamp    NOT NULL,
-    change_date      timestamp,
+    id            varchar(36)  NOT NULL,
+    author_id     varchar(36),
+    entity_id     varchar(36)  NOT NULL,
+    entity_type   varchar(255) NOT NULL,
+    content       varchar(255) NOT NULL,
+    creation_date timestamp    NOT NULL,
+    change_date   timestamp,
     FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE SET NULL,
     PRIMARY KEY (id)
-)
+);

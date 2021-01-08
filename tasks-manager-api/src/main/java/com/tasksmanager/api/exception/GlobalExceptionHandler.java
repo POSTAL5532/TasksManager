@@ -18,6 +18,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.tasksmanager.api.model.ApiError;
 import com.tasksmanager.api.model.ApiErrorType;
 import com.tasksmanager.api.model.NameValue;
+import com.tasksmanager.service.exception.UserHasNotToOperationAccessException;
+import com.tasksmanager.service.exception.UserHasNotToProjectAccessException;
 
 /**
  * Global exceptions handlers. Convert exceptions to HTTP response

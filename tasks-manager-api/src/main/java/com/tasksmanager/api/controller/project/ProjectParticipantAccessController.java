@@ -1,7 +1,5 @@
 package com.tasksmanager.api.controller.project;
 
-import java.util.NoSuchElementException;
-
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tasksmanager.api.converter.ProjectParticipantAccessConverter;
-import com.tasksmanager.api.exception.UserHasNotToOperationAccessException;
 import com.tasksmanager.api.model.ProjectParticipantAccessDto;
 import com.tasksmanager.api.security.UserDetailsServiceImpl;
 import com.tasksmanager.service.service.ProjectParticipantAccessService;
@@ -40,32 +37,20 @@ public class ProjectParticipantAccessController {
 
     @PostMapping
     public ResponseEntity<String> addAccess(@Valid @RequestBody ProjectParticipantAccessDto access) {
-        String newAccessId;
-
-        try {
-            newAccessId = projectParticipantAccessService.addNewUserAccess(
-                participantAccessConverter.convertToEntity(access),
-                userDetailsService.getCurrentAuthenticatedUserId()
-            ).getProjectId();
-        }
-        catch (NoSuchElementException exception) {
-            throw new UserHasNotToOperationAccessException(exception.getMessage());
-        }
+        String newAccessId = projectParticipantAccessService.addNewUserAccess(
+            participantAccessConverter.convertToEntity(access),
+            userDetailsService.getCurrentAuthenticatedUserId()
+        ).getProjectId();
 
         return ResponseEntity.ok(newAccessId);
     }
 
     @PutMapping
     public ResponseEntity<Void> changeAccess(@Valid @RequestBody ProjectParticipantAccessDto access) {
-        try {
-            projectParticipantAccessService.changeAccess(
-                participantAccessConverter.convertToEntity(access),
-                userDetailsService.getCurrentAuthenticatedUserId()
-            );
-        }
-        catch (NoSuchElementException exception) {
-            throw new UserHasNotToOperationAccessException(exception.getMessage());
-        }
+        projectParticipantAccessService.changeAccess(
+            participantAccessConverter.convertToEntity(access),
+            userDetailsService.getCurrentAuthenticatedUserId()
+        );
 
         return ResponseEntity.ok().build();
     }

@@ -36,6 +36,9 @@ public class ProjectParticipantAccess extends AbstractEntity {
     @Column(name = "can_see_other_tasks")
     private Boolean canSeeOtherTasks;
 
+    @Column(name = "can_edit_other_tasks")
+    private Boolean canEditOtherTasks;
+
     @Column(name = "can_add_tasks")
     private Boolean canAddTasks;
 
@@ -102,6 +105,14 @@ public class ProjectParticipantAccess extends AbstractEntity {
         this.canSeeOtherTasks = canSeeOtherTasks;
     }
 
+    public Boolean canEditOtherTasks() {
+        return canEditOtherTasks;
+    }
+
+    public void setCanEditOtherTasks(Boolean canEditOtherTasks) {
+        this.canEditOtherTasks = canEditOtherTasks;
+    }
+
     public Boolean canAddTasks() {
         return canAddTasks;
     }
@@ -128,6 +139,7 @@ public class ProjectParticipantAccess extends AbstractEntity {
             ", canSeeProject=" + canSeeProject +
             ", canEditProject=" + canEditProject +
             ", canSeeOtherTasks=" + canSeeOtherTasks +
+            ", canEditOtherTasks=" + canEditOtherTasks +
             ", canAddTasks=" + canAddTasks +
             ", canDeleteTasks=" + canDeleteTasks +
             ", id='" + id + '\'' +

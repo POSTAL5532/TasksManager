@@ -1,4 +1,4 @@
-package com.tasksmanager.api.exception;
+package com.tasksmanager.service.exception;
 
 /**
  * When user has not access to project.

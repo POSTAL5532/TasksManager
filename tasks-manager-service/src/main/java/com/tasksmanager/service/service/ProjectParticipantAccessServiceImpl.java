@@ -5,6 +5,8 @@ import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tasksmanager.service.exception.UserHasNotToOperationAccessException;
+import com.tasksmanager.service.exception.UserHasNotToProjectAccessException;
 import com.tasksmanager.service.model.project.ProjectParticipantAccess;
 import com.tasksmanager.service.repository.ProjectParticipantAccessRepository;
 
@@ -31,7 +33,7 @@ public class ProjectParticipantAccessServiceImpl implements ProjectParticipantAc
         ProjectParticipantAccess currentUserAccess = this.getAccessToProjectForUser(access.getProjectId(), currentUserId);
 
         if (!currentUserAccess.isOwner()) {
-            throw new NoSuchElementException("Current user is not owner of this project.");
+            throw new UserHasNotToProjectAccessException("Current user is not owner of this project.");
         }
 
         if (currentUserAccess.getUserId().equals(access.getUserId())) {
@@ -50,11 +52,11 @@ public class ProjectParticipantAccessServiceImpl implements ProjectParticipantAc
         ProjectParticipantAccess currentUserAccess = this.getAccessToProjectForUser(access.getProjectId(), currentUser);
 
         if (!currentUserAccess.isOwner()) {
-            throw new NoSuchElementException("Current user is not owner of this project.");
+            throw new UserHasNotToProjectAccessException("Current user is not owner of this project.");
         }
 
         if (!this.projectParticipantAccessRepository.existsById(access.getId())) {
-            throw new NoSuchElementException("Access not found");
+            throw new UserHasNotToOperationAccessException("Access not found");
         }
 
         if (currentUserAccess.getUserId().equals(access.getUserId())) {
