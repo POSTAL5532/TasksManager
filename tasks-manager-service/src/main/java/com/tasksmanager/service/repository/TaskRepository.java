@@ -17,4 +17,6 @@ public interface TaskRepository extends JpaRepository<Task, String> {
 
     @Override
     Optional<Task> findById(String s);
+
+    Long countByProjectId(String projectId);
 }

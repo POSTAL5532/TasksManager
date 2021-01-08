@@ -30,8 +30,8 @@ public class Task extends AbstractEntity {
     @Column(name = "project_id")
     private String projectId;
 
-    @Column(name = "parent_id")
-    private String parentId;
+    @Column(name = "parent_task_id")
+    private String parentTaskId;
 
     @Column(name = "author_id")
     private String authorId;
@@ -49,8 +49,10 @@ public class Task extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private TaskLevel level;
 
+    @Enumerated(EnumType.STRING)
     private TaskStatus status;
 
+    @Enumerated(EnumType.STRING)
     private TaskType type;
 
     @Column(name = "creation_date")

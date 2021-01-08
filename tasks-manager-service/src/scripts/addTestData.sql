@@ -77,40 +77,40 @@ VALUES ('4028e48f713215020171321690280101', 'Start TasksManager', 'STM',
         'Nam rutrum dictum justo et aliquam. Vivamus luctus nec odio ultrices ultrices. Duis quis vehicula libero, ut accumsan ante. Nulla in pharetra elit. Suspendisse potenti.',
         '4028e48f713215020171321690280013', 'DRAFT', '2020-09-18');
 
-INSERT INTO tasks (id, project_id, parent_task_id, author_id, executor_id, name, description, level, status, type, creation_date,
+INSERT INTO tasks (id, project_id, parent_task_id, author_id, executor_id, name, short_name, description, level, status, type, creation_date,
                    ending_date, change_date)
 VALUES ('4028e48f713215020171321690201001', '4028e48f713215020171321690280101', NULL, '4028e48f713215020171321690280001', NULL,
-        'Start TasksManager story 1', 'Story 1 some task description', 'MAJOR', 'NEED_TO_SOLVE', 'STORY',
+        'Start TasksManager story 1', 'STM-1', 'Story 1 some task description', 'MAJOR', 'NEED_TO_SOLVE', 'STORY',
         '2020-11-18', NULL, NULL),
        ('4028e48f713215020171321690201002', '4028e48f713215020171321690280101', '4028e48f713215020171321690201001',
-        '4028e48f713215020171321690280001', NULL, 'Story sub task 1', 'Story sub task 1 description', 'MAJOR',
+        '4028e48f713215020171321690280001', NULL, 'STM-1 sub task 1', 'STM-2', 'Story sub task 1 description', 'MAJOR',
         'NEED_TO_SOLVE', 'TASK', '2020-11-18', NULL, NULL),
        ('4028e48f713215020171321690201003', '4028e48f713215020171321690280101', '4028e48f713215020171321690201002',
-        '4028e48f713215020171321690280001', NULL, ' SST1 Sub task 1', 'Sub task 1 description', 'MAJOR',
+        '4028e48f713215020171321690280001', NULL, 'STM-2 Sub task 1', 'STM-3', 'Sub task 1 description', 'MAJOR',
         'NEED_TO_SOLVE', 'TASK', '2020-11-18', NULL, NULL),
        ('4028e48f713215020171321690201004', '4028e48f713215020171321690280101', '4028e48f713215020171321690201002',
-        '4028e48f713215020171321690280001', NULL, 'SST1 Sub task 2', 'Sub task 2 description', 'MAJOR',
+        '4028e48f713215020171321690280001', NULL, 'STM-2 Sub task 2', 'STM-4', 'Sub task 2 description', 'MAJOR',
         'NEED_TO_SOLVE', 'TASK', '2020-11-18', NULL, NULL),
        ('4028e48f713215020171321690201005', '4028e48f713215020171321690280101', '4028e48f713215020171321690201001',
-        '4028e48f713215020171321690280001', NULL, 'Story sub task 2', 'Story sub task 2 description', 'MINOR',
+        '4028e48f713215020171321690280001', NULL, 'STM-1 sub task 2', 'STM-5', 'Story sub task 2 description', 'MINOR',
         'NEED_TO_SOLVE', 'TASK', '2020-11-18', NULL, NULL),
        ('4028e48f713215020171321690201006', '4028e48f713215020171321690280101', '4028e48f713215020171321690201001',
-        '4028e48f713215020171321690280001', NULL, 'Story sub task 3', 'Story sub task 3 description', 'MINOR',
+        '4028e48f713215020171321690280001', NULL, 'STM-1 sub task 3', 'STM-6', 'Story sub task 3 description', 'MINOR',
         'NEED_TO_SOLVE', 'TASK', '2020-11-18', NULL, NULL);
 
 INSERT INTO tasks_relations (id, task_id, relation_type, related_task_id)
 VALUES ('4028e48f713215020171321690217001', '4028e48f713215020171321690201003', 'BLOCKER', '4028e48f713215020171321690201005'),
        ('4028e48f713215020171321690257002', '4028e48f713215020171321690201004', 'SIMPLE', '4028e48f713215020171321690201006');
 
-INSERT INTO project_participant_access (id, project_id, user_id, is_owner, can_see_team, can_see_project,
-                                 can_edit_project, can_see_other_tasks, can_add_tasks, can_delete_tasks)
+INSERT INTO project_participant_access (id, project_id, user_id, is_owner, can_see_team, can_see_project, can_edit_project,
+                                        can_see_other_tasks, can_edit_other_tasks, can_add_tasks, can_delete_tasks)
 VALUES ('4028e48f713215020171321121280101', '4028e48f713215020171321690280101', '4028e48f713215020171321690280001',
-        1, 1, 1, 1, 1, 1, 1),
+        1, 1, 1, 1, 1, 1, 1, 1),
        ('4028e48f713215020171321121280102', '4028e48f713215020171321690280102', '4028e48f713215020171321690280001',
-        1, 1, 1, 1, 1, 1, 1),
+        1, 1, 1, 1, 1, 1, 1, 1),
        ('4028e48f713215020171321121280103', '4028e48f713215020171321690280104', '4028e48f713215020171321690280001',
-        1, 1, 1, 1, 1, 1, 1),
+        1, 1, 1, 1, 1, 1, 1, 1),
        ('4028e48f713215020171321121280104', '4028e48f713215020171321690280103', '4028e48f713215020171321690280002',
-        1, 1, 1, 1, 1, 1, 1),
+        1, 1, 1, 1, 1, 1, 1, 1),
        ('4028e48f713215020171321121280105', '4028e48f713215020171321690280104', '4028e48f713215020171321690280002',
-        1, 1, 1, 1, 1, 1, 1);
+        1, 1, 1, 1, 1, 1, 1, 1);

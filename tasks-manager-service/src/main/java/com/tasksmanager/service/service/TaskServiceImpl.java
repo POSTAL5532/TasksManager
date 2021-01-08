@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tasksmanager.service.model.project.Project;
 import com.tasksmanager.service.model.task.Task;
 import com.tasksmanager.service.repository.TaskRepository;
 
@@ -16,8 +17,11 @@ public class TaskServiceImpl implements TaskService {
 
     private final TaskRepository taskRepository;
 
-    public TaskServiceImpl(TaskRepository taskRepository) {
+    private final ProjectService projectService;
+
+    public TaskServiceImpl(TaskRepository taskRepository, ProjectService projectService) {
         this.taskRepository = taskRepository;
+        this.projectService = projectService;
     }
 
     @Override
@@ -30,6 +34,10 @@ public class TaskServiceImpl implements TaskService {
     @Override
     @Transactional(readOnly = false)
     public Task addNewTask(Task newTask) {
+        Project taskProject = projectService.getById(newTask.getProjectId());
+        Long taskNumber = taskRepository.countByProjectId(taskProject.getId());
+
+        newTask.setShortName(String.format("%s-%s", taskProject.getShortName(), taskNumber));
         newTask.setCreationDate(Timestamp.valueOf(LocalDateTime.now()));
         return this.save(newTask);
     }

@@ -24,7 +24,7 @@ public class TaskConverter implements DtoEntityConverter<Task, TaskDto> {
         Task task = new Task();
         task.setId(dto.getId());
         task.setProjectId(dto.getProjectId());
-        task.setParentId(dto.getParentId());
+        task.setParentTaskId(dto.getParentTaskId());
         task.setAuthorId(dto.getAuthorId());
         task.setExecutorId(dto.getExecutorId());
         task.setName(dto.getName());
@@ -45,7 +45,7 @@ public class TaskConverter implements DtoEntityConverter<Task, TaskDto> {
         TaskDto taskDto = new TaskDto();
         taskDto.setId(entity.getId());
         taskDto.setProjectId(entity.getProjectId());
-        taskDto.setParentId(entity.getParentId());
+        taskDto.setParentTaskId(entity.getParentTaskId());
         taskDto.setAuthorId(entity.getAuthorId());
         taskDto.setExecutorId(entity.getExecutorId());
         taskDto.setName(entity.getName());
@@ -55,8 +55,8 @@ public class TaskConverter implements DtoEntityConverter<Task, TaskDto> {
         taskDto.setStatus(entity.getStatus().name());
         taskDto.setType(entity.getType().name());
         taskDto.setCreationDate(entity.getCreationDate().toLocalDateTime());
-        taskDto.setEndingDate(entity.getEndingDate().toLocalDate());
-        taskDto.setChangeDate(entity.getChangeDate().toLocalDateTime());
+        taskDto.setEndingDate(entity.getEndingDate() != null ? entity.getEndingDate().toLocalDate() : null);
+        taskDto.setChangeDate(entity.getChangeDate() != null ? entity.getChangeDate().toLocalDateTime() : null);
 
         return taskDto;
     }

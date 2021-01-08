@@ -114,6 +114,7 @@ CREATE TABLE tasks
     author_id      varchar(36),
     executor_id    varchar(36),
     name           varchar(255) NOT NULL,
+    short_name     varchar(255) NOT NULL,
     description    longvarchar,
     level          varchar(255) NOT NULL,
     status         varchar(255) NOT NULL,

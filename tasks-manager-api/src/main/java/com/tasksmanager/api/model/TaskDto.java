@@ -26,7 +26,7 @@ public class TaskDto {
     private String projectId;
 
     @NotBlank
-    private String parentId;
+    private String parentTaskId;
 
     private String authorId;
 
