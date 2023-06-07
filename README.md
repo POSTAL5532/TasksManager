@@ -8,6 +8,8 @@ Tasks manger application
 + NodeJS 12.13.0 or later
 + Google Chrome browser
 
+## MASTER FEATURE
+
 ## Run project
 1. Build the project - ``gradlew clean build``
 2. Start the database - ``gradlew startDatabase``
