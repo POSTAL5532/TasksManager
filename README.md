@@ -14,6 +14,8 @@ Tasks manger application
 
 ## MASTER FEATURE
 
+## SOME FEATURE2 1
+
 ## Run project
 1. Build the project - ``gradlew clean build``
 2. Start the database - ``gradlew startDatabase``
