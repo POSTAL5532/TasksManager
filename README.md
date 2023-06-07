@@ -1,6 +1,8 @@
 # Tasks manger application
 
-# SOME FEATURE
+# SOME FEATURE 1
+
+# SOME FEATURE 2
 
 ## Description
 Tasks manger application
