@@ -1,6 +1,7 @@
 # Tasks manger application
 
 ## Feature 1
+## Feature 2
 
 ## Description
 Tasks manger application
