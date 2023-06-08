@@ -1,9 +1,5 @@
 # Tasks manger application
 
-# SOME FEATURE 1
-
-# SOME FEATURE 2
-
 ## Description
 Tasks manger application
 
@@ -11,10 +7,6 @@ Tasks manger application
 + Java (JDK) 8
 + NodeJS 12.13.0 or later
 + Google Chrome browser
-
-## MASTER FEATURE
-
-## SOME FEATURE2 1
 
 ## Run project
 1. Build the project - ``gradlew clean build``
