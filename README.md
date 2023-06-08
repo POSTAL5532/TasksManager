@@ -20,6 +20,8 @@ Tasks manger application
 1. Stop the project - ``Ctrl + C``
 2. Start the database - ``gradlew stopDatabase`` or ``Ctrl + C``
 
+## Some master commit
+
 ## Database commands
 ``gradlew startDatabase`` - start database
 
