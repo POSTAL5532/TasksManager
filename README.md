@@ -10,7 +10,7 @@ Tasks manger application
 
 ## Work environment
 + Java (JDK) 8
-+ NodeJS 12.13.0 or later 1
++ NodeJS 12.13.0 or later 2
 + Google Chrome browser
 
 ## Run project
